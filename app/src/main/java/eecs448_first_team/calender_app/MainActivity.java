@@ -8,8 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CalendarView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,CalendarView.OnDateChangeListener{
+
+    CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        findViewById(R.id.addEventButton).setOnClickListener(this);
+        calendarView = (CalendarView)findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(this);
     }
 
     @Override
@@ -48,5 +55,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Called whenever a View that has this class as an OnClickListener is clicked
+    @Override
+    public void onClick(View v) {
+        switch(v.getId())
+        {
+            case(R.id.addEventButton): //test event adding
+            {
+                break;
+            }
+        }
+
+    }
+
+    @Override
+    public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+        ((TextView)findViewById(R.id.startText)).setText(String.valueOf(calendarView.getDate()));
     }
 }
