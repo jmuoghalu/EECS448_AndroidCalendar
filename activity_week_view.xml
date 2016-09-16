@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.cara.calendar.Weekview">
+    tools:context="com.example.cara.calendar2.WeekView">
 
     <TextView
         android:id="@+id/year"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="Sunday, Sept. 11" />
+        android:text="Sunday," />
     <TextView
         android:id="@+id/monday"
         android:clickable="true"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="Monday, Sept. 12" />
+        android:text="Monday," />
     <TextView
         android:id="@+id/tuesday"
         android:clickable="true"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="Tuesday, Sept. 13" />
+        android:text="Tuesday," />
     <TextView
         android:id="@+id/wednesday"
         android:clickable="true"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="Wednesday, Sept. 14" />
+        android:text="Wednesday," />
     <TextView
         android:id="@+id/thursday"
         android:clickable="true"
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="Thursday, Sept. 15" />
+        android:text="Thursday," />
     <TextView
         android:id="@+id/friday"
         android:clickable="true"
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="Friday, Sept. 16" />
+        android:text="Friday," />
     <TextView
         android:id="@+id/saturday"
         android:clickable="true"
@@ -79,22 +79,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="Saturday, Sept. 17" />
-    <Button
-        android:id="@+id/monthButton"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/weekButton"
+        android:text="Saturday," />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Month"/>
-    <Button
-        android:id="@+id/yearButton"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/monthButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Year"/>
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/monthButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Month"/>
+        <Button
+            android:id="@+id/yearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
