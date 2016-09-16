@@ -6,7 +6,8 @@ import android.view.View;
 import android.content.Intent;
 
 public class YearView extends AppCompatActivity implements View.OnClickListener {
-
+    public final static String DATA = "";
+    public int[] array = new int[6];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,66 +29,127 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View view)
     {
+        //Int array pass around [day, month, year, day of 1st, Sunday's day for WeekView, # days in month]
         Intent goToMonth = new Intent(this, MonthView.class);
         switch(view.getId())
         {
             case(R.id.augustButton):
             {
-                goToMonth.putExtra(MONTH, 8);
+                array[0]=0;
+                array[1]=8;
+                array[2]=2016;
+                array[3]=2;
+                array[4]=0;
+                array[5]=31;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.septemberButton):
             {
-                goToMonth.putExtra(MONTH, 9);
+                array[0]=0;
+                array[1]=9;
+                array[2]=2016;
+                array[3]=5;
+                array[4]=0;
+                array[5]=30;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.octoberButton):
             {
-                goToMonth.putExtra(MONTH, 10);
+                array[0]=0;
+                array[1]=10;
+                array[2]=2016;
+                array[3]=7;
+                array[4]=0;
+                array[5]=31;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.novemberButton):
             {
-                goToMonth.putExtra(MONTH, 11);
+                array[0]=0;
+                array[1]=11;
+                array[2]=2016;
+                array[3]=3;
+                array[4]=0;
+                array[5]=30;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.decemberButton):
             {
-                goToMonth.putExtra(MONTH, 12);
+                array[0]=0;
+                array[1]=12;
+                array[2]=2016;
+                array[3]=5;
+                array[4]=0;
+                array[5]=31;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.januaryButton):
             {
-                goToMonth.putExtra(MONTH, 1);
+                array[0]=0;
+                array[1]=1;
+                array[2]=2017;
+                array[3]=1;
+                array[4]=0;
+                array[5]=31;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.februaryButton):
             {
-                goToMonth.putExtra(MONTH, 2);
+                array[0]=0;
+                array[1]=2;
+                array[2]=2017;
+                array[3]=4;
+                array[4]=0;
+                array[5]=28;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.marchButton):
             {
-                goToMonth.putExtra(MONTH, 3);
+                array[0]=0;
+                array[1]=3;
+                array[2]=2017;
+                array[3]=4;
+                array[4]=0;
+                array[5]=31;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.aprilButton):
             {
-                goToMonth.putExtra(MONTH, 4);
+                array[0]=0;
+                array[1]=4;
+                array[2]=2017;
+                array[3]=7;
+                array[4]=0;
+                array[5]=30;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.mayButton):
             {
-                goToMonth.putExtra(MONTH, 5);
+                array[0]=0;
+                array[1]=5;
+                array[2]=2017;
+                array[3]=2;
+                array[4]=0;
+                array[5]=31;
+                goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
