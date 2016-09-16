@@ -1,16 +1,17 @@
-package com.example.cara.calendar;
+package com.example.cara.calendar2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public final static String SEPTEMBER = "com.example.cara.calendar";
+public class YearView extends AppCompatActivity implements View.OnClickListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_year_view);
+
         findViewById(R.id.januaryButton).setOnClickListener(this);
         findViewById(R.id.februaryButton).setOnClickListener(this);
         findViewById(R.id.marchButton).setOnClickListener(this);
@@ -19,23 +20,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.augustButton).setOnClickListener(this);
         findViewById(R.id.septemberButton).setOnClickListener(this);
         findViewById(R.id.octoberButton).setOnClickListener(this);
-        Intent y = getIntent();
-    }
-    //public void DoStuff()
-    //{
-        //does stuff
-    //}
+        findViewById(R.id.novemberButton).setOnClickListener(this);
+        findViewById(R.id.decemberButton).setOnClickListener(this);
 
+        Intent getToYear = getIntent();
+    }
     @Override
-    public void onClick(View view) {
-        //all
+    public void onClick(View view)
+    {
+        Intent goToMonth = new Intent(this, MonthView.class);
         switch(view.getId())
         {
-            case(R.id.septemberButton):
+            default:
             {
-                Intent s = new Intent(this, Monthview.class);
-                s.putExtra(SEPTEMBER, 9);
-                startActivity(s);
+                startActivity(goToMonth);
                 break;
             }
         }
