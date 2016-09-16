@@ -10,10 +10,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,CalendarView.OnDateChangeListener{
 
     CalendarView calendarView;
+    Calendar interpreterCalendar;
+    CalendarEventDb editDatabase;
+    TextView feedbackText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.addEventButton).setOnClickListener(this);
         calendarView = (CalendarView)findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(this);
+        interpreterCalendar = Calendar.getInstance(); //WARNING: upon getting instance, Calendar sets its current EXACT time down to milliseconds to current time. You have to overwrite this!
+//        interpreterCalendar.set(Calendar.YEAR,2000);
+//        interpreterCalendar.set(Calendar.MONTH,6);
+//        interpreterCalendar.set(Calendar.DAY_OF_MONTH,1);
+        interpreterCalendar.set(Calendar.HOUR,0); //locks hours,minutes,seconds,MS in Calendar to 0 to make consistent, and so we don't have to zero them again later
+        interpreterCalendar.set(Calendar.MINUTE,0); //thus, I can say with certainty that using the Calendar to convert 9-21-2016 to milliseconds will produce a constant value
+        interpreterCalendar.set(Calendar.SECOND,0);
+        interpreterCalendar.set(Calendar.MILLISECOND,0);
+        feedbackText = (TextView)findViewById(R.id.startText);
+//        feedbackText.setText(((Long)calendarView.getDate()).toString());
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        editDatabase = new CalendarEventDb(this);
+        feedbackText.setText(String.valueOf(interpreterCalendar.getTimeInMillis()));
     }
 
     @Override
@@ -72,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-        ((TextView)findViewById(R.id.startText)).setText(String.valueOf(calendarView.getDate()));
+        interpreterCalendar.set(year,month,dayOfMonth); //Calendar created by Calendar.getInstance();
+        calendarView.setDate(interpreterCalendar.getTimeInMillis()); //the CalendarView
+        Long outVal = view.getDate();
+        Toast.makeText(this,"Date " + dayOfMonth + "-" + month + "-" + year,Toast.LENGTH_LONG).show();
+        feedbackText.setText(outVal.toString());
     }
 }
