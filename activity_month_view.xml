@@ -7,18 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.cara.calendar.Monthview">
+    tools:context="com.example.cara.calendar2.MonthView">
 
-    <TextView
-        android:id="@+id/monthName"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:text="September"/>
-    <!--Get month from java
-        Maybe some way while getting month to get day month starts on
-        And how many days in month-->
     <TextView
         android:id="@+id/monthName"
         android:layout_centerHorizontal="true"
@@ -26,12 +16,12 @@
         android:layout_height="wrap_content"
         android:textSize="50sp"
         android:paddingBottom="10dp"
-        android:text="September"/>
-    <!--Get month from java
-        Maybe some way while getting month to get day month starts on
+        android:text=""/>
+    <!--Maybe some way while getting month to get day month starts on
         And how many days in month-->
     <LinearLayout
         android:id="@+id/daysOfWeek"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/monthName"
@@ -74,6 +64,7 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/firstWeek"
         android:clickable="true"
@@ -126,8 +117,10 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/secondWeek"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstWeek"
@@ -177,8 +170,10 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/thirdWeek"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/secondWeek"
@@ -186,6 +181,7 @@
 
         <TextView
             android:text="15"
+            android:clickable="true"
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -228,8 +224,10 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/fourthWeek"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/thirdWeek"
@@ -279,8 +277,10 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/fifthWeek"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fourthWeek"
@@ -305,25 +305,25 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="   "
+            android:text="    "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="   "
+            android:text="    "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="   "
+            android:text="    "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="   "
+            android:text="    "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
