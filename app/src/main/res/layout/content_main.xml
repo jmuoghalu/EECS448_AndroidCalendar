@@ -20,7 +20,7 @@
     <Button
         android:layout_below="@id/startText"
         android:id="@+id/addEventButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Calendar Event"/>
     <CalendarView
@@ -31,4 +31,10 @@
         android:maxDate="05/01/2017"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:layout_toRightOf="@id/addEventButton"
+        android:id="@+id/testEventButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Event"/>
 </RelativeLayout>

@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction("Action", null).show();
             }
         });
+        findViewById(R.id.testEventButton).setOnClickListener(this);
         findViewById(R.id.addEventButton).setOnClickListener(this);
         calendarView = (CalendarView)findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(this);
@@ -68,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void onPause()
+    {
+        super.onPause();
+        editDatabase.close();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -89,6 +97,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case(R.id.addEventButton): //test event adding
             {
+                if(editDatabase.setCalendarDetails(10000l,"Alternate Testing"))
+                {
+                    Toast.makeText(this,"Added successfully",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this,"Something failed",Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+            case(R.id.testEventButton): //test event existing
+            {
+                String outputVal = editDatabase.getCalendarDetails(10000l);
+                if(outputVal != null)
+                {
+                    Toast.makeText(this,"Value exists",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,outputVal,Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(this,"IT failed",Toast.LENGTH_LONG).show();
+                }
                 break;
             }
         }
