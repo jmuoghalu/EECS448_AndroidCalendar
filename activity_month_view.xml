@@ -17,8 +17,7 @@
         android:textSize="50sp"
         android:paddingBottom="10dp"
         android:text=""/>
-    <!--Maybe some way while getting month to get day month starts on
-        And how many days in month-->
+
     <LinearLayout
         android:id="@+id/daysOfWeek"
         android:clickable="true"
@@ -74,43 +73,50 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:text="01"
+            android:id="@+id/w11"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="02"
+            android:id="@+id/w12"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="03"
+            android:id="@+id/w13"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="04"
+            android:id="@+id/w14"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="05"
+            android:id="@+id/w15"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="06"
+            android:id="@+id/w16"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="07"
+            android:id="@+id/w17"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,43 +133,50 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:text="08"
+            android:id="@+id/w21"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="09"
+            android:id="@+id/w22"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="10"
+            android:id="@+id/w23"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="11"
+            android:id="@+id/w24"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="12"
+            android:id="@+id/w25"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="13"
+            android:id="@+id/w26"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="14"
+            android:id="@+id/w27"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -180,44 +193,51 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:text="15"
+            android:id="@+id/w31"
+            android:text=""
             android:clickable="true"
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="16"
+            android:id="@+id/w32"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="17"
+            android:id="@+id/w33"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="18"
+            android:id="@+id/w34"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="19"
+            android:id="@+id/w35"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="20"
+            android:id="@+id/w36"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="21"
+            android:id="@+id/w37"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -234,43 +254,50 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:text="22"
+            android:id="@+id/w41"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="23"
+            android:id="@+id/w42"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="24"
+            android:id="@+id/w43"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="25"
+            android:id="@+id/w44"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="26"
+            android:id="@+id/w45"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="27"
+            android:id="@+id/w46"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="28"
+            android:id="@+id/w47"
+            android:text=""
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -287,25 +314,87 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:text="29"
+            android:id="@+id/w51"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="30"
+            android:id="@+id/w52"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="31"
+            android:id="@+id/w53"
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:text="    "
+            android:id="@+id/w54"
+            android:text="     "
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/w55"
+            android:text="     "
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/w56"
+            android:text="     "
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/w57"
+            android:text="     "
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sixthWeek"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fifthWeek"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/w61"
+            android:text=""
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/w62"
+            android:text=""
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:text="     "
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:text="     "
             android:textSize="32sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
