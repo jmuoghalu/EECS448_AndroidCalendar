@@ -3,6 +3,8 @@ package eecs448_first_team.calender_app;
 /**
  * @Author Paul
  * @Date 20160916
+ * This class just holds constant integer values of all the months, days,
+ * and the 2 years needed.
  */
 public class SafeDate {
     private int date = 0;
@@ -52,6 +54,23 @@ public class SafeDate {
     public static final SafeDate day08 = new SafeDate(8);
     public static final SafeDate day09 = new SafeDate(9);
     public static final SafeDate day10 = new SafeDate(10);
+    public static final SafeDate day11 = new SafeDate(11);
+    public static final SafeDate day12 = new SafeDate(12);
+    public static final SafeDate day13 = new SafeDate(13);
+    public static final SafeDate day14 = new SafeDate(14);
+    public static final SafeDate day15 = new SafeDate(15);
+    public static final SafeDate day16 = new SafeDate(16);
+    public static final SafeDate day17 = new SafeDate(17);
+    public static final SafeDate day18 = new SafeDate(18);
+    public static final SafeDate day19 = new SafeDate(19);
+    public static final SafeDate day20 = new SafeDate(20);
+    public static final SafeDate day21 = new SafeDate(21);
+    public static final SafeDate day22 = new SafeDate(22);
+    public static final SafeDate day23 = new SafeDate(23);
+    public static final SafeDate day24 = new SafeDate(24);
+    public static final SafeDate day25 = new SafeDate(25);
+    public static final SafeDate day26 = new SafeDate(26);
+    public static final SafeDate day27 = new SafeDate(27);
     public static final SafeDate day28 = new SafeDate(28);
     public static final SafeDate day29 = new SafeDate(29);
     public static final SafeDate day30 = new SafeDate(30);
