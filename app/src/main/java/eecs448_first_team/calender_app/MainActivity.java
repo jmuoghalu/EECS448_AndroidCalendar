@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements CalendarView.OnDa
     CalendarView calendarView;
     Calendar interpreterCalendar;
     CalendarEventDb editDatabase;
-    TextView feedbackText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements CalendarView.OnDa
     {
         super.onResume();
         editDatabase = new CalendarEventDb(this);
-        feedbackText.setText(String.valueOf(interpreterCalendar.getTimeInMillis()));
     }
 
     @Override
@@ -131,6 +129,5 @@ public class MainActivity extends AppCompatActivity implements CalendarView.OnDa
         calendarView.setDate(interpreterCalendar.getTimeInMillis()); //the CalendarView
         Long outVal = view.getDate();
         Toast.makeText(this,"Date " + dayOfMonth + "-" + month + "-" + year,Toast.LENGTH_LONG).show();
-        feedbackText.setText(outVal.toString());
     }
 }
