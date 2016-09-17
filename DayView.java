@@ -21,6 +21,7 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
 
         Intent getToDay = getIntent();
         array = getToDay.getIntArrayExtra(WeekView.DATA);
+        array = getToDay.getIntArrayExtra(AddDetails.DATA);
         fillDate();
     }
     @Override
@@ -51,6 +52,7 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
             case(R.id.addDetailsButton):
             {
                 Intent goToDetails = new Intent(this, AddDetails.class);
+                goToDetails.putExtra(DATA, array);
                 startActivity(goToDetails);
                 break;
             }
