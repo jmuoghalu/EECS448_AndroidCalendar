@@ -39,10 +39,21 @@ public class SafeDate {
     public static final SafeDate springYear = new SafeDate(2017);
 
     /**
-     * Constant month endings to use as variables.
+     * Constant day number to use as variables.
      */
-    public static final SafeDate daysInMonth28 = new SafeDate(28);
-    public static final SafeDate daysInMonth29 = new SafeDate(29);
-    public static final SafeDate daysInMonth30 = new SafeDate(30);
-    public static final SafeDate daysInMonth31 = new SafeDate(31);
+    public static final SafeDate day00 = new SafeDate(0);
+    public static final SafeDate day01 = new SafeDate(1);
+    public static final SafeDate day02 = new SafeDate(2);
+    public static final SafeDate day03 = new SafeDate(3);
+    public static final SafeDate day04 = new SafeDate(4);
+    public static final SafeDate day05 = new SafeDate(5);
+    public static final SafeDate day06 = new SafeDate(6);
+    public static final SafeDate day07 = new SafeDate(7);
+    public static final SafeDate day08 = new SafeDate(8);
+    public static final SafeDate day09 = new SafeDate(9);
+    public static final SafeDate day10 = new SafeDate(10);
+    public static final SafeDate day28 = new SafeDate(28);
+    public static final SafeDate day29 = new SafeDate(29);
+    public static final SafeDate day30 = new SafeDate(30);
+    public static final SafeDate day31 = new SafeDate(31);
 }
