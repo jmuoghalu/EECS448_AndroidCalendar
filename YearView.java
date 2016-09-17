@@ -29,7 +29,7 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View view)
     {
-        //Int array pass around [day, month, year, day of 1st, Sunday's day for WeekView, # days in month]
+        //Int array pass around [day, month, year, day of 1st, Sunday's day for WeekView, # days in month, # days in previous month, week #]
         Intent goToMonth = new Intent(this, MonthView.class);
         switch(view.getId())
         {
@@ -41,6 +41,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=2;
                 array[4]=0;
                 array[5]=31;
+                array[6]=0;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -53,6 +55,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=5;
                 array[4]=0;
                 array[5]=30;
+                array[6]=31;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -65,6 +69,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=7;
                 array[4]=0;
                 array[5]=31;
+                array[6]=30;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -77,6 +83,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=3;
                 array[4]=0;
                 array[5]=30;
+                array[6]=31;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -89,6 +97,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=5;
                 array[4]=0;
                 array[5]=31;
+                array[6]=30;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -101,6 +111,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=1;
                 array[4]=0;
                 array[5]=31;
+                array[6]=31;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -113,6 +125,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=4;
                 array[4]=0;
                 array[5]=28;
+                array[6]=31;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -125,6 +139,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=4;
                 array[4]=0;
                 array[5]=31;
+                array[6]=28;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -137,6 +153,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=7;
                 array[4]=0;
                 array[5]=30;
+                array[6]=31;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -149,6 +167,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[3]=2;
                 array[4]=0;
                 array[5]=31;
+                array[6]=30;
+                array[7]=0;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
