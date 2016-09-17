@@ -20,6 +20,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
         findViewById(R.id.thirdWeek).setOnClickListener(this);
         findViewById(R.id.fourthWeek).setOnClickListener(this);
         findViewById(R.id.fifthWeek).setOnClickListener(this);
+        findViewById(R.id.sixthWeek).setOnClickListener(this);
 
         Intent getToMonth = getIntent();
         array = getToMonth.getIntArrayExtra(YearView.DATA);
