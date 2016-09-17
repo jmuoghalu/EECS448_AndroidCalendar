@@ -187,7 +187,7 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[sundayDayForWeekView] = SafeDate.day00.getDate();
                 array[numOfDaysInMonth] = SafeDate.day31.getDate();
                 array[numOfDaysInPrevMonth] = SafeDate.day30.getDate();
-                array[7] = SafeDate.day00.getDate();
+                array[weekNum] = SafeDate.day00.getDate();
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
