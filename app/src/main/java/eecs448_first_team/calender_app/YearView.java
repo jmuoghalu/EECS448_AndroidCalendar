@@ -36,11 +36,11 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
             case(R.id.augustButton):
             {
                 array[0]=0;
-                array[1]=8;
-                array[2]=2016;
+                array[1]= SafeDate.August.getDate();
+                array[2]= SafeDate.fallYear.getDate();
                 array[3]=2;
                 array[4]=0;
-                array[5]=31;
+                array[5]=SafeDate.daysInMonth30.getDate();
                 array[6]=0;
                 array[7]=0;
                 goToMonth.putExtra(DATA, array);
@@ -50,8 +50,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
             case(R.id.septemberButton):
             {
                 array[0]=0;
-                array[1]=9;
-                array[2]=2016;
+                array[1]= SafeDate.September.getDate();
+                array[2]=SafeDate.fallYear.getDate();
                 array[3]=5;
                 array[4]=0;
                 array[5]=30;
