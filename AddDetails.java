@@ -6,7 +6,8 @@ import android.view.View;
 import android.content.Intent;
 
 public class AddDetails extends AppCompatActivity implements View.OnClickListener {
-
+    public final static String DATA = "";
+    public int[] array;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,11 +17,13 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.cancelButton).setOnClickListener(this);
 
         Intent getToDetails = getIntent();
+        array = getToDetails.getIntArrayExtra(DayView.DATA);
     }
     @Override
     public void onClick(View view)
     {
         Intent goToDay = new Intent(this, DayView.class);
+        goToDay.putExtra(DATA, array);
         switch(view.getId())
         {
             case (R.id.doneButton):
