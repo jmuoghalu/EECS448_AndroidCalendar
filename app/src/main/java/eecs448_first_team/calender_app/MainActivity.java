@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,CalendarView.OnDateChangeListener{
+public class MainActivity extends AppCompatActivity implements CalendarView.OnDateChangeListener{
 
     CalendarView calendarView;
     Calendar interpreterCalendar;
@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 //        findViewById(R.id.testEventButton).setOnClickListener(this);
 //        findViewById(R.id.addEventButton).setOnClickListener(this);
-        calendarView = (CalendarView)findViewById(R.id.calendarView);
-        calendarView.setOnDateChangeListener(this);
+//        calendarView = (CalendarView)findViewById(R.id.calendarView);
+//        calendarView.setOnDateChangeListener(this);
         interpreterCalendar = Calendar.getInstance(); //WARNING: upon getting instance, Calendar sets its current EXACT time down to milliseconds to current time. You have to overwrite this!
 //        interpreterCalendar.set(Calendar.YEAR,2000);
 //        interpreterCalendar.set(Calendar.MONTH,6);
