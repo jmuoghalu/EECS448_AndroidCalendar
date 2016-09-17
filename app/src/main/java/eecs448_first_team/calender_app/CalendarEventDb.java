@@ -135,16 +135,23 @@ public class CalendarEventDb extends SQLiteOpenHelper
                     CalendarEventTable.Column_Date //sort by date first (assume ascending order)
             );
             //get the very first object returned (yes its possible to have multiple identical dates, but we prevent that)
-            searchContainer.moveToFirst();
-            //as specified in the RETURN_COLUMNS, 0th column is Date, 1st column is Details
-            CalendarEvent returnCalendarEvent = new CalendarEvent();
-            returnCalendarEvent.setDetails(searchContainer.getString(2));
-            returnCalendarEvent.setID(searchContainer.getLong(0));
-            returnCalendarEvent.setDaySinceAugustFirst_2016(searchContainer.getLong(1));
-            if(returnCalendarEvent != null)
-                return returnCalendarEvent;
-            else //something wrong happened at this point, likely object or table corrupted
+            if(searchContainer.getCount() >= 1)
+            {
+                searchContainer.moveToFirst();
+                //as specified in the RETURN_COLUMNS, 0th column is Date, 1st column is Details
+                CalendarEvent returnCalendarEvent = new CalendarEvent();
+                returnCalendarEvent.setDetails(searchContainer.getString(2));
+                returnCalendarEvent.setID(searchContainer.getLong(0));
+                returnCalendarEvent.setDaySinceAugustFirst_2016(searchContainer.getLong(1));
+                if(returnCalendarEvent != null)
+                    return returnCalendarEvent;
+                else //something wrong happened at this point, likely object or table corrupted
+                    return null;
+            }
+            else
+            {
                 return null;
+            }
         }
         catch(Exception e) //query failed horribly for some reason
         {

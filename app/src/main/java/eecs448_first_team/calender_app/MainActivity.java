@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case(R.id.addEventButton): //test event adding
             {
-                if(editDatabase.setCalendarDetails(10000l,"Alternate Testing"))
+                if(editDatabase.setCalendarDetails(interpreterCalendar.getTimeInMillis(),"Alternate Testing"))
                 {
                     Toast.makeText(this,"Added successfully",Toast.LENGTH_SHORT).show();
                 }
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             case(R.id.testEventButton): //test event existing
             {
-                String outputVal = editDatabase.getCalendarDetails(10000l);
+                String outputVal = editDatabase.getCalendarDetails(interpreterCalendar.getTimeInMillis());
                 if(outputVal != null)
                 {
                     Toast.makeText(this,"Value exists",Toast.LENGTH_SHORT).show();
