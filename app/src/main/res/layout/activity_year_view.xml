@@ -8,7 +8,7 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:orientation="horizontal"
-    tools:context="com.example.cara.calendar2.YearView">
+    tools:context="eecs448_first_team.calender_app.YearView">
 
     <TextView
         android:id="@+id/y2016"
