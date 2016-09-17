@@ -149,7 +149,7 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
             case(R.id.februaryButton):
             {
                 array[dayIndex] = nullDate;
-                array[monthIndex] = SafeDate.Febuary.getDate();
+                array[monthIndex] = SafeDate.February.getDate();
                 array[yearIndex] = springYear;
                 array[firstDayOfMonth] = SafeDate.day04.getDate();
                 array[sundayDayForWeekView] = nullDate;

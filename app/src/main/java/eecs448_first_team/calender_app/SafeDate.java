@@ -8,9 +8,13 @@ package eecs448_first_team.calender_app;
  */
 public class SafeDate {
     private int date = 0;
+    private String name = "";
 
-    private SafeDate( int date)
-    {
+    private SafeDate( String date){
+        this.name = name;
+    }
+
+    private SafeDate( int date) {
         this.date = date;
     }
 
@@ -18,11 +22,15 @@ public class SafeDate {
         return date;
     }
 
+    public String getName(){
+        return name;
+    }
+
     /**
-     * Constant months to use as variables.
+     * Constant int months to use as variables.
      */
     public static final SafeDate January = new SafeDate(1);
-    public static final SafeDate Febuary = new SafeDate(2);
+    public static final SafeDate February = new SafeDate(2);
     public static final SafeDate March = new SafeDate(3);
     public static final SafeDate April = new SafeDate(4);
     public static final SafeDate May = new SafeDate(5);
@@ -35,10 +43,33 @@ public class SafeDate {
     public static final SafeDate December = new SafeDate(12);
 
     /**
-     * Constant years to use as variables.
+     * Constant string months to use as variables.
+     */
+    public static final SafeDate stringJanuary = new SafeDate("January");
+    public static final SafeDate stringFebruary = new SafeDate("February");
+    public static final SafeDate stringMarch = new SafeDate("March");
+    public static final SafeDate stringApril = new SafeDate("April");
+    public static final SafeDate stringMay = new SafeDate("May");
+    public static final SafeDate stringJune = new SafeDate("June");
+    public static final SafeDate stringJuly = new SafeDate("July");
+    public static final SafeDate stringAugust = new SafeDate("August");
+    public static final SafeDate stringSeptember = new SafeDate("September");
+    public static final SafeDate stringOctober = new SafeDate("October");
+    public static final SafeDate stringNovember = new SafeDate("November");
+    public static final SafeDate stringDecember = new SafeDate("December");
+
+    /**
+     * Constant int years to use as variables.
      */
     public static final SafeDate fallYear = new SafeDate(2016);
     public static final SafeDate springYear = new SafeDate(2017);
+
+    /**
+     * Constant string years to use as variables
+     */
+    public static final SafeDate stringFallYear = new SafeDate("2016");
+    public static final SafeDate stringSpringYear = new SafeDate("2017");
+
 
     /**
      * Constant day number to use as variables.
