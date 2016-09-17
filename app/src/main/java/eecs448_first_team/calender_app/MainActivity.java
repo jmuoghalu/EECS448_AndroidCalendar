@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction("Action", null).show();
             }
         });
-        findViewById(R.id.testEventButton).setOnClickListener(this);
-        findViewById(R.id.addEventButton).setOnClickListener(this);
+//        findViewById(R.id.testEventButton).setOnClickListener(this);
+//        findViewById(R.id.addEventButton).setOnClickListener(this);
         calendarView = (CalendarView)findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener(this);
         interpreterCalendar = Calendar.getInstance(); //WARNING: upon getting instance, Calendar sets its current EXACT time down to milliseconds to current time. You have to overwrite this!
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         interpreterCalendar.set(Calendar.MINUTE,0); //thus, I can say with certainty that using the Calendar to convert 9-21-2016 to milliseconds will produce a constant value
         interpreterCalendar.set(Calendar.SECOND,0);
         interpreterCalendar.set(Calendar.MILLISECOND,0);
-        feedbackText = (TextView)findViewById(R.id.startText);
+//        feedbackText = (TextView)findViewById(R.id.startText);
 //        feedbackText.setText(((Long)calendarView.getDate()).toString());
     }
 
@@ -91,39 +91,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //Called whenever a View that has this class as an OnClickListener is clicked
-    @Override
-    public void onClick(View v) {
-        switch(v.getId())
-        {
-            case(R.id.addEventButton): //test event adding
-            {
-                if(editDatabase.setCalendarDetails(interpreterCalendar.getTimeInMillis(),"Alternate Testing"))
-                {
-                    Toast.makeText(this,"Added successfully",Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(this,"Something failed",Toast.LENGTH_LONG).show();
-                }
-                break;
-            }
-            case(R.id.testEventButton): //test event existing
-            {
-                String outputVal = editDatabase.getCalendarDetails(interpreterCalendar.getTimeInMillis());
-                if(outputVal != null)
-                {
-                    Toast.makeText(this,"Value exists",Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this,outputVal,Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(this,"IT failed",Toast.LENGTH_LONG).show();
-                }
-                break;
-            }
-        }
-
-    }
+//    @Override
+//    public void onClick(View v) {
+//        switch(v.getId())
+//        {
+//            case(R.id.addEventButton): //test event adding
+//            {
+//                if(editDatabase.setCalendarDetails(interpreterCalendar.getTimeInMillis(),"Alternate Testing"))
+//                {
+//                    Toast.makeText(this,"Added successfully",Toast.LENGTH_SHORT).show();
+//                }
+//                else
+//                {
+//                    Toast.makeText(this,"Something failed",Toast.LENGTH_LONG).show();
+//                }
+//                break;
+//            }
+//            case(R.id.testEventButton): //test event existing
+//            {
+//                String outputVal = editDatabase.getCalendarDetails(interpreterCalendar.getTimeInMillis());
+//                if(outputVal != null)
+//                {
+//                    Toast.makeText(this,"Value exists",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this,outputVal,Toast.LENGTH_SHORT).show();
+//                }
+//                else
+//                {
+//                    Toast.makeText(this,"IT failed",Toast.LENGTH_LONG).show();
+//                }
+//                break;
+//            }
+//        }
+//
+//    }
 
     @Override
     public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
