@@ -7,7 +7,7 @@ import android.content.Intent;
 
 public class YearView extends AppCompatActivity implements View.OnClickListener {
     public final static String DATA = "";
-    public int[] array = new int[6];
+    public int[] array = new int[8];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
