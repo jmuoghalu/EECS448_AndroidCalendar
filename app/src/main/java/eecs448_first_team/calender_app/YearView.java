@@ -49,145 +49,155 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
         final int numOfDaysInPrevMonth = 6;
         final int weekNum = 7;
 
+        /*
+         * To reduce the number of function calls down, creating local variables
+          */
+        int nullDate = SafeDate.day00.getDate();
+        int fallYear = SafeDate.fallYear.getDate();
+        int springYear = SafeDate.springYear.getDate();
+        int day30 = SafeDate.day30.getDate();
+        int day31 = SafeDate.day31.getDate();
+
+
         Intent goToMonth = new Intent(this, MonthView.class);
         switch(view.getId())
         {
             case(R.id.augustButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] = SafeDate.August.getDate();
-                array[yearIndex] = SafeDate.fallYear.getDate();
+                array[yearIndex] = fallYear;
                 array[firstDayOfMonth] = SafeDate.day02.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day30.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day00.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day30;
+                array[numOfDaysInPrevMonth] = nullDate;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.septemberButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] =  SafeDate.September.getDate();
-                array[yearIndex] = SafeDate.fallYear.getDate();
+                array[yearIndex] = fallYear;
                 array[firstDayOfMonth] =  SafeDate.day05.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day30.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day31.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day30;
+                array[numOfDaysInPrevMonth] = day31;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.octoberButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] =  SafeDate.October.getDate();
-                array[yearIndex] = SafeDate.fallYear.getDate();
+                array[yearIndex] = fallYear;
                 array[firstDayOfMonth] =  SafeDate.day07.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day31.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day30.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day31;
+                array[numOfDaysInPrevMonth] = day30;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.novemberButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] =  SafeDate.November.getDate();
-                array[yearIndex] = SafeDate.fallYear.getDate();
+                array[yearIndex] = fallYear;
                 array[firstDayOfMonth] =  SafeDate.day03.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day30.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day31.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day30;
+                array[numOfDaysInPrevMonth] = day31;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.decemberButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] = SafeDate.December.getDate();
-                array[yearIndex] = SafeDate.fallYear.getDate();
+                array[yearIndex] = fallYear;
                 array[firstDayOfMonth] = SafeDate.day05.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day31.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day30.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day31;
+                array[numOfDaysInPrevMonth] = day30;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.januaryButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] = SafeDate.January.getDate();
-                array[yearIndex] = SafeDate.springYear.getDate();
+                array[yearIndex] = springYear;
                 array[firstDayOfMonth] = SafeDate.day01.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day31.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day31.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day31;
+                array[numOfDaysInPrevMonth] = day31;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.februaryButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] = SafeDate.Febuary.getDate();
-                array[yearIndex] = SafeDate.springYear.getDate();
+                array[yearIndex] = springYear;
                 array[firstDayOfMonth] = SafeDate.day04.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
                 array[numOfDaysInMonth] = SafeDate.day28.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day31.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[numOfDaysInPrevMonth] = day31;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.marchButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] = SafeDate.March.getDate();
-                array[yearIndex] = SafeDate.springYear.getDate();
+                array[yearIndex] = springYear;
                 array[firstDayOfMonth] = SafeDate.day04.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day31.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day31;
                 array[numOfDaysInPrevMonth] = SafeDate.day28.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.aprilButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] = SafeDate.April.getDate();
-                array[yearIndex] = SafeDate.springYear.getDate();
+                array[yearIndex] = springYear;
                 array[firstDayOfMonth] = SafeDate.day07.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day30.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day31.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day30;
+                array[numOfDaysInPrevMonth] = day31;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
             }
             case(R.id.mayButton):
             {
-                array[dayIndex] = SafeDate.day00.getDate();
+                array[dayIndex] = nullDate;
                 array[monthIndex] = SafeDate.May.getDate();
-                array[yearIndex] = SafeDate.springYear.getDate();
+                array[yearIndex] = springYear;
                 array[firstDayOfMonth] = SafeDate.day02.getDate();
-                array[sundayDayForWeekView] = SafeDate.day00.getDate();
-                array[numOfDaysInMonth] = SafeDate.day31.getDate();
-                array[numOfDaysInPrevMonth] = SafeDate.day30.getDate();
-                array[weekNum] = SafeDate.day00.getDate();
+                array[sundayDayForWeekView] = nullDate;
+                array[numOfDaysInMonth] = day31;
+                array[numOfDaysInPrevMonth] = day30;
+                array[weekNum] = nullDate;
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
