@@ -362,4 +362,15 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
             return("");
         }
     }
+
+    /**
+     * @param savedInstanceState Bundles the values of of data and array and saves them once the activity is left
+     * @author Paul
+     * @cite https://developer.android.com/training/basics/activity-lifecycle/recreating.html
+     */
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putIntArray(DATA, array);
+        super.onSaveInstanceState(savedInstanceState);
+    }
 }
