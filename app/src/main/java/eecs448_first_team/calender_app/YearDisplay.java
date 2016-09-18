@@ -54,6 +54,38 @@ public class YearDisplay extends AppCompatActivity {
         array = new int[8];
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_year_display);
+
+        //BEFORE getting into all of the details of starting, check if we should switch views to a previously viewed View:
+        if(((StartupDetectionApplication)getApplication()).Check_and_CommunicateStartedUp())
+        {
+            //fetch user's last viewed activity with preserved array
+            UserLastSessionSaving loadData = new UserLastSessionSaving(this);
+            array = loadData.GetSessionDetails();
+            int nextView = loadData.GetLastSessionView();
+            switch(nextView)
+            {
+                case(UserLastSessionSaving.VIEW_DAY):
+                {
+                    Intent goToDay = new Intent(YearDisplay.this,DayView.class);
+                    goToDay.putExtra(DayView.DATA,array);
+                    startActivity(goToDay);
+                }
+                case(UserLastSessionSaving.VIEW_MONTH):
+                {
+                    Intent goToDay = new Intent(YearDisplay.this,MonthView.class);
+                    goToDay.putExtra(MonthView.DATA,array);
+                    startActivity(goToDay);
+                }
+                case(UserLastSessionSaving.VIEW_WEEK):
+                {
+                    Intent goToDay = new Intent(YearDisplay.this,WeekView.class);
+                    goToDay.putExtra(WeekView.DATA,array);
+                    startActivity(goToDay);
+                }
+            }
+        }
+
+
         CalendarView calender;
         calender = (CalendarView) findViewById(R.id.calender);
 
