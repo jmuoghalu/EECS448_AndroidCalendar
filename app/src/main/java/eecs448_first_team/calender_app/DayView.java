@@ -18,9 +18,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.util.Calendar;
+
 public class DayView extends AppCompatActivity implements View.OnClickListener {
     public final static String DATA = "";
     public int[] array;
+    private CalendarEventDb theDatabase;
+    private Calendar dateToMillisecondsInterpreter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,39 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
         Intent getToDay = getIntent();
         array = getToDay.getIntArrayExtra(AddDetails.DATA);
         fillDate();
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        theDatabase = new CalendarEventDb(this);
+        dateToMillisecondsInterpreter = Calendar.getInstance(); //configures the calendar to get current time in MS of your corresponding day
+        dateToMillisecondsInterpreter.set(Calendar.HOUR,0); //locks hours,minutes,seconds,MS in Calendar to 0 to make consistent, and so we don't have to zero them again later
+        dateToMillisecondsInterpreter.set(Calendar.MINUTE,0); //thus, I can say with certainty that using the Calendar to convert 9-21-2016 to milliseconds will produce a constant value
+        dateToMillisecondsInterpreter.set(Calendar.SECOND,0);
+        dateToMillisecondsInterpreter.set(Calendar.MILLISECOND,0);
+        dateToMillisecondsInterpreter.set(Calendar.DAY_OF_MONTH,array[0]);
+        if(array[7] == 1 && array[0] > 7) // if Week 1 and day is from the previous month
+        {
+            dateToMillisecondsInterpreter.set(Calendar.MONTH,array[1] - 1);
+        }
+        else if(array[7] > 4 && array[0] < 23) // if Week 5 or 6 and day is from the next month
+        {
+            dateToMillisecondsInterpreter.set(Calendar.MONTH,array[1] + 1);
+        }
+        else
+        {
+            dateToMillisecondsInterpreter.set(Calendar.MONTH,array[1]);
+        }
+        dateToMillisecondsInterpreter.set(Calendar.YEAR,array[2]);
+
+        ((TextView)findViewById(R.id.detailsText)).setText(theDatabase.getCalendarDetails(dateToMillisecondsInterpreter.getTimeInMillis()));
+    }
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        theDatabase.close();
     }
     @Override
     public void onClick(View view)

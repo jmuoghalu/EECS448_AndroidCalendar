@@ -28,8 +28,8 @@ public class CalendarEventDb extends SQLiteOpenHelper
         public void setDaySinceAugustFirst_2016(Long newValue) {daySinceAugustFirst_2016 = newValue;}
     }
 
-    private static SQLiteDatabase rdb; //readable database (for fetching values)
-    private static SQLiteDatabase wdb; //writable database (for editing values)
+    private SQLiteDatabase rdb; //readable database (for fetching values)
+    private SQLiteDatabase wdb; //writable database (for editing values)
 	public static final int DATABASE_VER = 1; //to be incremented to prevent conflict issues
 	private static final String DATABASE_NAME = "CalendarEventTable.db";
     private Calendar timeCalendar;

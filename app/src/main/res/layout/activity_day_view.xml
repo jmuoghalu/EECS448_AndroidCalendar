@@ -28,6 +28,7 @@
         android:text="Detail"
         android:id="@+id/detail" />
 
+
     <LinearLayout
         android:id="@+id/buttonBar"
         android:layout_width="wrap_content"
@@ -63,5 +64,12 @@
         android:background="@color/colorAccent"
         android:textSize="32sp"
         android:text="+"/>
+
+    <TextView
+        android:id="@+id/detailsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail"
+        android:layout_above="@id/addDetailsButton"/>
 
 </RelativeLayout>

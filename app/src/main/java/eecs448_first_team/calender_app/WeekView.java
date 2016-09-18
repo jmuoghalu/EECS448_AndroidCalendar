@@ -114,360 +114,361 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
             }
             default:
             {
-                Intent goToDay = new Intent(this, DayView.class);
-                goToDay.putExtra(DATA,array);
-                startActivity(goToDay);
+                GetWeekDay(view.getId());
+//                Intent goToDay = new Intent(this, DayView.class);
+//                goToDay.putExtra(DATA,array);
+//                startActivity(goToDay);
                 break;
             }
         }
     }
-//    public void fillWeek(int viewId)
-//    {
-//        TextView t = (TextView) findViewById(R.id.sunday);
-//        switch(viewId)
-//        {
-//
-//            //array: [day, month, year, day of 1st, Sunday's day for WeekView, # days in month, # days in previous month, week #]
-//            case(R.id.sunday):
-//            {
-//                if(array[1] != 8 || array[7] != 1) // if the first week of August is displayed, the user can't click where there is no date
-//                {
-//                    array[0] = array[4]; // otherwise, the date of Sunday will be the correct date
-//                    Intent goToDay = new Intent(this, DayView.class);
-//                    goToDay.putExtra(DATA, array);
-//                    startActivity(goToDay);
-//                }
-//                break;
-//            }
-//            case(R.id.monday):
-//            {
-//                if(array[7] == 1 && array[4] != 1) // if the first week is split between two months
-//                {
-//                    if(array[4] == array[6]) // if Sunday was the last day of ending month
-//                    {
-//                        array[0] = 1; // the day will be the 1st of the month
-//                    }
-//                    else
-//                    {
-//                        array[0] = array[4]+1; // otherwise the date is the next day of the ending month
-//                    }
-//                }
-//                else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) // if the fifth week is split between two months or it's the sixth week
-//                {
-//                    if(array[4] == array[5]) // if Sunday was the last day of the month
-//                    {
-//                        array[0] = 1; // the day will be the 1st of the next month
-//                    }
-//                    else
-//                    {
-//                        array[0] = array[4]+1; // otherwise the date is the next day of the month
-//                    }
-//                }
-//                else // if it is one of the middle weeks
-//                {
-//                    array[0] = array[4] + 1; // the date will be the next day after Sunday
-//                }
-//                Intent goToDay = new Intent(this, DayView.class);
-//                goToDay.putExtra(DATA, array);
-//                startActivity(goToDay);
-//                break;
-//            }
-//            case(R.id.tuesday):
-//            {
-//                if(array[7] == 1 && array[4] != 1) // if it's Week 1 and the month did not start on Sunday
-//                {
-//                    if(array[4] == array[6]) // if Sunday was last day of previous month
-//                    {
-//                        array[0] = 2; // Tuesday will be the 2nd
-//                    }
-//                    else if(array[4]+1 == array[6]) // if Monday was last day of previous month
-//                    {
-//                        array[0] = 1; // Tuesday will be the 1st
-//                    }
-//                    else
-//                    {
-//                        array[0] = array[4]+2; // otherwise it's the next day of the ending month
-//                    }
-//                }
-//                else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) // if Week 5 is split between months or if it's the sixth week
-//                {
-//                    if(array[4] == array[5]) // if Sunday was last day of month
-//                    {
-//                        array[0] = 2; // Tuesday will be the 2nd of the next month
-//                    }
-//                    else if(array[4]+1 == array[5]) //if Monday was last day of month
-//                    {
-//                        array[0] = 1; // Tuesday will be the 1st of the next month
-//                    }
-//                    else
-//                    {
-//                        array[0] = array[4]+2; // otherwise move date forward
-//                    }
-//                }
-//                else // if it's a middle week
-//                {
-//                    array[0] = array[4] + 2; // move date forward
-//                }
-//                Intent goToDay = new Intent(this, DayView.class);
-//                goToDay.putExtra(DATA, array);
-//                startActivity(goToDay);
-//                break;
-//            }
-//            case(R.id.wednesday):
-//            {
-//                if(array[7] == 1 && array[4] != 1) // if it's Week 1 and doesn't start on Sunday
-//                {
-//                    if(array[4] == array[6]) //Sunday was last day of previous month
-//                    {
-//                        array[0] = 3; // Wednesday is the 3rd
-//                    }
-//                    else if(array[4]+1 == array[6]) //Monday was last day of previous month
-//                    {
-//                        array[0] = 2; // Wednesday is the 2nd
-//                    }
-//                    else if(array[4]+2 == array[6]) //Tuesday was last day of previous month
-//                    {
-//                        array[0] = 1; // Wednesday is the 1st
-//                    }
-//                    else
-//                    {
-//                        array[0] = array[4]+3; // Previous month continues
-//                    }
-//                }
-//                else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) //Fifth week split between months or sixth week
-//                {
-//                    if(array[4] == array[5]) //Sunday was last day of month
-//                    {
-//                        array[0] = 3; //Wednesday is 3rd
-//                    }
-//                    else if(array[4]+1 == array[5]) //Monday was last day of month
-//                    {
-//                        array[0] = 2; //Wednesday is 2nd
-//                    }
-//                    else if(array[4]+2 == array[5]) //Tuesday was last day of month
-//                    {
-//                        array[0] = 1; //Wednesday is 1st
-//                    }
-//                    else
-//                    {
-//                        array[0] = array[4]+3; //Month continues
-//                    }
-//                }
-//                else // Middle week
-//                {
-//                    array[0] = array[4] + 3; //Month continues
-//                }
-//                Intent goToDay = new Intent(this, DayView.class);
-//                goToDay.putExtra(DATA, array);
-//                startActivity(goToDay);
-//                break;
-//            }
-//            case(R.id.thursday):
-//            {
-//                if(array[1] != 5 || array[7] != 5) // if the last week of May is displayed, user can't click where there is no date
-//                {
-//                    if(array[7] == 1 && array[4] != 1) //Week 1 and didn't start on Sunday
-//                    {
-//                        if(array[4] == array[6]) //Sunday was last day of previous month
-//                        {
-//                            array[0] = 4; //Thursday is the 4th
-//                        }
-//                        else if(array[4]+1 == array[6]) //Monday was last day of previous month
-//                        {
-//                            array[0] = 3; //Thursday is the 3rd
-//                        }
-//                        else if(array[4]+2 == array[6]) //Tuesday was last day of previous month
-//                        {
-//                            array[0] = 2; //Thursday is the 2nd
-//                        }
-//                        else if(array[4]+3 == array[6]) //Wednesday was last day of previous month
-//                        {
-//                            array[0] = 1; //Thursday is the 1st
-//                        }
-//                        else
-//                        {
-//                            array[0] = array[4]+4; //Previous month continues
-//                        }
-//                    }
-//                    else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) //Fifth week is split between months or sixth week
-//                    {
-//                        if(array[4] == array[5]) //Sunday was last day of month
-//                        {
-//                            array[0] = 4; //Thurs is the 4th
-//                        }
-//                        else if(array[4]+1 == array[5]) //Monday was last day of month
-//                        {
-//                            array[0] = 3; //Thurs is the 3rd
-//                        }
-//                        else if(array[4]+2 == array[5]) //Tuesday was last day of month
-//                        {
-//                            array[0] = 2; //Thurs is the 2nd
-//                        }
-//                        else if(array[4]+3 == array[5]) //Wednesday was last day of month
-//                        {
-//                            array[0] = 1; //Thurs is the 1st
-//                        }
-//                        else
-//                        {
-//                            array[0] = array[4]+4; //Month continues
-//                        }
-//                    }
-//                    else //Middle week
-//                    {
-//                        array[0] = array[4] + 4; //Month continues
-//                    }
-//                    Intent goToDay = new Intent(this, DayView.class);
-//                    goToDay.putExtra(DATA, array);
-//                    startActivity(goToDay);
-//                }
-//                break;
-//            }
-//            case(R.id.friday):
-//            {
-//                if(array[1] != 5 || array[7] != 5) // if the last week of May is displayed, user can't click where there is no date
-//                {
-//                    if(array[7] == 1 && array[4] != 1) //Week 1 and didn't start on Sunday
-//                    {
-//                        if(array[4] == array[6]) //Sunday was last day of previous month
-//                        {
-//                            array[0] = 5; //Fri is the 5th
-//                        }
-//                        else if(array[4]+1 == array[6]) //Monday was last day of previous month
-//                        {
-//                            array[0] = 4; //Fri is the 4th
-//                        }
-//                        else if(array[4]+2 == array[6]) //Tuesday was last day of previous month
-//                        {
-//                            array[0] = 3; //Fri is the 5th
-//                        }
-//                        else if(array[4]+3 == array[6]) //Wednesday was last day of previous month
-//                        {
-//                            array[0] = 2; //Fri is the 2nd
-//                        }
-//                        else if(array[4]+4 == array[6]) //Thursday was last day of previous month
-//                        {
-//                            array[0] = 1; //Fri is the 1st
-//                        }
-//                        else
-//                        {
-//                            array[0] = array[4]+5; //Previous month continues
-//                        }
-//                    }
-//                    else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) //Fifth week is split between months or sixth week
-//                    {
-//                        if(array[4] == array[5]) //Sunday was last day of month
-//                        {
-//                            array[0] = 5; //Fri is the 5th
-//                        }
-//                        else if(array[4]+1 == array[5]) //Monday was last day of month
-//                        {
-//                            array[0] = 4; //Fri is the 4th
-//                        }
-//                        else if(array[4]+2 == array[5]) //Tuesday was last day of month
-//                        {
-//                            array[0] = 3; //Fri is the 3rd
-//                        }
-//                        else if(array[4]+3 == array[5]) //Tuesday was last day of month
-//                        {
-//                            array[0] = 2; //Fri is the 2nd
-//                        }
-//                        else if(array[4]+4 == array[5]) //Thursday was last day of month
-//                        {
-//                            array[0] = 1; //Fri is the 1st
-//                        }
-//                        else
-//                        {
-//                            array[0] = array[4]+5; //Month continues
-//                        }
-//                    }
-//                    else //Middle week
-//                    {
-//                        array[0] = array[4] + 5; //Month continues
-//                    }
-//                    Intent goToDay = new Intent(this, DayView.class);
-//                    goToDay.putExtra(DATA, array);
-//                    startActivity(goToDay);
-//                }
-//                break;
-//            }
-//            case(R.id.saturday):
-//            {
-//                if(array[1] != 5 || array[7] != 5) // if the last week of May is displayed, user can't click where there is no date
-//                {
-//                    if(array[7] == 1 && array[4] != 1) //Week 1 and didn't start on Sunday
-//                    {
-//                        if(array[4] == array[6]) //Sunday was last day of previous month
-//                        {
-//                            array[0] = 6; //Sat is the 6th
-//                        }
-//                        else if(array[4]+1 == array[6]) //Monday was last day of previous month
-//                        {
-//                            array[0] = 5; //Sat is the 5th
-//                        }
-//                        else if(array[4]+2 == array[6]) //Tuesday was last day of previous month
-//                        {
-//                            array[0] = 4; //Sat is the 4th
-//                        }
-//                        else if(array[4]+3 == array[6]) //Wednesday was last day of previous month
-//                        {
-//                            array[0] = 3; //Sat is the 3rd
-//                        }
-//                        else if(array[4]+4 == array[6]) //Thursday was last day of previous month
-//                        {
-//                            array[0] = 2; //Sat is the 2nd
-//                        }
-//                        else if(array[4]+5 == array[6]) //Friday was last day of previous month
-//                        {
-//                            array[0] = 1; //Sat is the 1st
-//                        }
-//                        else
-//                        {
-//                            array[0] = array[4]+6; //Previous month continues
-//                        }
-//                    }
-//                    else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) //Fifth week is split between months or sixth week
-//                    {
-//                        if(array[4] == array[5]) //Sunday was last day of month
-//                        {
-//                            array[0] = 6; //Sat is the 6th
-//                        }
-//                        else if(array[4]+1 == array[5]) //Monday was last day of month
-//                        {
-//                            array[0] = 5; //Sat is the 5th
-//                        }
-//                        else if(array[4]+2 == array[5]) //Tuesday was last day of month
-//                        {
-//                            array[0] = 4; //Sat is the 4th
-//                        }
-//                        else if(array[4]+3 == array[5]) //Wednesday was last day of month
-//                        {
-//                            array[0] = 3; //Sat is the 3rd
-//                        }
-//                        else if(array[4]+4 == array[5]) //Thursday was last day of month
-//                        {
-//                            array[0] = 2; //Sat is the 2nd
-//                        }
-//                        else if(array[4]+5 == array[5]) //Friday was last day of month
-//                        {
-//                            array[0] = 1; //Sat is the 1st
-//                        }
-//                        else
-//                        {
-//                            array[0] = array[4]+6; //Month continues
-//                        }
-//                    }
-//                    else //Middle week
-//                    {
-//                        array[0] = array[4] + 6; //Month continues
-//                    }
-//                    Intent goToDay = new Intent(this, DayView.class);
-//                    goToDay.putExtra(DATA, array);
-//                    startActivity(goToDay);
-//                }
-//                break;
-//            }
-//        }
-//    }
+    public void GetWeekDay(int viewId)
+    {
+        TextView t = (TextView) findViewById(R.id.sunday);
+        switch(viewId)
+        {
+
+            //array: [day, month, year, day of 1st, Sunday's day for WeekView, # days in month, # days in previous month, week #]
+            case(R.id.sunday):
+            {
+                if(array[1] != 8 || array[7] != 1) // if the first week of August is displayed, the user can't click where there is no date
+                {
+                    array[0] = array[4]; // otherwise, the date of Sunday will be the correct date
+                    Intent goToDay = new Intent(this, DayView.class);
+                    goToDay.putExtra(DATA, array);
+                    startActivity(goToDay);
+                }
+                break;
+            }
+            case(R.id.monday):
+            {
+                if(array[7] == 1 && array[4] != 1) // if the first week is split between two months
+                {
+                    if(array[4] == array[6]) // if Sunday was the last day of ending month
+                    {
+                        array[0] = 1; // the day will be the 1st of the month
+                    }
+                    else
+                    {
+                        array[0] = array[4]+1; // otherwise the date is the next day of the ending month
+                    }
+                }
+                else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) // if the fifth week is split between two months or it's the sixth week
+                {
+                    if(array[4] == array[5]) // if Sunday was the last day of the month
+                    {
+                        array[0] = 1; // the day will be the 1st of the next month
+                    }
+                    else
+                    {
+                        array[0] = array[4]+1; // otherwise the date is the next day of the month
+                    }
+                }
+                else // if it is one of the middle weeks
+                {
+                    array[0] = array[4] + 1; // the date will be the next day after Sunday
+                }
+                Intent goToDay = new Intent(this, DayView.class);
+                goToDay.putExtra(DATA, array);
+                startActivity(goToDay);
+                break;
+            }
+            case(R.id.tuesday):
+            {
+                if(array[7] == 1 && array[4] != 1) // if it's Week 1 and the month did not start on Sunday
+                {
+                    if(array[4] == array[6]) // if Sunday was last day of previous month
+                    {
+                        array[0] = 2; // Tuesday will be the 2nd
+                    }
+                    else if(array[4]+1 == array[6]) // if Monday was last day of previous month
+                    {
+                        array[0] = 1; // Tuesday will be the 1st
+                    }
+                    else
+                    {
+                        array[0] = array[4]+2; // otherwise it's the next day of the ending month
+                    }
+                }
+                else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) // if Week 5 is split between months or if it's the sixth week
+                {
+                    if(array[4] == array[5]) // if Sunday was last day of month
+                    {
+                        array[0] = 2; // Tuesday will be the 2nd of the next month
+                    }
+                    else if(array[4]+1 == array[5]) //if Monday was last day of month
+                    {
+                        array[0] = 1; // Tuesday will be the 1st of the next month
+                    }
+                    else
+                    {
+                        array[0] = array[4]+2; // otherwise move date forward
+                    }
+                }
+                else // if it's a middle week
+                {
+                    array[0] = array[4] + 2; // move date forward
+                }
+                Intent goToDay = new Intent(this, DayView.class);
+                goToDay.putExtra(DATA, array);
+                startActivity(goToDay);
+                break;
+            }
+            case(R.id.wednesday):
+            {
+                if(array[7] == 1 && array[4] != 1) // if it's Week 1 and doesn't start on Sunday
+                {
+                    if(array[4] == array[6]) //Sunday was last day of previous month
+                    {
+                        array[0] = 3; // Wednesday is the 3rd
+                    }
+                    else if(array[4]+1 == array[6]) //Monday was last day of previous month
+                    {
+                        array[0] = 2; // Wednesday is the 2nd
+                    }
+                    else if(array[4]+2 == array[6]) //Tuesday was last day of previous month
+                    {
+                        array[0] = 1; // Wednesday is the 1st
+                    }
+                    else
+                    {
+                        array[0] = array[4]+3; // Previous month continues
+                    }
+                }
+                else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) //Fifth week split between months or sixth week
+                {
+                    if(array[4] == array[5]) //Sunday was last day of month
+                    {
+                        array[0] = 3; //Wednesday is 3rd
+                    }
+                    else if(array[4]+1 == array[5]) //Monday was last day of month
+                    {
+                        array[0] = 2; //Wednesday is 2nd
+                    }
+                    else if(array[4]+2 == array[5]) //Tuesday was last day of month
+                    {
+                        array[0] = 1; //Wednesday is 1st
+                    }
+                    else
+                    {
+                        array[0] = array[4]+3; //Month continues
+                    }
+                }
+                else // Middle week
+                {
+                    array[0] = array[4] + 3; //Month continues
+                }
+                Intent goToDay = new Intent(this, DayView.class);
+                goToDay.putExtra(DATA, array);
+                startActivity(goToDay);
+                break;
+            }
+            case(R.id.thursday):
+            {
+                if(array[1] != 5 || array[7] != 5) // if the last week of May is displayed, user can't click where there is no date
+                {
+                    if(array[7] == 1 && array[4] != 1) //Week 1 and didn't start on Sunday
+                    {
+                        if(array[4] == array[6]) //Sunday was last day of previous month
+                        {
+                            array[0] = 4; //Thursday is the 4th
+                        }
+                        else if(array[4]+1 == array[6]) //Monday was last day of previous month
+                        {
+                            array[0] = 3; //Thursday is the 3rd
+                        }
+                        else if(array[4]+2 == array[6]) //Tuesday was last day of previous month
+                        {
+                            array[0] = 2; //Thursday is the 2nd
+                        }
+                        else if(array[4]+3 == array[6]) //Wednesday was last day of previous month
+                        {
+                            array[0] = 1; //Thursday is the 1st
+                        }
+                        else
+                        {
+                            array[0] = array[4]+4; //Previous month continues
+                        }
+                    }
+                    else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) //Fifth week is split between months or sixth week
+                    {
+                        if(array[4] == array[5]) //Sunday was last day of month
+                        {
+                            array[0] = 4; //Thurs is the 4th
+                        }
+                        else if(array[4]+1 == array[5]) //Monday was last day of month
+                        {
+                            array[0] = 3; //Thurs is the 3rd
+                        }
+                        else if(array[4]+2 == array[5]) //Tuesday was last day of month
+                        {
+                            array[0] = 2; //Thurs is the 2nd
+                        }
+                        else if(array[4]+3 == array[5]) //Wednesday was last day of month
+                        {
+                            array[0] = 1; //Thurs is the 1st
+                        }
+                        else
+                        {
+                            array[0] = array[4]+4; //Month continues
+                        }
+                    }
+                    else //Middle week
+                    {
+                        array[0] = array[4] + 4; //Month continues
+                    }
+                    Intent goToDay = new Intent(this, DayView.class);
+                    goToDay.putExtra(DATA, array);
+                    startActivity(goToDay);
+                }
+                break;
+            }
+            case(R.id.friday):
+            {
+                if(array[1] != 5 || array[7] != 5) // if the last week of May is displayed, user can't click where there is no date
+                {
+                    if(array[7] == 1 && array[4] != 1) //Week 1 and didn't start on Sunday
+                    {
+                        if(array[4] == array[6]) //Sunday was last day of previous month
+                        {
+                            array[0] = 5; //Fri is the 5th
+                        }
+                        else if(array[4]+1 == array[6]) //Monday was last day of previous month
+                        {
+                            array[0] = 4; //Fri is the 4th
+                        }
+                        else if(array[4]+2 == array[6]) //Tuesday was last day of previous month
+                        {
+                            array[0] = 3; //Fri is the 5th
+                        }
+                        else if(array[4]+3 == array[6]) //Wednesday was last day of previous month
+                        {
+                            array[0] = 2; //Fri is the 2nd
+                        }
+                        else if(array[4]+4 == array[6]) //Thursday was last day of previous month
+                        {
+                            array[0] = 1; //Fri is the 1st
+                        }
+                        else
+                        {
+                            array[0] = array[4]+5; //Previous month continues
+                        }
+                    }
+                    else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) //Fifth week is split between months or sixth week
+                    {
+                        if(array[4] == array[5]) //Sunday was last day of month
+                        {
+                            array[0] = 5; //Fri is the 5th
+                        }
+                        else if(array[4]+1 == array[5]) //Monday was last day of month
+                        {
+                            array[0] = 4; //Fri is the 4th
+                        }
+                        else if(array[4]+2 == array[5]) //Tuesday was last day of month
+                        {
+                            array[0] = 3; //Fri is the 3rd
+                        }
+                        else if(array[4]+3 == array[5]) //Tuesday was last day of month
+                        {
+                            array[0] = 2; //Fri is the 2nd
+                        }
+                        else if(array[4]+4 == array[5]) //Thursday was last day of month
+                        {
+                            array[0] = 1; //Fri is the 1st
+                        }
+                        else
+                        {
+                            array[0] = array[4]+5; //Month continues
+                        }
+                    }
+                    else //Middle week
+                    {
+                        array[0] = array[4] + 5; //Month continues
+                    }
+                    Intent goToDay = new Intent(this, DayView.class);
+                    goToDay.putExtra(DATA, array);
+                    startActivity(goToDay);
+                }
+                break;
+            }
+            case(R.id.saturday):
+            {
+                if(array[1] != 5 || array[7] != 5) // if the last week of May is displayed, user can't click where there is no date
+                {
+                    if(array[7] == 1 && array[4] != 1) //Week 1 and didn't start on Sunday
+                    {
+                        if(array[4] == array[6]) //Sunday was last day of previous month
+                        {
+                            array[0] = 6; //Sat is the 6th
+                        }
+                        else if(array[4]+1 == array[6]) //Monday was last day of previous month
+                        {
+                            array[0] = 5; //Sat is the 5th
+                        }
+                        else if(array[4]+2 == array[6]) //Tuesday was last day of previous month
+                        {
+                            array[0] = 4; //Sat is the 4th
+                        }
+                        else if(array[4]+3 == array[6]) //Wednesday was last day of previous month
+                        {
+                            array[0] = 3; //Sat is the 3rd
+                        }
+                        else if(array[4]+4 == array[6]) //Thursday was last day of previous month
+                        {
+                            array[0] = 2; //Sat is the 2nd
+                        }
+                        else if(array[4]+5 == array[6]) //Friday was last day of previous month
+                        {
+                            array[0] = 1; //Sat is the 1st
+                        }
+                        else
+                        {
+                            array[0] = array[4]+6; //Previous month continues
+                        }
+                    }
+                    else if((array[7] == 5 && array[4]+6 > array[5]) || array[7] == 6) //Fifth week is split between months or sixth week
+                    {
+                        if(array[4] == array[5]) //Sunday was last day of month
+                        {
+                            array[0] = 6; //Sat is the 6th
+                        }
+                        else if(array[4]+1 == array[5]) //Monday was last day of month
+                        {
+                            array[0] = 5; //Sat is the 5th
+                        }
+                        else if(array[4]+2 == array[5]) //Tuesday was last day of month
+                        {
+                            array[0] = 4; //Sat is the 4th
+                        }
+                        else if(array[4]+3 == array[5]) //Wednesday was last day of month
+                        {
+                            array[0] = 3; //Sat is the 3rd
+                        }
+                        else if(array[4]+4 == array[5]) //Thursday was last day of month
+                        {
+                            array[0] = 2; //Sat is the 2nd
+                        }
+                        else if(array[4]+5 == array[5]) //Friday was last day of month
+                        {
+                            array[0] = 1; //Sat is the 1st
+                        }
+                        else
+                        {
+                            array[0] = array[4]+6; //Month continues
+                        }
+                    }
+                    else //Middle week
+                    {
+                        array[0] = array[4] + 6; //Month continues
+                    }
+                    Intent goToDay = new Intent(this, DayView.class);
+                    goToDay.putExtra(DATA, array);
+                    startActivity(goToDay);
+                }
+                break;
+            }
+        }
+    }
 
     /**
      * precondition: array exists and is filled with correct values
