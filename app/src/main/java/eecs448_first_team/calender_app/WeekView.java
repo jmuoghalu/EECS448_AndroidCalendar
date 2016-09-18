@@ -1,6 +1,14 @@
 
 package eecs448_first_team.calender_app;
 
+/**
+ * author: Cara Fisher
+ * date: 9-18-16
+ * purpose: a mobile app page that displays the Sunday-Saturday surrounding a date
+ *
+ * Many thanks to Android (http://developer.android.com/index.html) for its help
+ */
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,9 +21,9 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
     public int[] array;
 
     /**
-     * precondition: m is a valid integer
-     * postconditon: None
-     * @param m
+     * precondition: m is a valid integer.
+     * postconditon: None.
+     * @param m integer corresponding to month (1 = "Jan. ")
      * @return the abbreviated name of the month which is the mth month
      */
     public String getMonth(int m)
@@ -471,8 +479,8 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
     }
 
     /**
-     * precondition: array exists and is filled with correct values
-     * postcondition: IDs sunday-saturday in activity_week_view.xml are filled with correct dates
+     * precondition: array exists and is filled with correct values.
+     * postcondition: IDs sunday-saturday in activity_week_view.xml are filled with correct dates.
      */
     public void fillWeek()
     {

@@ -107,9 +107,9 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
         }
     }
     /**
-     * precondition: array exists and is filled with correct values
-     * postcondition: text of ID:date in activity_day_view.xml is set to date user wanted
-     *
+     * precondition: array exists and is filled with correct values.
+     * postcondition: text of ID:date in activity_day_view.xml is set to date user wanted.
+     * Sets the proper text to display based on selected day.
      * array: [day,month,year,day of the first of the month,date of Sunday of the week sent to WeekView,number of days in the month,number of days in the previous month,week number]
      */
     public void fillDate()
@@ -130,8 +130,8 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
     }
 
     /**
-     * precondition: m is an existing integer
-     * postconditon: None
+     * precondition: m is an existing integer.
+     * postconditon: None.
      * @param m the integer equivalent of the month to return (8 is "August", 1 is "January")
      * @return the name of the month of number m, or empty string if provided month is unreachable (June, July)
      */

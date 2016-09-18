@@ -3,7 +3,7 @@ package eecs448_first_team.calender_app;
 /**
  * author: Cara Fisher
  * date: 9-18-16
- * purpose: a mobile app page where details can be added to be displayed in DayView
+ * purpose: a mobile app page where details can be added to be displayed in DayView.
  *
  * Many thanks to Android (https://developer.android.com/index.html) for its help
  */

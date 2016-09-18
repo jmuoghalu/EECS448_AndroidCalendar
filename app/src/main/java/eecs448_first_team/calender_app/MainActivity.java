@@ -1,5 +1,7 @@
 package eecs448_first_team.calender_app;
 
+//ALERT!!!! This is a deprecated class, and is no longer in use!
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;

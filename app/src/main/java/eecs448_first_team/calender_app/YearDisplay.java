@@ -1,5 +1,13 @@
 package eecs448_first_team.calender_app;
 
+/**
+ * authors: Deema ALShoaibi and Hans Brown
+ * date: 9-18-16
+ * purpose: a mobile app page that displays the entire year to the user, allowing them to select
+ * a month through its constituent days.
+ *
+ */
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +45,11 @@ public class YearDisplay extends AppCompatActivity {
     public int Year, Month, Day, Weekday;
     @Override
 
+    /**
+     * Android method called as part of the Activity Lifecycle on activity creation
+     * gets layout, prepares undefined class methods, alters display programmatically.
+     * Configures listener for date changing to navigate user to corresponding month.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         array = new int[8];
         super.onCreate(savedInstanceState);
@@ -229,51 +242,5 @@ public class YearDisplay extends AppCompatActivity {
             }
 
         });
-
-        WeekViewButton();
-        DayViewButton();
     }
-
-    private void WeekViewButton(){
-        Button messagebuttin = (Button) findViewById(R.id.WeekViewBotton);
-        messagebuttin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //SEND DATE TO ANOTHER ACTIVITy
-
-                Intent intent = new Intent(YearDisplay.this, WeekView.class);
-                /**
-                 * Int array pass around [  0 = day
-                 *                          1 = month
-                 *                          2 = year
-                 *                          3 = 1st of month
-                 *                          4 = Sunday's day for WeekView
-                 *                          5 = # days in month
-                 *                          6 = # days in previous month
-                 *                          7 = week #
-                 *                       ]
-                 */
-                int[] arrayBundle = {Day,Month,Year,};
-                intent.putExtra( DATA,Year );
-                startActivity(intent);
-            }
-        });
-
-        }
-
-    private void DayViewButton(){
-        Button messagebuttin = (Button) findViewById(R.id.DayViewButton);
-        messagebuttin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-
-                //SEND DATE TO ANOTHER ACTIVITY
-                Intent intent =new Intent(YearDisplay.this, DayView.class);
-                intent.putExtra( DATA,array);
-                startActivity(intent);
-            }
-        });
-
-    }
-
-    }
+}

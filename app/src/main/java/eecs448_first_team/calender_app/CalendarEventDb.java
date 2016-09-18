@@ -1,5 +1,14 @@
 package eecs448_first_team.calender_app;
 
+/**
+ * author: Hans Brown
+ * date: 9-18-16
+ * purpose: a SQLite Database interfacing page: Instantiate an object to get access
+ * to the database for reading and writing values. Primary database access methods are
+ * getCalendarDetails(long) and setCalendarDetails(long,String)
+ * Many thanks to Android (https://developer.android.com/index.html) for its help
+ */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,9 +18,10 @@ import android.provider.BaseColumns;
 
 import java.util.Calendar;
 
+
 public class CalendarEventDb extends SQLiteOpenHelper
 {
-    public class CalendarEvent
+    private class CalendarEvent
     {
         private Long ID;
         private String details;
@@ -30,7 +40,7 @@ public class CalendarEventDb extends SQLiteOpenHelper
 
     private SQLiteDatabase rdb; //readable database (for fetching values)
     private SQLiteDatabase wdb; //writable database (for editing values)
-	public static final int DATABASE_VER = 1; //to be incremented to prevent conflict issues
+	public static final int DATABASE_VER = 1; //arbitrary database version representation: to be incremented to prevent conflict issues
 	private static final String DATABASE_NAME = "CalendarEventTable.db";
     private Calendar timeCalendar;
     private class CalendarEventTable implements BaseColumns
@@ -56,23 +66,27 @@ public class CalendarEventDb extends SQLiteOpenHelper
     //IE searches by date (you will supply a date
     private static final String[] PARAMETERS_TABLE_SEARCH_COLUMNS_DATE = {CalendarEventTable.Column_Date};
 
+    /**
+     * Constructs this interface to the app's SQLite database.
+     * @param context the context (any Activity is a context) used by base class constructor
+     */
 	public CalendarEventDb(Context context)
 	{
 		super(context,DATABASE_NAME,null,DATABASE_VER);
 	}
-
     /**
-	* Called automatically when a database is being accessed while database does not exist.
-     * Takes a SQLiteDatabase to represent the Phone-side database class to write using
-	* Creates a new empty database for user.
-	*/
+     * Called automatically when a database is being accessed while database does not exist.
+     * Takes a SQLiteDatabase to represent the Phone-side database class to write with.
+     * Creates a new empty database for user.
+     * @param db The SQLiteDatabase to be constructed. Has no meaningful purpose since there is only ever one database
+     */
 	public void onCreate(SQLiteDatabase db)
 	{
 		db.execSQL(SQL_CREATE_ENTRIES);
 	}
 
-    /**precondition: database was changed, we are upgrading to a new database
-     * postcondition: new database created, all existing data lost
+    /**precondition: database was changed, we are upgrading to a new database.
+     * postcondition: new database created, all existing data lost.
      * here we could do specific logic to transfer data from
      * old database to new database.
      * @param db the phone database used to hold table
@@ -86,6 +100,8 @@ public class CalendarEventDb extends SQLiteOpenHelper
 	}
 
     /**
+     * precondition: database already instantiated.
+     * postcondition: if readable database was not accessible, it is now accessible.
      * After (re)building readable database access, queries CalendarEventTable to see if
      * it contains details for supplied day of the week
      * @param timeInMilliseconds the millisecond time representation of the given day. Fetchable by CalendarView.getDate() or through a Date object
@@ -114,6 +130,8 @@ public class CalendarEventDb extends SQLiteOpenHelper
     }
 
     /**
+     * precondition: database already instantiated.
+     * postcondition: if readable database was not accessible, it is now accessible.
      * After (re)building readable database access, queries CalendarEventTable for a particular CalendarEvent
      * @param timeInMilliseconds the millisecond time representation of the given day. Fetchable by CalendarView.getDate() or through a Date object
      * @return a CalendarEvent object with a Day, an ID, and some Details, or Null if object does not exist or table corrupted
@@ -162,7 +180,7 @@ public class CalendarEventDb extends SQLiteOpenHelper
 
     /**
      * After (re)building writeable database access, inserts a new row into CalendarEventTable
-     * overwriting an existing row with the same Date and storing the provided Details
+     * overwriting an existing row with the same Date and storing the provided Details.
      * @param timeInMilliseconds the millisecond time representation of the given day. Fetchable by CalendarView.getDate() or through a Date object
      * @param detailsForDay the details to add for the given day, ie "I had to mine more gold, but my supply cap was very high."
      * @return True if Details were added successfully, False if Details adding failed (possibly table corrupted)
@@ -194,12 +212,12 @@ public class CalendarEventDb extends SQLiteOpenHelper
     }
 
     /**
-     * precondition: user reverting to old database version
-     * postcondition: new database created, all existing data lost
-     * here we could implement a way to preserve new data when reverting to an old database version
+     * precondition: user reverting to old database version.
+     * postcondition: new database created, all existing data lost.
+     * here we could implement a way to preserve new data when reverting to an old database version.
      * @param db the database physically on the phone associated with this application
-     * @param oldVersion the previous database version
-     * @param newVersion the new version to update the database to
+     * @param oldVersion the previous database version integer
+     * @param newVersion the new version integer to update the database to
      */
 	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
 	{
