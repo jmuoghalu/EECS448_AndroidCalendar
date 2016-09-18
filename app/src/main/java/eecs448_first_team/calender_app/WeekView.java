@@ -60,6 +60,7 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
             default:
             {
                 Intent goToDay = new Intent(this, DayView.class);
+                goToDay.putExtra(DATA,array);
                 startActivity(goToDay);
                 break;
             }
