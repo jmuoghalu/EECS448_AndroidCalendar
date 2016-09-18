@@ -30,7 +30,7 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
         array = getToWeek.getIntArrayExtra(eecs448_first_team.calender_app.MonthView.DATA);
 
         TextView textView = (TextView) findViewById(R.id.year);
-        if(array[2] == 2016) {
+        if(array[2] == SafeDate.fallYear.getDate()) {
             textView.setText("2016");
         }
         else

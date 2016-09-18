@@ -1,8 +1,10 @@
 package eecs448_first_team.calender_app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 /**
  * Created by Paul on 9/17/2016.
@@ -10,34 +12,22 @@ import android.os.Bundle;
  * https://developer.android.com/guide/topics/data/data-storage.html#pref
  * and
  * https://classroom.udacity.com/courses/ud853/lessons/1474559101/concepts/164
+ * http://stackoverflow.com/questions/3624280/how-to-use-sharedpreferences-in-android-to-store-fetch-and-edit-values
  */
 public class Loader extends Activity {
-    public static final String month = "month";
-    public static final String day = "day";
 
-    protected void OnStart(Bundle old){
-        super.onStart();
+    public int restoreDate(String inDateString){
 
-        SharedPreferences monthView = getSharedPreferences("month", MODE_PRIVATE);
-        int month = monthView.getInt("month", R.id.monthName);
-
-        SharedPreferences dayView = getSharedPreferences("month", MODE_PRIVATE);
-        int day = dayView.getInt("day", R.id.date);
-
+        SharedPreferences dateStored = PreferenceManager.getDefaultSharedPreferences(this);
+        int missingMonth = 0;
+        return dateStored.getInt(inDateString, missingMonth);
     }
 
-    @Override
-    protected void onStop(){
-        super.onStop();
+    public void writeDate(String inDateString, int inDateInt){
 
-        SharedPreferences monthView = getSharedPreferences(month, MODE_PRIVATE);
-        SharedPreferences.Editor monthEdit = monthView.edit();
-        monthEdit.putInt(month, R.id.monthName);
-        monthEdit.commit();
-
-        SharedPreferences dayView = getSharedPreferences(month, MODE_PRIVATE);
-        SharedPreferences.Editor dayEdit = dayView.edit();
-        dayEdit.putInt(day, R.id.date);
-        dayEdit.commit();
+        SharedPreferences date = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editDate = date.edit();
+        editDate.putInt(inDateString, inDateInt);
+        editDate.apply();
     }
 }
