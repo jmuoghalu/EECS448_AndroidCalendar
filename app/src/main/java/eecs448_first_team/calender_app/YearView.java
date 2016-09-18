@@ -1,5 +1,13 @@
 package com.example.cara.calendar2;
 
+/**
+ * author: Cara Fisher
+ * date: 9-18-16
+ * purpose: a mobile app page that displays the months of the academic year for the user
+ * 
+ * Many thanks to Android (https://developer.android.com/index.html) for its help
+ */
+ 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
