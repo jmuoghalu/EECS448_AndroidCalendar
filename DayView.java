@@ -1,22 +1,10 @@
-package eecs448_first_team.calender_app;
-
-/** 
-4  * author: Cara Fisher 
-5  * date: 9-18-16 
-6  * purpose: a mobile app page which displays the focus date and any events user has added to that date
-7  *  
-8  * Many thanks to Android (https://developer.android.com/index.html) for its help 
-9  */ 
+package com.example.cara.calendar2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 import android.widget.TextView;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 public class DayView extends AppCompatActivity implements View.OnClickListener {
     public final static String DATA = "";
@@ -32,6 +20,7 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.addDetailsButton).setOnClickListener(this);
 
         Intent getToDay = getIntent();
+        array = getToDay.getIntArrayExtra(WeekView.DATA);
         array = getToDay.getIntArrayExtra(AddDetails.DATA);
         fillDate();
     }
@@ -56,33 +45,27 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
             }
             case(R.id.yearButton):
             {
-                Intent goToYear = new Intent(this, YearDisplay.class);
+                Intent goToYear = new Intent(this, YearView.class);
                 startActivity(goToYear);
                 break;
             }
             case(R.id.addDetailsButton):
             {
                 Intent goToDetails = new Intent(this, AddDetails.class);
-                goToDetails.putExtra(DATA, array); //TODO: do we pass array into details?
+                goToDetails.putExtra(DATA, array);
                 startActivity(goToDetails);
                 break;
             }
         }
     }
-    /**
-     * precondition: array exists and is filled with correct values
-     * postcondition: text of ID:date in activity_day_view.xml is set to date user wanted
-     *
-     * array: [day,month,year,day of the first of the month,date of Sunday of the week sent to WeekView,number of days in the month,number of days in the previous month,week number]
-     */
-    public void fillDate()
+    public void fillDate()  //Pay attention to first and last weeks
     {
         TextView t = (TextView) findViewById(R.id.date);
-        if(array[7] == 1 && array[0] > 7) // if Week 1 and day is from the previous month
+        if(array[7] == 1 && array[0] > 7)
         {
             t.setText(getMonth(array[1]-1) + array[0] + ", " + array[2]);
         }
-        else if(array[7] > 4 && array[0] < 23) // if Week 5 or 6 and day is from the next month
+        else if(array[7] > 4 && array[0] < 23)
         {
             t.setText(getMonth(array[1]+1) + array[0] + ", " + array[2]);
         }
@@ -91,13 +74,6 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
             t.setText(getMonth(array[1]) + array[0] + ", " + array[2]);
         }
     }
-
-    /**
-     * precondition: m is an existing integer
-     * postconditon: None
-     * @param m the integer equivalent of the month to return (8 is "August", 1 is "January")
-     * @return the name of the month of number m, or empty string if provided month is unreachable (June, July)
-     */
     public String getMonth(int m)
     {
         if(m == 8)

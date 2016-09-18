@@ -1,17 +1,5 @@
-package eecs448_first_team.calender_app;
+package com.example.cara.calendar2;
 
-/**
- * author: Cara Fisher
- * date: 9-18-16
- * purpose: a mobile app page where details can be added to be displayed in DayView
- *
- * Many thanks to Android (https://developer.android.com/index.html) for its help
- */
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
