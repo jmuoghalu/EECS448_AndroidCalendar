@@ -13,14 +13,14 @@ import android.preference.PreferenceManager;
  * and
  * https://classroom.udacity.com/courses/ud853/lessons/1474559101/concepts/164
  * http://stackoverflow.com/questions/3624280/how-to-use-sharedpreferences-in-android-to-store-fetch-and-edit-values
+ * https://developer.android.com/training/basics/data-storage/shared-preferences.html#ReadSharedPreference
  */
 public class Loader extends Activity {
 
     public int restoreDate(String inDateString){
-
-        SharedPreferences dateStored = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences dateStored = getPreferences(MODE_PRIVATE);
         int missingMonth = 0;
-        return dateStored.getInt(inDateString, missingMonth);
+        return dateStored.getInt((inDateString), missingMonth);
     }
 
     public void writeDate(String inDateString, int inDateInt){
