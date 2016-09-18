@@ -6,14 +6,6 @@ package eecs448_first_team.calender_app;
  * date: 9-18-16
  * purpose: a mobile app page that displays the Sunday-Saturday surrounding a date
  *
- * Many thanks to Android (http://developer.android.com/index.html) for its help
- */
-
-/**
- * author: Cara Fisher
- * date: 9-18-16
- * purpose: a mobile app page that displays the Sunday-Saturday surrounding a date
- *
  * Many thanks to Android (https://developer.android.com/index.html) for its help
  */
 

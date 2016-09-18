@@ -4,14 +4,6 @@ package eecs448_first_team.calender_app;
 
 /**
  * author: Cara Fisher
- * date:9-18-2016
- * purpose: a mobile app page that displays the month decided by the user
- *
- * Many thanks to Android (http://developer.android.com/index.html) for its help
- */
-
-/**
- * author: Cara Fisher
  * date: 9-18-16
  * purpose: a mobile app page that displays the month decided by the user
  *
