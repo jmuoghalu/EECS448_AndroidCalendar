@@ -8,21 +8,32 @@ import android.content.Intent;
 public class YearView extends AppCompatActivity implements View.OnClickListener {
     public final static String DATA = "";
     public int[] array = new int[8];
+    public Loader stash;
+    public String inDate = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_view);
+        int oldMonthDate = stash.restoreDate(inDate);
 
-        findViewById(R.id.januaryButton).setOnClickListener(this);
-        findViewById(R.id.februaryButton).setOnClickListener(this);
-        findViewById(R.id.marchButton).setOnClickListener(this);
-        findViewById(R.id.aprilButton).setOnClickListener(this);
-        findViewById(R.id.mayButton).setOnClickListener(this);
-        findViewById(R.id.augustButton).setOnClickListener(this);
-        findViewById(R.id.septemberButton).setOnClickListener(this);
-        findViewById(R.id.octoberButton).setOnClickListener(this);
-        findViewById(R.id.novemberButton).setOnClickListener(this);
-        findViewById(R.id.decemberButton).setOnClickListener(this);
+        if(oldMonthDate == '0') {
+            findViewById(R.id.januaryButton).setOnClickListener(this);
+            findViewById(R.id.februaryButton).setOnClickListener(this);
+            findViewById(R.id.marchButton).setOnClickListener(this);
+            findViewById(R.id.aprilButton).setOnClickListener(this);
+            findViewById(R.id.mayButton).setOnClickListener(this);
+            findViewById(R.id.augustButton).setOnClickListener(this);
+            findViewById(R.id.septemberButton).setOnClickListener(this);
+            findViewById(R.id.octoberButton).setOnClickListener(this);
+            findViewById(R.id.novemberButton).setOnClickListener(this);
+            findViewById(R.id.decemberButton).setOnClickListener(this);
+        }
+        else{
+
+            oldMonthDate = 0;
+        }
+
 
         Intent getToYear = getIntent();
     }
@@ -58,7 +69,6 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
         int day30 = SafeDate.day30.getDate();
         int day31 = SafeDate.day31.getDate();
 
-
         Intent goToMonth = new Intent(this, MonthView.class);
         switch(view.getId())
         {
@@ -72,6 +82,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day30;
                 array[numOfDaysInPrevMonth] = nullDate;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.August.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -86,6 +98,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day30;
                 array[numOfDaysInPrevMonth] = day31;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.September.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -100,6 +114,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day31;
                 array[numOfDaysInPrevMonth] = day30;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.October.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -114,6 +130,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day30;
                 array[numOfDaysInPrevMonth] = day31;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.November.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -128,6 +146,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day31;
                 array[numOfDaysInPrevMonth] = day30;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.December.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -142,6 +162,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day31;
                 array[numOfDaysInPrevMonth] = day31;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.January.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -156,6 +178,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = SafeDate.day28.getDate();
                 array[numOfDaysInPrevMonth] = day31;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.February.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -170,6 +194,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day31;
                 array[numOfDaysInPrevMonth] = SafeDate.day28.getDate();
                 array[weekNum] = nullDate;
+                inDate = SafeDate.March.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -184,6 +210,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day30;
                 array[numOfDaysInPrevMonth] = day31;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.April.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
@@ -198,6 +226,8 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
                 array[numOfDaysInMonth] = day31;
                 array[numOfDaysInPrevMonth] = day30;
                 array[weekNum] = nullDate;
+                inDate = SafeDate.May.getName();
+                stash.writeDate(inDate, array[monthIndex]);
                 goToMonth.putExtra(DATA, array);
                 startActivity(goToMonth);
                 break;
