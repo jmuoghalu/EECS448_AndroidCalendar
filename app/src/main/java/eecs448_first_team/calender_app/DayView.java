@@ -1,5 +1,13 @@
 package com.example.cara.calendar2;
 
+/** 
+4  * author: Cara Fisher 
+5  * date: 9-18-16 
+6  * purpose: a mobile app page which displays the focus date and any events user has added to that date
+7  *  
+8  * Many thanks to Android (https://developer.android.com/index.html) for its help 
+9  */ 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
