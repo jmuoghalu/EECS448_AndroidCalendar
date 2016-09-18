@@ -782,8 +782,10 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
 
     /**
      * @param savedInstanceState Bundles the values of of data and array and saves them once the activity is left
-     * @author Paul
-     * @cite https://developer.android.com/training/basics/activity-lifecycle/recreating.html
+     * @see   : https://developer.android.com/training/basics/activity-lifecycle/recreating.html
+     * @param : DATA (name of the array of the date we go too
+     * @param : array (holds the destination and other relevant date integers)
+     * @return none
      */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {

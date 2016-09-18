@@ -41,6 +41,7 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
          *                          6 = # days in previous month
          *                          7 = week #
          *                       ]
+         * @Why to make changing the array indices easier and more readable
          */
         final int dayIndex = 0;
         final int monthIndex = 1;
@@ -51,9 +52,9 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
         final int numOfDaysInPrevMonth = 6;
         final int weekNum = 7;
 
-        /*
-         * To reduce the number of function calls down, creating local variables
-          */
+        /**
+         * @Why To reduce the number of function calls down, creating local variables
+         */
         int nullDate = SafeDate.day00.getDate();
         int fallYear = SafeDate.fallYear.getDate();
         int springYear = SafeDate.springYear.getDate();
@@ -197,8 +198,10 @@ public class YearView extends AppCompatActivity implements View.OnClickListener 
 
     /**
      * @param savedInstanceState Bundles the values of of data and array and saves them once the activity is left
-     * @author Paul
-     * @cite https://developer.android.com/training/basics/activity-lifecycle/recreating.html
+     * @see   : https://developer.android.com/training/basics/activity-lifecycle/recreating.html
+     * @param : DATA (name of the array of the date we go too
+     * @param : array (holds the destination and other relevant date integers)
+     * @return none
      */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
