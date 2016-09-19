@@ -9,4 +9,6 @@
  *	Also, the calendar API codes.
  *  @see https://developer.android.com/training/basics/data-storage/shared-preferences.html
  *	Data storage code/inspiration.
+ *  @see https://docs.oracle.com/javase/7/docs/api/java/util/Calendar.html
+ *      Calendar object for converting between date format and millisecond format
  */
