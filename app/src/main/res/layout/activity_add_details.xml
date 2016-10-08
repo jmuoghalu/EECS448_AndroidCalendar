@@ -31,19 +31,30 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:hint="Add your detail here..."/>
-    <Button
-        android:id="@+id/doneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit"
-        android:layout_alignParentLeft="true"
-        android:text="Done"/>
+
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Cancel"
         android:layout_below="@+id/edit"
-        android:layout_alignParentRight="true"
-        android:text="Cancel"/>
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:layout_below="@+id/edit"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/upButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Up"
+        android:layout_below="@+id/doneButton"
+        android:layout_alignParentEnd="true"
+        android:layout_align/>
 
 </RelativeLayout>
