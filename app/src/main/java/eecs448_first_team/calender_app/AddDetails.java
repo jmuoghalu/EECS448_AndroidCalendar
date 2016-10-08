@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -35,12 +36,12 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     public static String sTime;
     public static String eTime;
 // strings holding value of array^^
-    TextView startTimeText1 = (TextView) findViewById(R.id.startTimeText);
-    TextView endTimeText1 = (TextView) findViewById(R.id.endTimeText);
-    TextView startDateMonthText1 = (TextView) findViewById(R.id.startDateMonthText);
-    TextView endDateMonthText1 = (TextView) findViewById(R.id.endDateMonthText1);
-    TextView StartDateDayText1 = (TextView) findViewById(R.id.StartDateDayText);
-    TextView endDateDayText1 = (TextView) findViewById(R.id.endDateDayText);
+//    TextView startTimeText1 = (TextView) findViewById(R.id.startTimeText);
+//    TextView endTimeText1 = (TextView) findViewById(R.id.endTimeText);
+//    TextView startDateMonthText1 = (TextView) findViewById(R.id.startDateMonthText);
+//    TextView endDateMonthText1 = (TextView) findViewById(R.id.endDateMonthText1);
+//    TextView StartDateDayText1 = (TextView) findViewById(R.id.StartDateDayText);
+//    TextView endDateDayText1 = (TextView) findViewById(R.id.endDateDayText);
 //displays value of strings ^^
     public int[] array;
     private CalendarEventDb database;
@@ -107,7 +108,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                         else
                             cycleBeginningTime++;
                         sTime=time[cycleBeginningTime];
-                        startTimeText1.setText(sTime);
+//                        startTimeText1.setText(sTime);
                         break;
             }
             case (R.id.upButtonEnd):
@@ -119,7 +120,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                         else
                             cycleBeginningTime--;
                        sTime=time[cycleBeginningTime];
-                        startTimeText1.setText(sTime);
+//                        startTimeText1.setText(sTime);
                 break;
             }
             case (R.id.downButtonBegin): //end time
@@ -131,7 +132,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 else
                     cycleEndingTime++;
                 eTime=time[cycleEndingTime];
-                endTimeText1.setText(eTime);
+//                endTimeText1.setText(eTime);
                 break;
             }
             case (R.id.downButtonEnd):
@@ -143,7 +144,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 else
                     cycleEndingTime--;
                eTime=time[cycleEndingTime];
-                endTimeText1.setText(eTime);
+//                endTimeText1.setText(eTime);
                 break;
             }
                 //endDateDayup, endDateDaydown, endDateMonthup,EndDateMonthDown
@@ -168,7 +169,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                         else
                             cycleEndingDate++;
                         eDate=days[cycleEndingDate];
-                        endDateDayText1.setText(eDate);
+//                        endDateDayText1.setText(eDate);
 
                         break;
                     }
@@ -194,7 +195,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     else
                         cycleEndingDate--;
                     eDate=days[cycleEndingDate];
-                    endDateDayText1.setText(eDate);
+//                    endDateDayText1.setText(eDate);
                     break;
                 }
             }
@@ -207,7 +208,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 else
                 cycleEndingMonth++;
                 eMonth=month[cycleEndingMonth];
-                endDateMonthText1.setText(eMonth);
+//                endDateMonthText1.setText(eMonth);
                 break;
             }
             case (R.id.endDateMonthDown):
@@ -219,7 +220,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 else
                     cycleEndingMonth--;
                 eMonth=month[cycleEndingMonth];
-                endDateMonthText1.setText(eMonth);
+//                endDateMonthText1.setText(eMonth);
                 break;
             }
             case (R.id.doneButton):
