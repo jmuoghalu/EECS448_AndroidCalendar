@@ -129,9 +129,9 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
         }
 
         Intent goToDay = new Intent(this, DayView.class);
-        goToDay.putExtra("year", cal.get(Calendar.YEAR));
-        goToDay.putExtra("month", cal.get(Calendar.MONTH));
-        goToDay.putExtra("day", cal.get(Calendar.DAY_OF_MONTH));
+        goToDay.putExtra("year", newcal.get(Calendar.YEAR));
+        goToDay.putExtra("month", newcal.get(Calendar.MONTH));
+        goToDay.putExtra("day", newcal.get(Calendar.DAY_OF_MONTH));
         startActivity(goToDay);
     }
 
