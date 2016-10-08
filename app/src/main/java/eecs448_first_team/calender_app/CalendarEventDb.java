@@ -36,8 +36,8 @@ public class CalendarEventDb extends SQLiteOpenHelper
 
         public void setStartDate(Long newStart) {start = newStart;}
         public Long getStartDate() {return start;}
-        public void setEndDate(Long newStart) {start = newStart;}
-        public Long getEndDate() {return start;}
+        public void setEndDate(Long newEnd) {end = newEnd;}
+        public Long getEndDate() {return end;}
     }
 
     private SQLiteDatabase rdb; //readable database (for fetching values)
