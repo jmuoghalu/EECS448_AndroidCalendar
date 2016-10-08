@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:textSize="42sp"
-        android:text="Add Details to"/>
+        android:text="Add Details"/>
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
@@ -25,12 +25,6 @@
         android:layout_below="@+id/add"
         android:textSize="32sp"
         android:text=""/>
-    <EditText
-        android:id="@+id/edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:hint="Add your detail here..."/>
 
     <Button
         android:id="@+id/cancelButton"
@@ -48,13 +42,159 @@
         android:layout_below="@+id/edit"
         android:layout_alignParentEnd="true" />
 
+
+
+    <!-- Added by James Muoghalu -->
+    <TextView
+        android:id="@+id/timeframe"
+        android:layout_width="150sp"
+        android:layout_height="50sp"
+        android:textSize="15sp"
+        android:text="\n   Choose Timeframe"
+        android:layout_above="@+id/downButtonBegin"
+        android:layout_centerHorizontal="true"
+        />
+
     <Button
-        android:id="@+id/upButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/upButtonBegin"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:text="Up"
+        android:text="+"
         android:layout_below="@+id/doneButton"
-        android:layout_alignParentEnd="true"
-        android:layout_align/>
+        android:layout_toLeftOf="@+id/doneButton"
+        />
+
+    <Button
+        android:id="@+id/downButtonBegin"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:layout_below="@+id/cancelButton"
+        android:layout_toRightOf="@+id/cancelButton"
+        />
+
+    <Button
+        android:id="@+id/upButtonEnd"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:layout_below="@+id/upButtonBegin"
+        android:layout_toLeftOf="@+id/doneButton"
+        />
+
+    <Button
+        android:id="@+id/downButtonEnd"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:layout_below="@+id/downButtonBegin"
+        android:layout_toRightOf="@+id/cancelButton"
+        />
+
+
+
+    <!-- start date will always be today's date-->
+    <TextView
+        android:id="@+id/startDate"
+        android:layout_width="150sp"
+        android:layout_height="50sp"
+        android:textSize="15sp"
+        android:text="\nStart Date:"
+        android:layout_below="@+id/downButtonEnd"
+        android:layout_toLeftOf="@+id/downButtonEnd"
+        />
+
+    <TextView
+        android:id="@+id/startDateText"
+        android:layout_width="150sp"
+        android:layout_height="50sp"
+        android:textSize="15sp"
+        android:text="\n(From Java File):"
+        android:layout_below="@+id/downButtonEnd"
+        android:layout_toRightOf="@+id/startDate"
+        />
+
+
+
+
+    <TextView
+        android:id="@+id/endDate"
+        android:layout_width="150sp"
+        android:layout_height="50sp"
+        android:textSize="15sp"
+        android:text="\nEnd Date:"
+        android:layout_below="@+id/startDate"
+        android:layout_toLeftOf="@+id/downButtonEnd"
+        />
+
+
+
+    <TextView
+        android:id="@+id/endDateMonth"
+        android:layout_width="150sp"
+        android:layout_height="50sp"
+        android:textSize="15sp"
+        android:text="\n(From Java File):"
+        android:layout_below="@+id/startDateText"
+        android:layout_toRightOf="@+id/endDate"
+        />
+
+    <Button
+        android:id="@+id/endDateMonthDown"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:layout_below="@+id/doneButton"
+        />
+
+    <Button
+        android:id="@+id/endDateMonthUp"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:layout_toLeftOf="@+id/doneButton"
+        />
+
+
+
+
+
+    <TextView
+        android:id="@+id/endDateDay"
+        android:layout_width="150sp"
+        android:layout_height="50sp"
+        android:textSize="15sp"
+        android:text="\n(From Java File):"
+        android:layout_above="@+id/downButtonBegin"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/endDateDayDown"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:layout_below="@+id/doneButton"
+        android:layout_toLeftOf="@+id/doneButton"
+        />
+
+    <Button
+        android:id="@+id/endDateDayUp"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:layout_below="@+id/doneButton"
+        android:layout_toLeftOf="@+id/doneButton"
+        />
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add your detail here..."
+        android:layout_marginTop="53dp"
+        android:layout_below="@+id/date"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>
