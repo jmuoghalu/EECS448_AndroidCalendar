@@ -54,7 +54,6 @@
         android:layout_height="wrap_content"
         android:text="Up"
         android:layout_below="@+id/doneButton"
-        android:layout_alignParentEnd="true"
-        android:layout_align/>
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
