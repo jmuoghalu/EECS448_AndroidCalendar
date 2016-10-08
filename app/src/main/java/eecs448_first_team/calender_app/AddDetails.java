@@ -20,9 +20,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class AddDetails extends AppCompatActivity implements View.OnClickListener {
-    public final static String DATA = "";
     public static String[] time = {"12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM","6:00 AM","7:00 AM","8:00 AM","9:00 AM","10:00 AM","11:00 AM","12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM","11:00 PM","12:00 PM"};
-    public static String[] month = {"August","September","October","November","December","January","February","March","April","May"};
+    public static String[] months = {"August","September","October","November","December","January","February","March","April","May"};
     public static String[] days1 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28"};//february
     public static String[] days2 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"};//september,november,april
     public static String[] days3 = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};//august,october,december,january,march,may
@@ -196,7 +195,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 }
                 else
                 cycleEndingMonth++;
-                eMonth=month[cycleEndingMonth];
+                eMonth=months[cycleEndingMonth];
 //                endDateMonthText1.setText(eMonth);
                 break;
             }
@@ -208,7 +207,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 }
                 else
                     cycleEndingMonth--;
-                eMonth=month[cycleEndingMonth];
+                eMonth=months[cycleEndingMonth];
 //                endDateMonthText1.setText(eMonth);
                 break;
             }
