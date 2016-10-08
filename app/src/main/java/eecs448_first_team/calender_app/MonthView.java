@@ -117,7 +117,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
     public void fillMonth(int first_day, int number_of_days)
     {
         // Fill out the days startin at the first day of the first week in the month
-        if(first_day == 0) // if Sunday was the 1st day of the month
+        if(first_day == Calendar.SUNDAY) // if Sunday was the 1st day of the month
         {
             TextView t = (TextView) findViewById(R.id.w11);
             t.setText("01");
@@ -188,7 +188,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
                 }
             }
         }
-        else if(first_day == 1) // if Monday was the 1st of the month
+        else if(first_day == Calendar.MONDAY) // if Monday was the 1st of the month
         {
             TextView t = (TextView) findViewById(R.id.w12);
             t.setText("01");
@@ -259,7 +259,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
                 }
             }
         }
-        else if(first_day == 2)  // if Tuesday was the 1st of the month
+        else if(first_day == Calendar.TUESDAY)  // if Tuesday was the 1st of the month
         {
             TextView t = (TextView) findViewById(R.id.w13);
             t.setText("01");
@@ -330,7 +330,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
                 }
             }
         }
-        else if(first_day == 3)  // if Wednesday was the 1st of the month
+        else if(first_day == Calendar.WEDNESDAY)  // if Wednesday was the 1st of the month
         {
             TextView t = (TextView) findViewById(R.id.w14);
             t.setText("01");
@@ -401,7 +401,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
                 }
             }
         }
-        else if(first_day == 4)  // if Thursday was the 1st of the month
+        else if(first_day == Calendar.THURSDAY)  // if Thursday was the 1st of the month
         {
             TextView t = (TextView) findViewById(R.id.w15);
             t.setText("01");
@@ -472,7 +472,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
                 }
             }
         }
-        else if(first_day == 5) // if Friday was the 1st of the month
+        else if(first_day == Calendar.FRIDAY) // if Friday was the 1st of the month
         {
             TextView t = (TextView) findViewById(R.id.w16);
             t.setText("01");
@@ -543,7 +543,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
                 }
             }
         }
-        else if(first_day == 6) // if Saturday was the 1st of the month
+        else if(first_day == Calendar.SATURDAY) // if Saturday was the 1st of the month
         {
             TextView t = (TextView) findViewById(R.id.w17);
             t.setText("01");
