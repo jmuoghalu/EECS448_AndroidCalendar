@@ -9,24 +9,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="eecs448_first_team.calender_app.DayView">
 
-    <TextView
-        android:paddingBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:text="Date"
-        android:id="@+id/date" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:paddingBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:text="Detail"
-        android:id="@+id/detail" />
+        <TextView
+            android:paddingBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:text="Date"
+            android:id="@+id/date" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/events_list" />
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -36,6 +38,13 @@
         android:paddingTop="16dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
+
+        <Button
+            android:text="+"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addDetailsButton1"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/weekButton"
@@ -54,22 +63,5 @@
             android:text="Year"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/addDetailsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/buttonBar"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
-        android:textSize="32sp"
-        android:text="+"/>
-
-    <TextView
-        android:id="@+id/detailsText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail"
-        android:layout_above="@id/addDetailsButton"/>
 
 </RelativeLayout>

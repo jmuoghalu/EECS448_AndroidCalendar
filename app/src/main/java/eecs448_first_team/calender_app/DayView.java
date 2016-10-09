@@ -12,20 +12,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class DayView extends AppCompatActivity implements View.OnClickListener {
-    private CalendarEventDb theDatabase;
+    private CalendarEventDb database;
 
     private int day;
     private int month;
     private int year;
     private Calendar cal;
+    private ListView eventsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,7 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.weekButton).setOnClickListener(this);
         findViewById(R.id.monthButton).setOnClickListener(this);
         findViewById(R.id.yearButton).setOnClickListener(this);
-        findViewById(R.id.addDetailsButton).setOnClickListener(this);
+        findViewById(R.id.addDetailsButton1).setOnClickListener(this);
 
         Intent getToDay = getIntent();
         day = getToDay.getIntExtra("day", 0);
@@ -48,57 +52,70 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
-        theDatabase = new CalendarEventDb(this);
+        database = new CalendarEventDb(this);
 
-        ((TextView)findViewById(R.id.detailsText)).setText(theDatabase.getCalendarDetails(cal.getTimeInMillis()));
+        Long start = cal.getTimeInMillis();
+
+        Calendar tomorrowCal = (Calendar) cal.clone();
+        tomorrowCal.add(Calendar.DAY_OF_YEAR, 1);
+        Long end = tomorrowCal.getTimeInMillis();
+
+        List<CalendarEvent> events = database.getCalendarEvents(start, end);
+
+        EventAdapter adapter = new EventAdapter(this, events);
+
+        eventsListView = (ListView) findViewById(R.id.events_list);
+        eventsListView.setAdapter(adapter);
+
+        final DayView me = this;
+
+        // from http://stackoverflow.com/questions/2468100/android-listview-click-howto
+        eventsListView.setClickable(true);
+        eventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                CalendarEvent event = (CalendarEvent) eventsListView.getItemAtPosition(position);
+                Intent goToAdd = new Intent(me, AddDetails.class);
+                goToAdd.putExtra("id", event.getID());
+                startActivity(goToAdd);
+            }
+        });
     }
 
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         super.onStop();
-        theDatabase.close();
+        database.close();
     }
 
     @Override
-    public void onClick(View view)
-    {
-        switch(view.getId())
-        {
-            case(R.id.weekButton):
-            {
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.weekButton:
                 Intent goToWeek = new Intent(this, WeekView.class);
                 goToWeek.putExtra("year", year);
                 goToWeek.putExtra("week", cal.get(Calendar.WEEK_OF_YEAR));
                 startActivity(goToWeek);
                 break;
-            }
-            case(R.id.monthButton):
-            {
+            case R.id.monthButton:
                 Intent goToMonth = new Intent(this, MonthView.class);
                 goToMonth.putExtra("year", cal.get(Calendar.YEAR));
                 goToMonth.putExtra("month", cal.get(Calendar.MONTH));
                 startActivity(goToMonth);
                 break;
-            }
-            case(R.id.yearButton):
-            {
+            case R.id.yearButton:
                 Intent goToYear = new Intent(this, YearDisplay.class);
                 startActivity(goToYear);
                 break;
-            }
-            case(R.id.addDetailsButton):
-            {
-                Intent goToDetails = new Intent(this, AddDetails.class);
-                goToDetails.putExtra("year", cal.get(Calendar.YEAR));
-                goToDetails.putExtra("month", cal.get(Calendar.MONTH));
-                goToDetails.putExtra("day", cal.get(Calendar.DAY_OF_MONTH));
-                startActivity(goToDetails);
+            case R.id.addDetailsButton1:
+                Intent goToAdd = new Intent(this, AddDetails.class);
+                goToAdd.putExtra("year", cal.get(Calendar.YEAR));
+                goToAdd.putExtra("month", cal.get(Calendar.MONTH));
+                goToAdd.putExtra("day", cal.get(Calendar.DAY_OF_MONTH));
+                startActivity(goToAdd);
                 break;
-            }
         }
     }
     /**
@@ -107,8 +124,7 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
      * Sets the proper text to display based on selected day.
      * array: [day,month,year,day of the first of the month,date of Sunday of the week sent to WeekView,number of days in the month,number of days in the previous month,week number]
      */
-    public void fillDate()
-    {
+    public void fillDate() {
         DateFormat dateFormat = new SimpleDateFormat("MMMM d, YYYY");
 
         TextView t = (TextView) findViewById(R.id.date);

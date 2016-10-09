@@ -420,12 +420,28 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/yearButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Year" />
+        android:id="@+id/buttonBar"
+        android:layout_below="@+id/sixthWeek">
+
+        <Button
+            android:text="+"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addDetailsButton2"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/yearButton"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fifthWeek"
+            android:text="Year"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </RelativeLayout>

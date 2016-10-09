@@ -11,243 +11,237 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="eecs448_first_team.calender_app.AddDetails">
 
-    <TextView
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:textSize="42sp"
-        android:text="Add Details"/>
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/add"
-        android:textSize="32sp"
-        android:text=""/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp">
 
+        <TextView
+            android:id="@+id/add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:textSize="42sp"
+            android:text="Add Details"/>
 
-    <TextView
-        android:id="@+id/startTime"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="\nStart Time:"
-        android:layout_below="@+id/gap"
-        />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/add"
+            android:textSize="32sp"
+            android:text=""/>
 
-    <Button
-        android:id="@+id/upButtonBegin"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:layout_below="@+id/gap"
-        android:layout_toLeftOf="@+id/doneButton"
-        />
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Add your detail here..."
+            android:layout_marginTop="12dp"
+            android:layout_below="@+id/date"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/startTimeText"
-        android:layout_width="50sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="(From Java File):"
-        android:layout_below="@+id/gap"
-        android:layout_toLeftOf="@id/upButtonBegin"
-        android:layout_toRightOf="@+id/downButtonBegin"
-        />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/downButtonBegin"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:layout_below="@+id/gap"
-        android:layout_toRightOf="@+id/cancelButton"
-        />
+            <TextView
+                android:text="Start Date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView" />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/endTime"
-        android:layout_width="80sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="\nEnd Time:"
-        android:layout_below="@+id/startTime"
-        />
+                <Button
+                    android:text="-"
+                    android:layout_width="52dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateMonthMinus" />
 
-    <Button
-        android:id="@+id/upButtonEnd"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:layout_below="@+id/upButtonBegin"
-        android:layout_toLeftOf="@+id/doneButton"
-        />
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateMonthText"
+                    android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/endTimeText"
-        android:layout_width="50sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="(From Java File):"
-        android:layout_below="@+id/startTimeText"
-        android:layout_toLeftOf="@+id/upButtonEnd"
-        android:layout_toRightOf="@+id/downButtonEnd"
-        />
+                <Button
+                    android:text="+"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateMonthPlus" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/downButtonEnd"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:layout_below="@+id/downButtonBegin"
-        android:layout_toRightOf="@+id/cancelButton"
-        />
+                <Button
+                    android:text="-"
+                    android:layout_width="51dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateDayMinus" />
 
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateDayText"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="+"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateDayPlus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:text="-"
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateHourMinus" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateHourText"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="+"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startDateHourPlus" />
+            </LinearLayout>
+
+            <TextView
+                android:text="End Date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:text="-"
+                    android:layout_width="58dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateMonthMinus" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateMonthText"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="+"
+                    android:layout_width="69dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateMonthPlus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:text="-"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateDayMinus" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateDayText"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="+"
+                    android:layout_width="74dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateDayPlus" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="-"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateHourMinus" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateHourText"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="+"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endDateHourPlus" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Cancel"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/doneButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Done"
+                android:layout_alignBaseline="@+id/cancelButton"
+                android:layout_alignBottom="@+id/cancelButton"
+                android:layout_alignParentEnd="true"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     <!-- start date will always be today's date-->
-    <TextView
-        android:id="@+id/startDate"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="\nStart Date:"
-        android:layout_below="@+id/endTime"
-        android:layout_toLeftOf="@+id/downButtonEnd"
-        />
 
-    <TextView
-        android:id="@+id/startDateMonth"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="\n(From Java File):"
-        android:layout_below="@+id/downButtonEnd"
-        android:layout_toRightOf="@+id/startDate"
-        />
-
-    <TextView
-        android:id="@+id/startDateDay"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="\n(From Java File):"
-        android:layout_below="@+id/startDateMonth"
-        android:layout_toRightOf="@+id/startDate"
-        />
-
-
-
-
-    <TextView
-        android:id="@+id/endDate"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="\nEnd Date:"
-        android:layout_below="@+id/startDateDay"
-        android:layout_toLeftOf="@+id/downButtonEnd"
-        />
-
-
-
-    <TextView
-        android:id="@+id/endDateMonth"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="\n(From Java File):"
-        android:layout_below="@+id/startDateDay"
-        android:layout_toRightOf="@+id/endDate"
-        />
-
-    <Button
-        android:id="@+id/endDateMonthDown"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:layout_below="@id/startDateDay"
-        android:layout_toRightOf="@+id/endDateMonth"
-        />
-
-    <Button
-        android:id="@+id/endDateMonthUp"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:layout_below="@id/startDateDay"
-        android:layout_toRightOf="@+id/endDateMonthDown"
-        />
-
-
-
-
-
-    <TextView
-        android:id="@+id/endDateDay"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:textSize="15sp"
-        android:text="\n(From Java File):"
-        android:layout_below="@+id/endDateMonth"
-        android:layout_toRightOf="@+id/endDate"
-        />
-
-    <Button
-        android:id="@+id/endDateDayDown"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:layout_below="@+id/endDateMonthDown"
-        android:layout_toRightOf="@+id/endDateDay"
-        />
-
-    <Button
-        android:id="@+id/endDateDayUp"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:layout_below="@+id/endDateMonthUp"
-        android:layout_toRightOf="@+id/endDateDayDown"
-        />
-
-    <TextView
-        android:id="@+id/gap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint=""
-        android:layout_below="@+id/edit"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Add your detail here..."
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/date"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="14dp" />
-
-    <Button
-        android:id="@+id/doneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
-        android:layout_alignBaseline="@+id/cancelButton"
-        android:layout_alignBottom="@+id/cancelButton"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

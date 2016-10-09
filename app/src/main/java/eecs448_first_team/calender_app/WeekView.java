@@ -39,6 +39,7 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
         findViewById(R.id.saturday).setOnClickListener(this);
         findViewById(R.id.monthButton).setOnClickListener(this);
         findViewById(R.id.yearButton).setOnClickListener(this);
+        findViewById(R.id.addDetailsButton4).setOnClickListener(this);
 
         Intent getToWeek = getIntent();
 
@@ -56,76 +57,63 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onClick(View view)
-    {
-        switch(view.getId())
-        {
-            case(R.id.monthButton):
-            {
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.monthButton:
                 Intent goToMonth = new Intent(this, MonthView.class);
                 goToMonth.putExtra("year", cal.get(Calendar.YEAR));
                 goToMonth.putExtra("month", cal.get(Calendar.MONTH));
                 goToMonth.putExtra("day", cal.get(Calendar.DAY_OF_MONTH));
                 startActivity(goToMonth);
                 break;
-            }
-            case(R.id.yearButton):
-            {
+            case R.id.yearButton:
                 Intent goToYear = new Intent(this, YearDisplay.class);
                 goToYear.putExtra("year", cal.get(Calendar.YEAR));
                 goToYear.putExtra("month", cal.get(Calendar.MONTH));
                 goToYear.putExtra("day", cal.get(Calendar.DAY_OF_MONTH));
                 startActivity(goToYear);
                 break;
-            }
+            case R.id.addDetailsButton4:
+                Intent goToAdd = new Intent(this, AddDetails.class);
+                startActivity(goToAdd);
+                break;
             default:
-            {
                 GetWeekDay(view.getId());
                 break;
-            }
         }
     }
-    public void GetWeekDay(int viewId)
-    {
+
+    public void GetWeekDay(int viewId) {
         Calendar newcal = (Calendar) cal.clone();
         TextView t = (TextView) findViewById(R.id.sunday);
-        switch(viewId)
-        {
-            case(R.id.sunday):
-            {
+        switch(viewId) {
+            case R.id.sunday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
                 break;
-            }
-            case(R.id.monday):
-            {
+
+            case R.id.monday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                 break;
-            }
-            case(R.id.tuesday):
-            {
+
+            case R.id.tuesday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
                 break;
-            }
-            case(R.id.wednesday):
-            {
+
+            case R.id.wednesday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
                 break;
-            }
-            case(R.id.thursday):
-            {
+
+            case R.id.thursday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
                 break;
-            }
-            case(R.id.friday):
-            {
+
+            case R.id.friday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
                 break;
-            }
-            case(R.id.saturday):
-            {
+
+            case R.id.saturday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
                 break;
-            }
         }
 
         Intent goToDay = new Intent(this, DayView.class);
@@ -139,8 +127,7 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
      * precondition: array exists and is filled with correct values.
      * postcondition: IDs sunday-saturday in activity_week_view.xml are filled with correct dates.
      */
-    public void fillWeek()
-    {
+    public void fillWeek() {
         DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM. d");
 
         TextView sunday = (TextView) findViewById(R.id.sunday);
