@@ -116,6 +116,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             startTime = new GregorianCalendar(year, month, day);
             endTime = (Calendar) startTime.clone();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
+            endTime.add(Calendar.MINUTE, -1);
         } else {
             startTime = GregorianCalendar.getInstance();
 
@@ -126,6 +127,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
             endTime = (Calendar) startTime.clone();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
+            endTime.add(Calendar.MINUTE, -1);
         }
 
 
