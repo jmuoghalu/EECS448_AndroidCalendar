@@ -16,7 +16,9 @@ import android.widget.CalendarView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class YearDisplay extends AppCompatActivity implements View.OnClickListener {
 
@@ -65,6 +67,14 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
             }
 
         });
+
+        Intent getToDay = getIntent();
+        int day = getToDay.getIntExtra("day", 1);
+        int month = getToDay.getIntExtra("month", 7);
+        int year = getToDay.getIntExtra("year", 2016);
+
+        Calendar cal = new GregorianCalendar(year, month, day);
+        calendar.setDate(cal.getTimeInMillis());
     }
 
     @Override

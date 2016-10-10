@@ -42,7 +42,7 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.addDetailsButton1).setOnClickListener(this);
 
         Intent getToDay = getIntent();
-        day = getToDay.getIntExtra("day", 0);
+        day = getToDay.getIntExtra("day", 1);
         month = getToDay.getIntExtra("month", 7);
         year = getToDay.getIntExtra("year", 2016);
 
@@ -105,6 +105,9 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.yearButton:
                 Intent goToYear = new Intent(this, YearDisplay.class);
+                goToYear.putExtra("year", cal.get(Calendar.YEAR));
+                goToYear.putExtra("month", cal.get(Calendar.MONTH));
+                goToYear.putExtra("day", cal.get(Calendar.DAY_OF_MONTH));
                 startActivity(goToYear);
                 break;
             case R.id.addDetailsButton1:

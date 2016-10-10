@@ -70,7 +70,6 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
                 Intent goToYear = new Intent(this, YearDisplay.class);
                 goToYear.putExtra("year", cal.get(Calendar.YEAR));
                 goToYear.putExtra("month", cal.get(Calendar.MONTH));
-                goToYear.putExtra("day", cal.get(Calendar.DAY_OF_MONTH));
                 startActivity(goToYear);
                 break;
             case R.id.addDetailsButton4:

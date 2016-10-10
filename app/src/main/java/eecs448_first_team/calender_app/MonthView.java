@@ -60,6 +60,8 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         if (view.getId() == R.id.yearButton) {
             Intent goToYear = new Intent(this, YearDisplay.class);
+            goToYear.putExtra("year", cal.get(Calendar.YEAR));
+            goToYear.putExtra("month", cal.get(Calendar.MONTH));
             startActivity(goToYear);
             return;
         } else if (view.getId() == R.id.addDetailsButton2) {
