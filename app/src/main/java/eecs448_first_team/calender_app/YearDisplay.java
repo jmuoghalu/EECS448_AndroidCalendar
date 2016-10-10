@@ -29,30 +29,30 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_display);
-        CalendarView calender;
-        calender = (CalendarView) findViewById(R.id.calender);
+        CalendarView calendar;
+        calendar = (CalendarView) findViewById(R.id.calendar);
 
         SimpleDateFormat sdf = new SimpleDateFormat("d-M-yyyy hh:mm");
         try {
             Date date = sdf.parse("1-8-2016 00:00");
-            calender.setMinDate(date.getTime()); //prevents date from going before Aug 1st
+            calendar.setMinDate(date.getTime()); //prevents date from going before Aug 1st
         } catch(ParseException e) {
             //googled off of the internet
-            calender.setMinDate(1470027600000l);
+            calendar.setMinDate(1470027600000l);
         }
 
         try {
             Date date = sdf.parse("31-5-2017 00:00");
-            calender.setMaxDate(date.getTime()); //prevents date from going before Aug 1st
+            calendar.setMaxDate(date.getTime()); //prevents date from going before Aug 1st
         } catch(ParseException e) {
             //googled off of the internet
-            calender.setMaxDate(1496206800000l);
+            calendar.setMaxDate(1496206800000l);
         }
 
         findViewById(R.id.addDetailsButton3).setOnClickListener(this);
 
         // Listener to catch selected date and save it to be sent to anothe activity
-        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
             @Override
 
 
