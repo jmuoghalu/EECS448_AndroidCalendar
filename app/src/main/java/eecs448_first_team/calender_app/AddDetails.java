@@ -30,7 +30,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private TextView endDateMonthText;
     private TextView startDateDayText;
     private TextView endDateDayText;
-    private TextView add;
     private EditText details; //the details text to be replaced
 
     private CalendarEventDb database;
@@ -63,7 +62,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
         details = (EditText) findViewById(R.id.edit);
 
-        add = (TextView) findViewById(R.id.add);
         startDateHourText = (TextView) findViewById(R.id.startDateHourText);
         endDateHourText = (TextView) findViewById(R.id.endDateHourText);
         startDateMonthText = (TextView) findViewById(R.id.startDateMonthText);
@@ -83,8 +81,8 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             endTime = (Calendar) startTime.clone();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
         } else {
-            startTime = (Calendar) GregorianCalendar.getInstance();
-            endTime = (Calendar) GregorianCalendar.getInstance();
+            startTime = GregorianCalendar.getInstance();
+            endTime = GregorianCalendar.getInstance();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
         }
 
