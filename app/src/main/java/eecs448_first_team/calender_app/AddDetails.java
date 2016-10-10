@@ -50,6 +50,10 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.cancelButton).setOnClickListener(this);
         findViewById(R.id.startDateHourPlus).setOnClickListener(this);
         findViewById(R.id.startDateHourMinus).setOnClickListener(this);
+        findViewById(R.id.startDateDayPlus).setOnClickListener(this);
+        findViewById(R.id.startDateDayMinus).setOnClickListener(this);
+        findViewById(R.id.startDateMonthPlus).setOnClickListener(this);
+        findViewById(R.id.startDateMonthMinus).setOnClickListener(this);
         findViewById(R.id.endDateDayMinus).setOnClickListener(this);
         findViewById(R.id.endDateDayPlus).setOnClickListener(this);
         findViewById(R.id.endDateMonthMinus).setOnClickListener(this);
@@ -152,8 +156,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             case (R.id.startDateHourMinus):
                 startTime.add(Calendar.HOUR, -1);
                 break;
-
-            /*
             case (R.id.startDateDayPlus):
                 startTime.add(Calendar.DAY_OF_MONTH, 1);
                 break;
@@ -166,9 +168,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             case (R.id.startDateMonthMinus):
                 startTime.add(Calendar.MONTH, -1);
                 break;
-
-            */
-
             case (R.id.endDateDayPlus):
                 endTime.add(Calendar.DAY_OF_MONTH, 1);
                 break;

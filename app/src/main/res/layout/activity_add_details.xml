@@ -65,6 +65,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <Button
+                        android:text="-"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/startDateMonthMinus" />
 
                     <TextView
                         android:text="TextView"
@@ -73,14 +78,11 @@
                         android:id="@+id/startDateMonthText"
                         android:layout_weight="1" />
 
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="wrap_content"
+                    <Button
+                        android:text="+"
+                        android:layout_width="66dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/startDateDayText"
-                        android:layout_weight="1" />
-
-
+                        android:id="@+id/startDateMonthPlus" />
                 </LinearLayout>
 
 
@@ -89,15 +91,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <Button
+                        android:text="-"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/startDateDayMinus" />
 
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/startDateDayText"
+                        android:layout_weight="1" />
 
+                    <Button
+                        android:text="+"
+                        android:layout_width="66dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/startDateDayPlus" />
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
                     <Button
                         android:text="-"
@@ -114,11 +131,10 @@
 
                     <Button
                         android:text="+"
-                        android:layout_width="66dp"
+                        android:layout_width="64dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/startDateHourPlus" />
                 </LinearLayout>
-
 
                 <TextView
                     android:layout_width="match_parent"
