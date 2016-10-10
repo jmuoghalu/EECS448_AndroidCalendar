@@ -69,15 +69,13 @@ public class DayView extends AppCompatActivity implements View.OnClickListener {
         eventsListView = (ListView) findViewById(R.id.events_list);
         eventsListView.setAdapter(adapter);
 
-        final DayView me = this;
-
         // from http://stackoverflow.com/questions/2468100/android-listview-click-howto
         eventsListView.setClickable(true);
         eventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 CalendarEvent event = (CalendarEvent) eventsListView.getItemAtPosition(position);
-                Intent goToAdd = new Intent(me, AddDetails.class);
+                Intent goToAdd = new Intent(DayView.this, AddDetails.class);
                 goToAdd.putExtra("id", event.getID());
                 startActivity(goToAdd);
             }

@@ -33,9 +33,6 @@ public class EventAdapter extends ArrayAdapter<CalendarEvent> {
      * @return True if the event conflicts with another event in the list of event sprovided
      */
     public boolean doesConflict(CalendarEvent event1) {
-        Long startTime = event1.getStartDate();
-        Long endTime = event1.getEndDate();
-
         for (int i = 0; i < getCount(); i++) {
             CalendarEvent event2 = getItem(i);
             if (event2.getID() == event1.getID()) {
@@ -98,7 +95,7 @@ public class EventAdapter extends ArrayAdapter<CalendarEvent> {
         TextView endTime = (TextView) convertView.findViewById(R.id.endTime);
         endTime.setText(dateFormat.format(event.getEndDate()));
 
-        if (doesConflict(event)) {
+        if (doesConflict(event)) { // mark events that conflict
             startTime.setTextColor(Color.RED);
             endTime.setTextColor(Color.RED);
         }
