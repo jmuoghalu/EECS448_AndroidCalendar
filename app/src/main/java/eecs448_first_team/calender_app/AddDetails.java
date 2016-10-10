@@ -12,7 +12,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.CheckBox;
+||||||| merged common ancestors
+=======
+import android.widget.Button;
+>>>>>>> refs/remotes/origin/master
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -56,6 +61,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
         findViewById(R.id.doneButton).setOnClickListener(this);
         findViewById(R.id.cancelButton).setOnClickListener(this);
+        findViewById(R.id.deleteButton).setOnClickListener(this);
         findViewById(R.id.startDateHourPlus).setOnClickListener(this);
         findViewById(R.id.startDateHourMinus).setOnClickListener(this);
         findViewById(R.id.startDateDayPlus).setOnClickListener(this);
@@ -116,7 +122,13 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             endTime.add(Calendar.DAY_OF_YEAR, 1);
         } else {
             startTime = GregorianCalendar.getInstance();
-            endTime = GregorianCalendar.getInstance();
+
+            // zero out time for the current day
+            startTime.set(Calendar.HOUR_OF_DAY, 0);
+            startTime.set(Calendar.MINUTE, 0);
+            startTime.set(Calendar.SECOND, 0);
+
+            endTime = (Calendar) startTime.clone();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
         }
 
@@ -136,15 +148,21 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             }
         }
 
+        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+
         if (event != null) {
             details.setText(event.getDetails());
             startTime.setTimeInMillis(event.getStartDate());
             endTime.setTimeInMillis(event.getEndDate());
+
+            deleteButton.setVisibility(View.VISIBLE);
         } else {
             event = new CalendarEvent();
             event.setDetails("");
             event.setStartDate(startTime.getTimeInMillis());
             event.setEndDate(endTime.getTimeInMillis());
+
+            deleteButton.setVisibility(View.INVISIBLE);
         }
 
         updateTime();
@@ -183,10 +201,10 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         {
 
             case (R.id.startDateHourPlus):
-                startTime.add(Calendar.HOUR, 1);
+                startTime.add(Calendar.MINUTE, 15);
                 break;
             case (R.id.startDateHourMinus):
-                startTime.add(Calendar.HOUR, -1);
+                startTime.add(Calendar.MINUTE, -15);
                 break;
             case (R.id.startDateDayPlus):
                 startTime.add(Calendar.DAY_OF_MONTH, 1);
@@ -213,10 +231,10 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 endTime.add(Calendar.MONTH, -1);
                 break;
             case (R.id.endDateHourPlus):
-                endTime.add(Calendar.HOUR, 1);
+                endTime.add(Calendar.MINUTE, 15);
                 break;
             case (R.id.endDateHourMinus):
-                endTime.add(Calendar.HOUR, -1);
+                endTime.add(Calendar.MINUTE, -15);
                 break;
 
 
@@ -272,9 +290,18 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             case (R.id.cancelButton):
                 startActivity(goToDay);
                 break;
+
+            case (R.id.deleteButton):
+                if (event != null && event.getID() != null) {
+                    database.deleteEvent(event);
+                }
+                startActivity(goToDay);
+                break;
+
         }
 
         updateTime();
+        fillDate();
     }
 
     @Override
@@ -294,17 +321,9 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
      */
     public void fillDate()
     {
-        Intent currentDay = getIntent();
-        Calendar cal;
-        int year = currentDay.getIntExtra("year" , 2016);
-        int month = currentDay.getIntExtra("month" , 7);
-        int day = currentDay.getIntExtra("day", 0);
-
-        cal = new GregorianCalendar(year, month, day);
-
         DateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, YYYY");
         TextView t = (TextView) findViewById(R.id.add);
-        t.setText(dateFormat.format(cal.getTime()));
+        t.setText(dateFormat.format(startTime.getTime()));
     }
 
 }

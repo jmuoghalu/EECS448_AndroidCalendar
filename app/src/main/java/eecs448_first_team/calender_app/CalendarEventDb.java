@@ -106,7 +106,7 @@ public class CalendarEventDb extends SQLiteOpenHelper
                     searchArgs, //... it matches the date I gave
                     null, //don't group rows
                     null, //don't filter by row groups
-                    CalendarEventTable.Column_Start_Date
+                    CalendarEventTable.Column_Start_Date + ", " + CalendarEventTable.Column_End_Date
             );
 
             List<CalendarEvent> events = new ArrayList<CalendarEvent>(searchContainer.getCount());
@@ -133,18 +133,17 @@ public class CalendarEventDb extends SQLiteOpenHelper
      * precondition: database already instantiated.
      * postcondition: if readable database was not accessible, it is now accessible.
      * After (re)building readable database access, queries CalendarEventTable to see if
-     * it contains details for the supplied time frame
-     * start The start time to search
-     * end The end time to search
-     * @return String containing Details message. Empty string if database query failed or no matching row
+     * it contains details for the supplied event id
+     * @param id The identifier to query the event
+     * @return Event containing informaton of event id. null if database query failed or no matching row
      */
     public CalendarEvent getCalendarEvent(Long id) {
-        if(rdb == null)
-            rdb = this.getReadableDatabase();
-
-        String[] searchArgs = {id.toString()}; //used to search (you have to use strings)
-
         try {
+            if (rdb == null)
+                rdb = this.getReadableDatabase();
+
+            String[] searchArgs = {id.toString()}; //used to search (you have to use strings)
+
             Cursor searchContainer = rdb.query(
                     CalendarEventTable.Table_Name, //query the CalendarEventTable
                     PARAMETERS_TABLE_RETURN_COLUMNS, //give me ID, Date, and Details columns that...
@@ -169,8 +168,8 @@ public class CalendarEventDb extends SQLiteOpenHelper
 
                 return returnCalendarEvent;
             }
-        } catch(Exception e) {
-            return null; //either there's nothing there, or table is corrupted
+        } catch (Exception e) {
+            return null;
         }
     }
 
@@ -180,19 +179,22 @@ public class CalendarEventDb extends SQLiteOpenHelper
      * @return True if Details were added successfully, False if Details adding failed (possibly table corrupted)
      */
     public boolean updateEvent(CalendarEvent event) {
-        if(wdb == null)
-            wdb = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-
-        values.put(CalendarEventTable.Column_Start_Date, event.getStartDate());
-        values.put(CalendarEventTable.Column_End_Date, event.getEndDate());
-        values.put(CalendarEventTable.Column_Details, event.getDetails());
-
         try {
-            wdb.update(CalendarEventTable.Table_Name, values, CalendarEventTable._ID + "=" + event.getID(), null);
-            return true;
-        } catch (Exception e) { //something failed, probably database corrupted, can't add details
+            if (wdb == null)
+                wdb = this.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+
+            values.put(CalendarEventTable.Column_Start_Date, event.getStartDate());
+            values.put(CalendarEventTable.Column_End_Date, event.getEndDate());
+            values.put(CalendarEventTable.Column_Details, event.getDetails());
+
+            String[] searchArgs = {event.getID().toString()}; //used to search (you have to use strings)
+
+            int num_updated = wdb.update(CalendarEventTable.Table_Name, values, CalendarEventTable._ID + "= ?", searchArgs);
+
+            return num_updated > 0;
+        } catch (Exception e) {
             return false;
         }
     }
@@ -203,17 +205,42 @@ public class CalendarEventDb extends SQLiteOpenHelper
      * @return True if Details were added successfully, False if Details adding failed (possibly table corrupted)
      */
     public boolean addEvent(CalendarEvent event) {
-        if(wdb == null)
-            wdb = this.getWritableDatabase();
+        try {
+            if (wdb == null)
+                wdb = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
+            ContentValues values = new ContentValues();
 
-        values.put(CalendarEventTable.Column_Start_Date, event.getStartDate());
-        values.put(CalendarEventTable.Column_End_Date, event.getEndDate());
-        values.put(CalendarEventTable.Column_Details, event.getDetails());
+            values.put(CalendarEventTable.Column_Start_Date, event.getStartDate());
+            values.put(CalendarEventTable.Column_End_Date, event.getEndDate());
+            values.put(CalendarEventTable.Column_Details, event.getDetails());
 
-        wdb.insert(CalendarEventTable.Table_Name, null, values);
-        return true;
+            Long id = wdb.insert(CalendarEventTable.Table_Name, null, values);
+
+            return id != -1;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Adds a new event.
+     * @param event The event to store in the database
+     * @return True if events was removed, False if event removing failed (possibly table corrupted)
+     */
+    public boolean deleteEvent(CalendarEvent event) {
+        try {
+            if (wdb == null)
+                wdb = this.getWritableDatabase();
+
+            String[] searchArgs = {event.getID().toString()}; //used to search (you have to use strings)
+
+            int num_deleted = wdb.delete(CalendarEventTable.Table_Name, CalendarEventTable._ID + " = ?", searchArgs);
+
+            return num_deleted > 0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
