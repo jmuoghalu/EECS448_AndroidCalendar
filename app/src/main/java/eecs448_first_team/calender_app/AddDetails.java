@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +30,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private TextView endDateMonthText;
     private TextView startDateDayText;
     private TextView endDateDayText;
+    private TextView add;
     private EditText details; //the details text to be replaced
 
     private CalendarEventDb database;
@@ -59,6 +63,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
         details = (EditText) findViewById(R.id.edit);
 
+        add = (TextView) findViewById(R.id.add);
         startDateHourText = (TextView) findViewById(R.id.startDateHourText);
         endDateHourText = (TextView) findViewById(R.id.endDateHourText);
         startDateMonthText = (TextView) findViewById(R.id.startDateMonthText);
@@ -82,6 +87,9 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             endTime = (Calendar) GregorianCalendar.getInstance();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
         }
+
+
+        fillDate();
     }
 
     @Override
@@ -114,6 +122,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
         SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm aaa");
+
 
         Date startDate = startTime.getTime();
         startDateMonthText.setText(monthFormat.format(startDate));
@@ -201,4 +210,26 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         super.onStop();
         database.close();
     }
+
+
+    // from DayView.java
+    /**
+     * precondition: array exists and is filled with correct values.
+     * postcondition: text of ID:date in activity_day_view.xml is set to date user wanted.
+     * Sets the proper text to display based on selected day.
+     * array: [day,month,year,day of the first of the month,date of Sunday of the week sent to WeekView,number of days in the month,number of days in the previous month,week number]
+     */
+    public void fillDate()
+    {
+        Intent currentDay = getIntent();
+        int year = currentDay.getIntExtra("year" , 2016);
+        int month = currentDay.getIntExtra("month" , 7);
+        int day = currentDay.getIntExtra("day", 0);
+        Calendar cal = new GregorianCalendar(year, month, day);
+
+        DateFormat dateFormat = new SimpleDateFormat("MMMM d, YYYY");
+        TextView t = (TextView) findViewById(R.id.add);
+        t.setText(dateFormat.format(cal.getTime()));
+    }
+
 }
