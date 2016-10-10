@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,6 +32,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private TextView startDateDayText;
     private TextView endDateDayText;
     private EditText details; //the details text to be replaced
+
+    private CheckBox sunBox;
+    private CheckBox monBox;
+    private CheckBox tuesBox;
+    private CheckBox wedBox;
+    private CheckBox thursBox;
+    private CheckBox friBox;
+    private CheckBox satBox;
 
     private CalendarEventDb database;
 
@@ -60,6 +69,22 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.endDateHourPlus).setOnClickListener(this);
         findViewById(R.id.endDateHourMinus).setOnClickListener(this);
 
+        findViewById(R.id.none).setOnClickListener(this);
+        findViewById(R.id.weekly).setOnClickListener(this);
+        findViewById(R.id.biweekly).setOnClickListener(this);
+        findViewById(R.id.monthly).setOnClickListener(this);
+
+        findViewById(R.id.check1).setOnClickListener(this);
+        findViewById(R.id.check2).setOnClickListener(this);
+        findViewById(R.id.check3).setOnClickListener(this);
+        findViewById(R.id.check4).setOnClickListener(this);
+        findViewById(R.id.check5).setOnClickListener(this);
+        findViewById(R.id.check6).setOnClickListener(this);
+        findViewById(R.id.check7).setOnClickListener(this);
+
+
+
+
         details = (EditText) findViewById(R.id.edit);
 
         startDateHourText = (TextView) findViewById(R.id.startDateHourText);
@@ -68,6 +93,15 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         endDateMonthText = (TextView) findViewById(R.id.endDateMonthText);
         startDateDayText = (TextView) findViewById(R.id.startDateDayText);
         endDateDayText = (TextView) findViewById(R.id.endDateDayText);
+
+        sunBox = (CheckBox) findViewById(R.id.check1);
+        monBox = (CheckBox) findViewById(R.id.check2);
+        tuesBox = (CheckBox) findViewById(R.id.check3);
+        wedBox = (CheckBox) findViewById(R.id.check4);
+        thursBox = (CheckBox) findViewById(R.id.check5);
+        friBox = (CheckBox) findViewById(R.id.check6);
+        satBox = (CheckBox) findViewById(R.id.check7);
+
 
         Intent getToDetails = getIntent();
         id = getToDetails.getLongExtra("id", 0);
@@ -184,6 +218,46 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             case (R.id.endDateHourMinus):
                 endTime.add(Calendar.HOUR, -1);
                 break;
+
+
+            case (R.id.none):
+                sunBox.setVisibility(view.INVISIBLE);
+                monBox.setVisibility(view.INVISIBLE);
+                tuesBox.setVisibility(view.INVISIBLE);
+                wedBox.setVisibility(view.INVISIBLE);
+                thursBox.setVisibility(view.INVISIBLE);
+                friBox.setVisibility(view.INVISIBLE);
+                satBox.setVisibility(view.INVISIBLE);
+                break;
+            case (R.id.weekly):
+                sunBox.setVisibility(view.VISIBLE);
+                monBox.setVisibility(view.VISIBLE);
+                tuesBox.setVisibility(view.VISIBLE);
+                wedBox.setVisibility(view.VISIBLE);
+                thursBox.setVisibility(view.VISIBLE);
+                friBox.setVisibility(view.VISIBLE);
+                satBox.setVisibility(view.VISIBLE);
+                break;
+            case (R.id.biweekly):
+                sunBox.setVisibility(view.VISIBLE);
+                monBox.setVisibility(view.VISIBLE);
+                tuesBox.setVisibility(view.VISIBLE);
+                wedBox.setVisibility(view.VISIBLE);
+                thursBox.setVisibility(view.VISIBLE);
+                friBox.setVisibility(view.VISIBLE);
+                satBox.setVisibility(view.VISIBLE);
+                break;
+            case (R.id.monthly):
+                sunBox.setVisibility(view.INVISIBLE);
+                monBox.setVisibility(view.INVISIBLE);
+                tuesBox.setVisibility(view.INVISIBLE);
+                wedBox.setVisibility(view.INVISIBLE);
+                thursBox.setVisibility(view.INVISIBLE);
+                friBox.setVisibility(view.INVISIBLE);
+                satBox.setVisibility(view.INVISIBLE);
+                break;
+
+
 
             case (R.id.doneButton):
                 if (event != null && event.getID() != null) {
