@@ -163,10 +163,10 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         {
 
             case (R.id.startDateHourPlus):
-                startTime.add(Calendar.HOUR, 1);
+                startTime.add(Calendar.MINUTE, 15);
                 break;
             case (R.id.startDateHourMinus):
-                startTime.add(Calendar.HOUR, -1);
+                startTime.add(Calendar.MINUTE, -15);
                 break;
             case (R.id.startDateDayPlus):
                 startTime.add(Calendar.DAY_OF_MONTH, 1);
@@ -193,10 +193,10 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 endTime.add(Calendar.MONTH, -1);
                 break;
             case (R.id.endDateHourPlus):
-                endTime.add(Calendar.HOUR, 1);
+                endTime.add(Calendar.MINUTE, 15);
                 break;
             case (R.id.endDateHourMinus):
-                endTime.add(Calendar.HOUR, -1);
+                endTime.add(Calendar.MINUTE, -15);
                 break;
 
             case (R.id.doneButton):
