@@ -272,9 +272,122 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 friBox.setVisibility(view.INVISIBLE);
                 satBox.setVisibility(view.INVISIBLE);
                 break;
+/* TEST CODE
+//EXPERIMENTAL CODE MTWTRF
+            case R.id.mon:
+                if (dayChecked)
+                {
+                    mondayCheck=true;
+                }
+                else
+                {
+                    mondayCheck=false;
+                }
+                break;
+            case R.id.tues:
+                if (dayChecked)
+                {
+                    tuesdayCheck=true;
+                }
+                else
+                {
+                    tuesdayCheck=false;
+                }
 
+            case R.id.wed:
+                if (dayChecked)
+                {
+                    wednesdayCheck=true;
+                }
+                else
+                {
+                    wednesdayCheck=false;
+                }
+                break;
+            case R.id.thur:
+                if (dayChecked)
+                {
+                    thursdayCheck=true;
+                }
+                else
+                {
+                    thursdayCheck=false;
+                }
+                break;
+            case R.id.fri:
+                if (dayChecked)
+                {
+                    fridayCheck=true;
+                }
+                else
+                {
+                    fridayCheck=false;
+                }
+                break;
+            case R.id.sat:
+                if (dayChecked)
+                {
+                    saturdayCheck=true;
+                }
+                else
+                {
+                    saturdayCheck=false;
+                }
+                break;
+            case R.id.sun:
+                if (dayChecked)
+                {
+                    sundayCheck=true;
+                }
+                else
+                {
+                    sundayCheck=false;
+                }
+                break;
+//EXPERIMENTAL CODE END
+//EXPERIMENTAL WEEKLY,BIWEEKLY, MONTHLY
+            case R.id.weekly:
+                if (recurringChecked)
+                {
+                    int startingDate = recurringTime.get(Calendar.DAY_OF_WEEK); //startingDate starts on a monday or tues.. or.. or sun
+                    int m,t,w,tr,f;
+                    while (recurringTime.getTime().before(endTime.getTime()))
+                    {
+                        recurringTime.add(Calendar.WEEK_OF_YEAR, 1);
 
-
+                        if(mondayCheck)
+                        {
+                            recurringTime.add(Calendar.DAY_OF_YEAR, (7+0)); //dayofyear%7 -> 0-6 AKA mon-sun
+                        }
+                        if(tuesdayCheck)
+                        {
+                            recurringTime.add(Calendar.DAY_OF_YEAR, (7+1)); //dayofyear%7 -> 0-6 AKA mon-sun
+                        }
+                        if(wednesdayCheck)
+                        {
+                            recurringTime.add(Calendar.DAY_OF_YEAR, (7+2)); //dayofyear%7 -> 0-6 AKA mon-sun
+                        }
+                    }
+                }
+                    break;
+            case R.id.biweekly:
+                if (recurringChecked)
+                {
+                    while (recurringTime.getTime().before(endTime.getTime())) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, 14);
+                    }
+                }
+                    break;
+            case R.id.monthly:
+                if (recurringChecked)
+                {
+                    while (recurringTime.getTime().before(endTime.getTime())) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, 31); //THIS doesnt work, changed this to MONTH_OF_YEAR?
+                    }
+                }
+                    break;
+//END WEEKLY,BIWEEKLY,MONTLY
+*/
             case (R.id.doneButton):
                 if (event != null && event.getID() != null) {
                     database.updateEvent(event);
