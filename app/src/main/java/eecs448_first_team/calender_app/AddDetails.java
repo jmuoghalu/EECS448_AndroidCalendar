@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -47,6 +48,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
         findViewById(R.id.doneButton).setOnClickListener(this);
         findViewById(R.id.cancelButton).setOnClickListener(this);
+        findViewById(R.id.deleteButton).setOnClickListener(this);
         findViewById(R.id.startDateHourPlus).setOnClickListener(this);
         findViewById(R.id.startDateHourMinus).setOnClickListener(this);
         findViewById(R.id.startDateDayPlus).setOnClickListener(this);
@@ -102,15 +104,21 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             }
         }
 
+        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+
         if (event != null) {
             details.setText(event.getDetails());
             startTime.setTimeInMillis(event.getStartDate());
             endTime.setTimeInMillis(event.getEndDate());
+
+            deleteButton.setVisibility(View.VISIBLE);
         } else {
             event = new CalendarEvent();
             event.setDetails("");
             event.setStartDate(startTime.getTimeInMillis());
             event.setEndDate(endTime.getTimeInMillis());
+
+            deleteButton.setVisibility(View.INVISIBLE);
         }
 
         updateTime();
@@ -198,6 +206,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             case (R.id.cancelButton):
                 startActivity(goToDay);
                 break;
+
+            case (R.id.deleteButton):
+                if (event != null && event.getID() != null) {
+                    database.deleteEvent(event);
+                }
+                startActivity(goToDay);
+                break;
+
         }
 
         updateTime();
