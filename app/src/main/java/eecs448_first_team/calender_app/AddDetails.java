@@ -84,7 +84,13 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             endTime.add(Calendar.DAY_OF_YEAR, 1);
         } else {
             startTime = GregorianCalendar.getInstance();
-            endTime = GregorianCalendar.getInstance();
+
+            // zero out time for the current day
+            startTime.set(Calendar.HOUR_OF_DAY, 0);
+            startTime.set(Calendar.MINUTE, 0);
+            startTime.set(Calendar.SECOND, 0);
+
+            endTime = (Calendar) startTime.clone();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
         }
 
