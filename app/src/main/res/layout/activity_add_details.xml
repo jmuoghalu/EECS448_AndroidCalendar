@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
-            android:textSize="42sp"
+            android:textSize="28sp"
             android:text="TextView"/>
 
         <TextView
@@ -61,11 +61,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <Button
-                    android:text="-"
-                    android:layout_width="52dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/startDateMonthMinus" />
 
                 <TextView
                     android:text="TextView"
@@ -74,24 +69,6 @@
                     android:id="@+id/startDateMonthText"
                     android:layout_weight="1" />
 
-                <Button
-                    android:text="+"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/startDateMonthPlus" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:text="-"
-                    android:layout_width="51dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/startDateDayMinus" />
-
                 <TextView
                     android:text="TextView"
                     android:layout_width="wrap_content"
@@ -99,12 +76,19 @@
                     android:id="@+id/startDateDayText"
                     android:layout_weight="1" />
 
-                <Button
-                    android:text="+"
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/startDateDayPlus" />
+
             </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -130,6 +114,116 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/startDateHourPlus" />
             </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="Set Recurring:"
+                android:id="@+id/gap2"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="None"
+                        android:id="@+id/none"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weekly"
+                        android:id="@+id/weekly"
+                    />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Biweekly"
+                        android:id="@+id/biweekly"
+                    />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Monthly"
+                        android:id="@+id/monthly"
+                    />
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+            <!--android:visibility="gone"-->
+            <!--Add the above line to all of the check boxes-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/Check1"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/Check2"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/Check3"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/Check4"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/Check5"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/Check6"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/Check7"/>
+
+
+            </LinearLayout>
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/gap1"/>
 
             <TextView
                 android:text="End Date"
@@ -216,12 +310,12 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="67dp">
 
             <Button
                 android:id="@+id/cancelButton"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:text="Cancel"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
@@ -230,7 +324,7 @@
             <Button
                 android:id="@+id/doneButton"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:text="Done"
                 android:layout_alignBaseline="@+id/cancelButton"
                 android:layout_alignBottom="@+id/cancelButton"

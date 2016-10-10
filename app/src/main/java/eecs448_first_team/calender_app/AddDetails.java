@@ -48,10 +48,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
         findViewById(R.id.doneButton).setOnClickListener(this);
         findViewById(R.id.cancelButton).setOnClickListener(this);
-        findViewById(R.id.startDateDayMinus).setOnClickListener(this);
-        findViewById(R.id.startDateDayPlus).setOnClickListener(this);
-        findViewById(R.id.startDateMonthMinus).setOnClickListener(this);
-        findViewById(R.id.startDateMonthPlus).setOnClickListener(this);
         findViewById(R.id.startDateHourPlus).setOnClickListener(this);
         findViewById(R.id.startDateHourMinus).setOnClickListener(this);
         findViewById(R.id.endDateDayMinus).setOnClickListener(this);
@@ -147,13 +143,17 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         event.setStartDate(startTime.getTimeInMillis());
         event.setEndDate(endTime.getTimeInMillis());
 
-        switch (view.getId()) {
+        switch (view.getId())
+        {
+
             case (R.id.startDateHourPlus):
                 startTime.add(Calendar.HOUR, 1);
                 break;
             case (R.id.startDateHourMinus):
                 startTime.add(Calendar.HOUR, -1);
                 break;
+
+            /*
             case (R.id.startDateDayPlus):
                 startTime.add(Calendar.DAY_OF_MONTH, 1);
                 break;
@@ -166,6 +166,8 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             case (R.id.startDateMonthMinus):
                 startTime.add(Calendar.MONTH, -1);
                 break;
+
+            */
 
             case (R.id.endDateDayPlus):
                 endTime.add(Calendar.DAY_OF_MONTH, 1);
@@ -222,12 +224,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     public void fillDate()
     {
         Intent currentDay = getIntent();
+        Calendar cal;
         int year = currentDay.getIntExtra("year" , 2016);
         int month = currentDay.getIntExtra("month" , 7);
         int day = currentDay.getIntExtra("day", 0);
-        Calendar cal = new GregorianCalendar(year, month, day);
 
-        DateFormat dateFormat = new SimpleDateFormat("MMMM d, YYYY");
+        cal = new GregorianCalendar(year, month, day);
+
+        DateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, YYYY");
         TextView t = (TextView) findViewById(R.id.add);
         t.setText(dateFormat.format(cal.getTime()));
     }
