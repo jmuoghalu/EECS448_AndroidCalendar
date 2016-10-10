@@ -96,14 +96,13 @@ public class CalendarEventDb extends SQLiteOpenHelper
         if(rdb == null)
             rdb = this.getReadableDatabase();
 
-        String[] searchArgs = {start.toString(), end.toString(), start.toString(), end.toString()}; //used to search (you have to use strings)
+        String[] searchArgs = {end.toString(), start.toString()}; //used to search (you have to use strings)
 
         try {
             Cursor searchContainer = rdb.query(
                     CalendarEventTable.Table_Name, //query the CalendarEventTable
                     PARAMETERS_TABLE_RETURN_COLUMNS, //give me ID, Date, and Details columns that...
-                    "(" + CalendarEventTable.Column_Start_Date + ">= ? AND " + CalendarEventTable.Column_Start_Date + "< ?) " +
-                    "OR (" + CalendarEventTable.Column_End_Date + ">= ? AND " + CalendarEventTable.Column_End_Date + "< ?)",
+                    CalendarEventTable.Column_Start_Date + " < ? AND " + CalendarEventTable.Column_End_Date + " >= ?",
                     searchArgs, //... it matches the date I gave
                     null, //don't group rows
                     null, //don't filter by row groups
