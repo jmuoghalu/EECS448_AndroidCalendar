@@ -123,6 +123,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             // zero out time for the current day
             startTime.set(Calendar.HOUR_OF_DAY, 0);
             startTime.set(Calendar.MINUTE, 0);
+            startTime.set(Calendar.MINUTE, 0);
             startTime.set(Calendar.SECOND, 0);
 
             endTime = (Calendar) startTime.clone();
@@ -413,6 +414,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
         updateTime();
         fillDate();
+    }
+
+    public void addEvent(Calendar start, Calendar end) {
+        CalendarEvent event = new CalendarEvent();
+        event.setDetails(this.event.getDetails());
+        event.setEndDate(end.getTimeInMillis());
+        event.setStartDate(start.getTimeInMillis());
+        database.addEvent(event);
     }
 
     @Override
