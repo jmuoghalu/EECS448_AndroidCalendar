@@ -201,6 +201,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         }
 
         updateTime();
+        fillDate();
     }
 
     @Override
@@ -220,17 +221,9 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
      */
     public void fillDate()
     {
-        Intent currentDay = getIntent();
-        Calendar cal;
-        int year = currentDay.getIntExtra("year" , 2016);
-        int month = currentDay.getIntExtra("month" , 7);
-        int day = currentDay.getIntExtra("day", 0);
-
-        cal = new GregorianCalendar(year, month, day);
-
         DateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, YYYY");
         TextView t = (TextView) findViewById(R.id.add);
-        t.setText(dateFormat.format(cal.getTime()));
+        t.setText(dateFormat.format(startTime.getTime()));
     }
 
 }
