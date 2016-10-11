@@ -396,82 +396,157 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
 
             //EXPERIMENTAL WEEKLY,BIWEEKLY, MONTHLY
+
             case (1):
             {
-
                 Calendar newStartTime = (Calendar) startTime.clone();
                 Calendar newEndTime = (Calendar) endTime.clone();
                 Calendar endOfYear = new GregorianCalendar(2017, 5, 1);
 
+                CalendarEvent newEvent = new CalendarEvent();
+                newEvent.setDetails(details.getText().toString());
+                newEvent.setStartDate(newStartTime.getTimeInMillis());
+                newEvent.setEndDate(newEndTime.getTimeInMillis());
 
-                int beginningWeek = newStartTime.get(Calendar.WEEK_OF_YEAR);
-
-
-                int curDay;
-
-                while( newStartTime.before(endOfYear) )
+                if (sunBox.isChecked())
                 {
-                        // ex.) curDay is Monday
-                    curDay = newStartTime.get(Calendar.DAY_OF_WEEK); //2
+                    newStartTime = (Calendar) startTime.clone();
+                    newStartTime.set(Calendar.DAY_OF_WEEK, 1);
+                    newEndTime = (Calendar) endTime.clone();
+                    newEndTime.set(Calendar.DAY_OF_WEEK, 1);
 
+                    while( newStartTime.before(endOfYear) ) {
 
-                    if(newStartTime.get(Calendar.WEEK_OF_YEAR) != beginningWeek)
-                    {
+                        newEvent.setDetails(details.getText().toString());
+                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                        newEvent.setEndDate(newEndTime.getTimeInMillis());
 
-                        for (int A = 1; A < 7; A++)
-                        {
+                        database.addEvent(newEvent);
 
-                            if( dayBoxes[A - 1].isChecked() )
-                            {
-                                newStartTime.set(Calendar.DAY_OF_WEEK, A);
-                                newEndTime.set(Calendar.DAY_OF_WEEK, A);
-
-                                CalendarEvent newEvent = new CalendarEvent();
-                                newEvent.setDetails(details.getText().toString());
-                                newEvent.setStartDate(newStartTime.getTimeInMillis());
-                                newEvent.setEndDate(newEndTime.getTimeInMillis());
-
-                                database.addEvent(newEvent);
-                            }
-
-                        }
+                        newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                        newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
                     }
-                        // handles the week of the original day
-                    else
-                    {
+                }
+                if (monBox.isChecked())
+                {
+                    newStartTime = (Calendar) startTime.clone();
+                    newStartTime.set(Calendar.DAY_OF_WEEK, 2);
+                    newEndTime = (Calendar) endTime.clone();
+                    newEndTime.set(Calendar.DAY_OF_WEEK, 2);
 
-                        for (int A = curDay; A < 7; A++)
-                        {
+                    while( newStartTime.before(endOfYear) ) {
 
-                            if( dayBoxes[A - 1].isChecked() )
-                            {
-                                newStartTime.set(Calendar.DAY_OF_WEEK, A);
-                                newEndTime.set(Calendar.DAY_OF_WEEK, A);
+                        newEvent.setDetails(details.getText().toString());
+                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                        newEvent.setEndDate(newEndTime.getTimeInMillis());
 
-                                CalendarEvent newEvent = new CalendarEvent();
-                                newEvent.setDetails(details.getText().toString());
-                                newEvent.setStartDate(newStartTime.getTimeInMillis());
-                                newEvent.setEndDate(newEndTime.getTimeInMillis());
+                        database.addEvent(newEvent);
 
-                                database.addEvent(newEvent);
-                            }
-
-                        }
-
+                        newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                        newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
                     }
+                }
+                if (tuesBox.isChecked())
+                {
+                    newStartTime = (Calendar) startTime.clone();
+                    newStartTime.set(Calendar.DAY_OF_WEEK, 3);
+                    newEndTime = (Calendar) endTime.clone();
+                    newEndTime.set(Calendar.DAY_OF_WEEK, 3);
+
+                    while( newStartTime.before(endOfYear) ) {
+
+                        newEvent.setDetails(details.getText().toString());
+                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                        database.addEvent(newEvent);
 
 
+                        newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                        newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
+                    }
+                }
+                if (wedBox.isChecked())
+                {
+                    newStartTime = (Calendar) startTime.clone();
+                    newStartTime.set(Calendar.DAY_OF_WEEK, 4);
+                    newEndTime = (Calendar) endTime.clone();
+                    newEndTime.set(Calendar.DAY_OF_WEEK, 4);
 
-                    newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                    while( newStartTime.before(endOfYear) ) {
+
+                        newEvent.setDetails(details.getText().toString());
+                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                        database.addEvent(newEvent);
+
+
+                        newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                        newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
+                    }
+                }
+                if (thursBox.isChecked())
+                {
+                    newStartTime = (Calendar) startTime.clone();
+                    newStartTime.set(Calendar.DAY_OF_WEEK, 5);
+                    newEndTime = (Calendar) endTime.clone();
+                    newEndTime.set(Calendar.DAY_OF_WEEK, 5);
+
+                    while( newStartTime.before(endOfYear) ) {
+
+                        newEvent.setDetails(details.getText().toString());
+                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                        database.addEvent(newEvent);
+
+                        newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                        newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
+                    }
+                }
+                if (friBox.isChecked())
+                {
+                    newStartTime = (Calendar) startTime.clone();
+                    newStartTime.set(Calendar.DAY_OF_WEEK, 6);
+                    newEndTime = (Calendar) endTime.clone();
+                    newEndTime.set(Calendar.DAY_OF_WEEK, 6);
+
+                    while( newStartTime.before(endOfYear) ) {
+
+                        newEvent.setDetails(details.getText().toString());
+                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                        database.addEvent(newEvent);
+
+                        newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                        newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
+                    }
+                }
+                if (satBox.isChecked())
+                {
+                    newStartTime = (Calendar) startTime.clone();
+                    newStartTime.set(Calendar.DAY_OF_WEEK, 7);
+                    newEndTime = (Calendar) endTime.clone();
+                    newEndTime.set(Calendar.DAY_OF_WEEK, 7);
+
+                    while( newStartTime.before(endOfYear) ) {
+
+                        newEvent.setDetails(details.getText().toString());
+                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                        database.addEvent(newEvent);
+
+                        newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                        newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
+                    }
                 }
 
-                // new calendars set for end of calendar year
-                // while starttime.before end times of calendar year
-                // if startDay is before
 
                 break;
             }
-
 
 
             case (2):
