@@ -349,6 +349,11 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 //EXPERIMENTAL WEEKLY,BIWEEKLY, MONTHLY
             case (1):
                 int startingDate = 0; //startingDate starts on a monday or tues.. or.. or sun
+                if (startTime.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) 
+                {
+                    startingDate=1;
+                    startSunday = true;
+                }
                 if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY)
                 {
                     startingDate=2;
@@ -382,16 +387,13 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     startingDate=7;
                     startSaturday = true;
                 }
-                if (startTime.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-                    startingDate=1;
-                    startSunday = true;
-                }
+
                 int m, t, w, tr, f, s;
                 while (recurringTime.getTime().before(endTime.getTime())) {
                     if (sunBox.isChecked() && startingDate<=1) {
                     //DO NOTHING, STARTING DATE IS MON-SAT
                     }
-                    else if (sunBox.isChecked()) {
+                    else if (sunBox.isChecked() && startingDate==0) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (0)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (0)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
@@ -400,7 +402,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     if (monBox.isChecked() && StartingDate<=2) {
                         
                     }                    
-                    else if (monBox.isChecked()) {
+                    else if (monBox.isChecked() && startingDate==0) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (1)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (1)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
@@ -408,7 +410,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     if (tuesBox.isChecked() && StartingDate<=3) {
                         
                     }                                   
-                    else if (tuesBox.isChecked()) {
+                    else if (tuesBox.isChecked()&& startingDate==0) {
                         recurringTime.set(Calendar.DAY_OF_YEAR, (2)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.set(Calendar.DAY_OF_YEAR, (2)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
@@ -416,7 +418,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     if (wedBox.isChecked() && StartingDate<=4) {
                         
                     }               
-                    else if (wedBox.isChecked()) {
+                    else if (wedBox.isChecked()&& startingDate==0) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (3)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (3)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
@@ -424,7 +426,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     if (thursBox.isChecked() && StartingDate<=5) {
                         
                     }               
-                    else if (thursBox.isChecked()) {
+                    else if (thursBox.isChecked()&& startingDate==0) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (4)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (4)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
@@ -433,7 +435,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     if (friBox.isChecked() && StartingDate<=6) {
                         
                     }               
-                    else if (friBox.isChecked()) {
+                    else if (friBox.isChecked()&& startingDate==0) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (5)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (5)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
@@ -442,7 +444,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     if (satBox.isChecked() && StartingDate<=7) {
                         
                     }               
-                   else if (satBox.isChecked()) {
+                   else if (satBox.isChecked()&& startingDate==0) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (6)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (6)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
