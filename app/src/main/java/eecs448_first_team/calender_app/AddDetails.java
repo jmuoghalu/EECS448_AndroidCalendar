@@ -351,84 +351,104 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 int startingDate = 0; //startingDate starts on a monday or tues.. or.. or sun
                 if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY)
                 {
-                    startingDate=1;
+                    startingDate=2;
                      startMonday = true;
                 }
                 if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY)
                 {
-                    startingDate=2;
+                    startingDate=3;
 
                     startTuesday = true;
                 }
                 if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY)
                 {
-                    startingDate=3;
+                    startingDate=4;
 
                     startWednesday = true;
                 }
                 if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)
                 {
-                    startingDate=4;
+                    startingDate=5;
 
                     startThursday = true;
                 }
                 if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY)
                 {
-                    startingDate=5;
+                    startingDate=6;
 
                     startFriday = true;
                 }
                 if (startTime.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-                    startingDate=6;
+                    startingDate=7;
                     startSaturday = true;
                 }
                 if (startTime.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-                    startingDate=0;
+                    startingDate=1;
                     startSunday = true;
                 }
                 int m, t, w, tr, f, s;
                 while (recurringTime.getTime().before(endTime.getTime())) {
-
-                    if (sunBox.isChecked()) {
+                    if (sunBox.isChecked() && startingDate<=1) {
+                    //DO NOTHING, STARTING DATE IS MON-SAT
+                    }
+                    else if (sunBox.isChecked()) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (0)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (0)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
 
                     }
-                    if (monBox.isChecked()) {
+                    if (monBox.isChecked() && StartingDate<=2) {
+                        
+                    }                    
+                    else if (monBox.isChecked()) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (1)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (1)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
                     }
-                    if (tuesBox.isChecked()) {
+                    if (tuesBox.isChecked() && StartingDate<=3) {
+                        
+                    }                                   
+                    else if (tuesBox.isChecked()) {
                         recurringTime.set(Calendar.DAY_OF_YEAR, (2)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.set(Calendar.DAY_OF_YEAR, (2)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
                     }
-                    if (wedBox.isChecked()) {
+                    if (wedBox.isChecked() && StartingDate<=4) {
+                        
+                    }               
+                    else if (wedBox.isChecked()) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (3)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (3)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
                     }
-                    if (thursBox.isChecked()) {
+                    if (thursBox.isChecked() && StartingDate<=5) {
+                        
+                    }               
+                    else if (thursBox.isChecked()) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (4)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (4)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
 
                     }
-                    if (friBox.isChecked()) {
+                    if (friBox.isChecked() && StartingDate<=6) {
+                        
+                    }               
+                    else if (friBox.isChecked()) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (5)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (5)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
 
                     }
-                    if (satBox.isChecked()) {
+                    if (satBox.isChecked() && StartingDate<=7) {
+                        
+                    }               
+                   else if (satBox.isChecked()) {
                         recurringTime.add(Calendar.DAY_OF_YEAR, (6)); //dayofyear%7 -> 0-6 AKA sun-mon
                         recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (6)); //dayofyear%7 -> 0-6 AKA sun-mon
                         addEvent(recurringTime,recurringTimeTracer);
 
                     }
-
+                    startingDate=0;
                     recurringTimeTracer2.add(Calendar.DAY_OF_YEAR,(7)); //same as recurringTime2 but saves endtime
                     recurringTime2.add(Calendar.WEEK_OF_YEAR, 1); //moves onto next week
                     recurringTimeTracer = (Calendar) recurringTimeTracer2.clone(); //start of next week
