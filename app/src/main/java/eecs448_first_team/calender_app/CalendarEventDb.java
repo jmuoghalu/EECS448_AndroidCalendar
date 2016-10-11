@@ -84,21 +84,22 @@ public class CalendarEventDb extends SQLiteOpenHelper
 	}
 
     /**
+     * Get the events in the databse between two arbitrary start and end times.
      * precondition: database already instantiated.
      * postcondition: if readable database was not accessible, it is now accessible.
-     * After (re)building readable database access, queries CalendarEventTable to see if
-     * it contains details for the supplied time frame
-     * start The start time to search
-     * end The end time to search
-     * @return String containing Details message. Empty string if database query failed or no matching row
+     * @param start The start time to search
+     * @param end The end time to search
+     * @return List of events that exist between these two times. null if error in db request.
      */
     public List<CalendarEvent> getCalendarEvents(Long start, Long end) {
         if(rdb == null)
             rdb = this.getReadableDatabase();
 
-        String[] searchArgs = {end.toString(), start.toString()}; //used to search (you have to use strings)
+        //used to search (you have to use strings)
+        String[] searchArgs = {end.toString(), start.toString()};
 
         try {
+            // db query
             Cursor searchContainer = rdb.query(
                     CalendarEventTable.Table_Name, //query the CalendarEventTable
                     PARAMETERS_TABLE_RETURN_COLUMNS, //give me ID, Date, and Details columns that...
@@ -109,10 +110,12 @@ public class CalendarEventDb extends SQLiteOpenHelper
                     CalendarEventTable.Column_Start_Date + ", " + CalendarEventTable.Column_End_Date
             );
 
+            // create a list based on rows returned
             List<CalendarEvent> events = new ArrayList<CalendarEvent>(searchContainer.getCount());
             for (int i = 0; i < searchContainer.getCount(); i++) {
                 searchContainer.moveToPosition(i);
 
+                // init new calendar event
                 CalendarEvent returnCalendarEvent = new CalendarEvent();
 
                 returnCalendarEvent.setID(searchContainer.getLong(0));
@@ -120,6 +123,7 @@ public class CalendarEventDb extends SQLiteOpenHelper
                 returnCalendarEvent.setEndDate(searchContainer.getLong(2));
                 returnCalendarEvent.setDetails(searchContainer.getString(3));
 
+                // add it to list
                 events.add(returnCalendarEvent);
             }
 
@@ -130,10 +134,9 @@ public class CalendarEventDb extends SQLiteOpenHelper
     }
 
     /**
+     * Get the calendar event with the specified id
      * precondition: database already instantiated.
      * postcondition: if readable database was not accessible, it is now accessible.
-     * After (re)building readable database access, queries CalendarEventTable to see if
-     * it contains details for the supplied event id
      * @param id The identifier to query the event
      * @return Event containing informaton of event id. null if database query failed or no matching row
      */
@@ -201,7 +204,7 @@ public class CalendarEventDb extends SQLiteOpenHelper
 
     /**
      * Adds a new event.
-     * @param event The event to store in the database
+     * @param event The event to store in the database.
      * @return True if Details were added successfully, False if Details adding failed (possibly table corrupted)
      */
     public boolean addEvent(CalendarEvent event) {
@@ -224,8 +227,8 @@ public class CalendarEventDb extends SQLiteOpenHelper
     }
 
     /**
-     * Adds a new event.
-     * @param event The event to store in the database
+     * Delete an event based on information provided.
+     * @param event The event to store in the database. "getID()" must be non-null.
      * @return True if events was removed, False if event removing failed (possibly table corrupted)
      */
     public boolean deleteEvent(CalendarEvent event) {
@@ -233,8 +236,10 @@ public class CalendarEventDb extends SQLiteOpenHelper
             if (wdb == null)
                 wdb = this.getWritableDatabase();
 
-            String[] searchArgs = {event.getID().toString()}; //used to search (you have to use strings)
+            //used to search (you have to use strings)
+            String[] searchArgs = {event.getID().toString()};
 
+            // delete request to db
             int num_deleted = wdb.delete(CalendarEventTable.Table_Name, CalendarEventTable._ID + " = ?", searchArgs);
 
             return num_deleted > 0;
@@ -244,9 +249,9 @@ public class CalendarEventDb extends SQLiteOpenHelper
     }
 
     /**
+     * Handle db version changes.
      * precondition: user reverting to old database version.
      * postcondition: new database created, all existing data lost.
-     * here we could implement a way to preserve new data when reverting to an old database version.
      * @param db the database physically on the phone associated with this application
      * @param oldVersion the previous database version integer
      * @param newVersion the new version integer to update the database to

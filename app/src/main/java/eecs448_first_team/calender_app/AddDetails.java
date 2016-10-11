@@ -62,10 +62,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private CalendarEvent event = null;
 
     @Override
+    /**
+     * Called when an Add Details view is created.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_details);
 
+        // listen for buttons
         findViewById(R.id.doneButton).setOnClickListener(this);
         findViewById(R.id.cancelButton).setOnClickListener(this);
         findViewById(R.id.deleteButton).setOnClickListener(this);
@@ -95,6 +99,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.check6).setOnClickListener(this);
         findViewById(R.id.check7).setOnClickListener(this);
 
+        // init references to widgets on the view
 
         details = (EditText) findViewById(R.id.edit);
 
@@ -121,7 +126,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         dayBoxes[5] = friBox;
         dayBoxes[6] = satBox;
 
-
+        // load details passed to the view
 
         Intent getToDetails = getIntent();
         id = getToDetails.getLongExtra("id", 0);
@@ -130,17 +135,22 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         int month = getToDetails.getIntExtra("month", 0);
         int year = getToDetails.getIntExtra("year", 0);
 
-        if (year != 0) {
+        if (year != 0) { // if a valid year was passed
+            // init an end and start time
             startTime = new GregorianCalendar(year, month, day);
+
+            // use next day for end time
             endTime = (Calendar) startTime.clone();
+            endTime.add(Calendar.DAY_OF_YEAR, 1);
+            endTime.add(Calendar.MINUTE, -1);
+
+            // init recurringTime
             recurringTime = (Calendar) startTime.clone();
             recurringTime2 = (Calendar) startTime.clone();
             recurringTimeTracer = (Calendar) startTime.clone();
             recurringTimeTracer2 = (Calendar) startTime.clone();
-
-            endTime.add(Calendar.DAY_OF_YEAR, 1);
-            endTime.add(Calendar.MINUTE, -1);
         } else {
+            // init time based on current time
             startTime = GregorianCalendar.getInstance();
 
             // zero out time for the current day
@@ -148,63 +158,77 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             startTime.set(Calendar.MINUTE, 0);
             startTime.set(Calendar.SECOND, 0);
 
+            // use next day for end time
             endTime = (Calendar) startTime.clone();
+            endTime.add(Calendar.DAY_OF_YEAR, 1);
+            endTime.add(Calendar.MINUTE, -1);
+
+            // init recurringTime
             recurringTime = (Calendar) startTime.clone();
             recurringTime2 = (Calendar) startTime.clone();
             recurringTimeTracer = (Calendar) startTime.clone();
             recurringTimeTracer2 = (Calendar) startTime.clone();
-
-            endTime.add(Calendar.DAY_OF_YEAR, 1);
-            endTime.add(Calendar.MINUTE, -1);
         }
-
 
         fillDate();
     }
 
     @Override
+    /**
+     * Load database info after the view has been loaded.
+     */
     public void onResume() {
         super.onResume();
 
-        if (event == null) {
+        if (event == null) { // make sure event has not been initialized
+                             // event should not be overwritten
             database = new CalendarEventDb(this);
 
             if (id != 0) {
-                event = database.getCalendarEvent(id);
+                event = database.getCalendarEvent(id); // use id passed to view
             }
         }
 
+        // ref to delete button
         Button deleteButton = (Button) findViewById(R.id.deleteButton);
 
         if (event != null) {
+            // load widget details based on this event
             details.setText(event.getDetails());
             startTime.setTimeInMillis(event.getStartDate());
+            endTime.setTimeInMillis(event.getEndDate());
+
             recurringTime.setTimeInMillis(event.getStartDate());
             recurringTime2 = (Calendar) startTime.clone();
             recurringTimeTracer.setTimeInMillis(event.getStartDate());
             recurringTimeTracer2.setTimeInMillis(event.getStartDate());
 
-
-            endTime.setTimeInMillis(event.getEndDate());
-
+            // show delete button when event has already been created
             deleteButton.setVisibility(View.VISIBLE);
         } else {
+            // create new event with no details
             event = new CalendarEvent();
             event.setDetails("");
             event.setStartDate(startTime.getTimeInMillis());
             event.setEndDate(endTime.getTimeInMillis());
 
+            // hide delete button when event has already been created
             deleteButton.setVisibility(View.INVISIBLE);
         }
 
         updateTime();
     }
 
+    /**
+     * Update the start and end time.
+     */
     public void updateTime() {
-        SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
-        SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm aaa");
+        // date formatters used to show date text
+        DateFormat monthFormat = new SimpleDateFormat("MMMM");
+        DateFormat dayFormat = new SimpleDateFormat("dd");
+        DateFormat timeFormat = new SimpleDateFormat("h:mm aaa");
 
+        // set the text fields with formatted string
 
         Date startDate = startTime.getTime();
         startDateMonthText.setText(monthFormat.format(startDate));
@@ -218,18 +242,22 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
+    /**
+     * Handle click events to add details.
+     * @param view The clicked view.
+     */
     public void onClick(View view)
     {
+        // open the day to click
         Intent goToDay = new Intent(this, DayView.class);
-
         goToDay.putExtra("day", startTime.get(Calendar.DAY_OF_MONTH));
         goToDay.putExtra("month", startTime.get(Calendar.MONTH));
         goToDay.putExtra("year", startTime.get(Calendar.YEAR));
 
+        // make sure event and widgets are kept in sync.
         event.setDetails(details.getText().toString());
         event.setStartDate(startTime.getTimeInMillis());
         event.setEndDate(endTime.getTimeInMillis());
-
 
         switch (view.getId()) {
 
@@ -375,18 +403,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         fillDate();
     }
 
-
-
     @Override
+    /**
+     * Close database when view is stopped.
+     */
     public void onStop() {
         super.onStop();
         database.close();
     }
-
-
-
-
-
 
     public void setRecurringDates(View view, int recurringChoice)
     {
@@ -615,6 +639,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 //END WEEKLY,BIWEEKLY,MONTLY
         }
     }
+
     public void addEvent(Calendar start, Calendar end) {
         CalendarEvent event = new CalendarEvent();
         event.setDetails(this.event.getDetails());
@@ -628,12 +653,10 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
      * precondition: array exists and is filled with correct values.
      * postcondition: text of ID:date in activity_day_view.xml is set to date user wanted.
      * Sets the proper text to display based on selected day.
-     * array: [day,month,year,day of the first of the month,date of Sunday of the week sent to WeekView,number of days in the month,number of days in the previous month,week number]
      */
     public void fillDate() {
         DateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, YYYY");
         TextView t = (TextView) findViewById(R.id.add);
         t.setText(dateFormat.format(startTime.getTime()));
     }
-
 }

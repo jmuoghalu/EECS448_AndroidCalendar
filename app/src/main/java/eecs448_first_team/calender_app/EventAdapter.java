@@ -87,6 +87,8 @@ public class EventAdapter extends ArrayAdapter<CalendarEvent> {
             formatString = "EEE, d MMM yyyy HH:mm aaa";
         }
 
+        // display the start and end time for the event
+
         DateFormat dateFormat = new SimpleDateFormat(formatString);
 
         TextView startTime = (TextView) convertView.findViewById(R.id.startTime);
@@ -95,6 +97,7 @@ public class EventAdapter extends ArrayAdapter<CalendarEvent> {
         TextView endTime = (TextView) convertView.findViewById(R.id.endTime);
         endTime.setText(dateFormat.format(event.getEndDate()));
 
+        // if the events conflict, mark it with red text
         if (doesConflict(event)) { // mark events that conflict
             startTime.setTextColor(Color.RED);
             endTime.setTextColor(Color.RED);

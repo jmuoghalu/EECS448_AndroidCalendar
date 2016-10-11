@@ -31,6 +31,8 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_display);
+
+        // get the calendar widget from the year display view
         CalendarView calendar;
         calendar = (CalendarView) findViewById(R.id.calendar);
 
@@ -51,6 +53,7 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
             calendar.setMaxDate(1496206800000l);
         }
 
+        // listen for button clicks from add details
         findViewById(R.id.addDetailsButton3).setOnClickListener(this);
 
         // Listener to catch selected date and save it to be sent to anothe activity
@@ -68,22 +71,26 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
 
         });
 
+        // get last selected day from other views (defaults to August 1, 2016 if none given)
         Intent getToDay = getIntent();
         int day = getToDay.getIntExtra("day", 1);
         int month = getToDay.getIntExtra("month", 7);
         int year = getToDay.getIntExtra("year", 2016);
 
+        // set the calendar date based on above year, month, day values
         Calendar cal = new GregorianCalendar(year, month, day);
         calendar.setDate(cal.getTimeInMillis());
     }
 
     @Override
+    /**
+     * Android method to handle clicks to this view.
+     */
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.addDetailsButton3:
-                Intent goToAdd = new Intent(this, AddDetails.class);
-                startActivity(goToAdd);
-                break;
+        if (view.getId() == R.id.addDetailsButton3) {
+            // go to add details view
+            Intent goToAdd = new Intent(this, AddDetails.class);
+            startActivity(goToAdd);
         }
     }
 }

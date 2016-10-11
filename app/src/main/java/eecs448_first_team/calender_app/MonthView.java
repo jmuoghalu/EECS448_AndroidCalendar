@@ -26,10 +26,15 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
     private Calendar cal;
 
     @Override
+    /**
+     * Load the Month View for android
+     * @param saveInstanceState The previous state to use.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_month_view);
 
+        // listen for cilcks from any of these buttons
         findViewById(R.id.yearButton).setOnClickListener(this);
         findViewById(R.id.firstWeek).setOnClickListener(this);
         findViewById(R.id.secondWeek).setOnClickListener(this);
@@ -39,25 +44,32 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
         findViewById(R.id.sixthWeek).setOnClickListener(this);
         findViewById(R.id.addDetailsButton2).setOnClickListener(this);
 
+        // load the month state from another view.
+        // Defaults to August, 2016
         Intent getToMonth = getIntent();
         year = getToMonth.getIntExtra("year", 2016);
         month = getToMonth.getIntExtra("month", 7);
-
         cal = new GregorianCalendar(year, month, 1);
 
+        // set the month view text
         TextView textview = (TextView) findViewById(R.id.monthName);
-
         SimpleDateFormat format = new SimpleDateFormat("MMMM");
-
         textview.setText(format.format(cal.getTime()));
 
+        // fill the days of the month with info on first day of week and number of days
         int day_of_month = cal.get(Calendar.DAY_OF_WEEK);
         int max_days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         fillMonth(day_of_month, max_days);
     }
 
     @Override
+    /**
+     * Determine what was clicked and act appropriately.
+     * @param view The view that was clicked.
+     */
     public void onClick(View view) {
+        // handle clicks to year button and add details
+        // each goes to the correct view.
         if (view.getId() == R.id.yearButton) {
             Intent goToYear = new Intent(this, YearDisplay.class);
             goToYear.putExtra("year", cal.get(Calendar.YEAR));
@@ -72,6 +84,8 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
 
         Calendar newcal = (Calendar) cal.clone();
 
+        // set the week of month based on which part of the layout was clicked
+        // if none, just return
         switch (view.getId()) {
             case R.id.firstWeek:
                 newcal.set(Calendar.WEEK_OF_MONTH, 1);
@@ -91,8 +105,12 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
             case R.id.sixthWeek:
                 newcal.set(Calendar.WEEK_OF_MONTH, 6);
                 break;
+
+            default:
+                return;
         }
 
+        // pass the correct week and year to the week view
         Intent goToWeek = new Intent(this, WeekView.class);
         goToWeek.putExtra("year", year);
         goToWeek.putExtra("week", newcal.get(Calendar.WEEK_OF_YEAR));
@@ -100,6 +118,7 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
+     * Fill the text views with the current numbers for the months
      * precondition: start and end are valid integers
      * postcondition: the month in activity_month_view.xml is filled out correctly
      * @param first_day the day the month starts on (1 = Sunday, 2 = Monday, etc.)
@@ -580,11 +599,9 @@ public class MonthView extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
+     * Event called when a saved instance is saved. This uses the same year, month as in onCreate.
      * @param savedInstanceState Bundles the values of of data and array and saves them once the activity is left
      * @see   : https://developer.android.com/training/basics/activity-lifecycle/recreating.html
-     * @param : DATA (name of the array of the date we go too
-     * @param : array (holds the destination and other relevant date integers)
-     * @return none
      */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {

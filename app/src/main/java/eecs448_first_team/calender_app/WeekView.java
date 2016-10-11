@@ -26,6 +26,10 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
     private int week;
 
     @Override
+    /**
+     * Handle the creation of this view. Used by AppCompatActivity
+     * @param savedInstanceState Info to recover from previously create view.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_view);
@@ -41,50 +45,71 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
         findViewById(R.id.yearButton).setOnClickListener(this);
         findViewById(R.id.addDetailsButton4).setOnClickListener(this);
 
+        // load information from previous view
         Intent getToWeek = getIntent();
-
         year = getToWeek.getIntExtra("year", 2016);
         week = getToWeek.getIntExtra("week", 26);
 
+        // create calendar based on above info
         cal = new GregorianCalendar();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.WEEK_OF_YEAR, week);
 
+        // set the text for the year
+        DateFormat weekFormat = new SimpleDateFormat("MMMM d");
         TextView textView = (TextView) findViewById(R.id.year);
-        textView.setText("" + year);
+        textView.setText("Week of " + weekFormat.format(cal.getTime()));
 
         fillWeek();
     }
 
     @Override
+    /**
+     * Android handler for a clicked view.
+     * @param view The view that was "clicked" on the android application
+     */
     public void onClick(View view) {
+        // check based on the view's identifier
         switch (view.getId()) {
-            case R.id.monthButton:
+
+            case R.id.monthButton: // go to the month view
                 Intent goToMonth = new Intent(this, MonthView.class);
                 goToMonth.putExtra("year", cal.get(Calendar.YEAR));
                 goToMonth.putExtra("month", cal.get(Calendar.MONTH));
                 goToMonth.putExtra("day", cal.get(Calendar.DAY_OF_MONTH));
                 startActivity(goToMonth);
                 break;
-            case R.id.yearButton:
+
+            case R.id.yearButton: // go to the year view
                 Intent goToYear = new Intent(this, YearDisplay.class);
                 goToYear.putExtra("year", cal.get(Calendar.YEAR));
                 goToYear.putExtra("month", cal.get(Calendar.MONTH));
                 startActivity(goToYear);
                 break;
-            case R.id.addDetailsButton4:
+
+            case R.id.addDetailsButton4: // go to the add details view
                 Intent goToAdd = new Intent(this, AddDetails.class);
                 startActivity(goToAdd);
                 break;
-            default:
-                GetWeekDay(view.getId());
+
+            default: // assume that week day was selected, because that's all we are listening for
+                     // in this view
+                getWeekDay(view.getId());
                 break;
         }
     }
 
-    public void GetWeekDay(int viewId) {
+    /**
+     * Open the week day clicked as a new view.
+     * @param viewId The identifier that was clicked.
+     *               It should be one of R.id.sunday -> R.id.saturday. If not one of those,
+     *               no action is taken.
+     */
+    public void getWeekDay(int viewId) {
+        // create a new calendar so we don't break above calculations
         Calendar newcal = (Calendar) cal.clone();
-        TextView t = (TextView) findViewById(R.id.sunday);
+
+        // set the day of the week based on which element was clicked
         switch(viewId) {
             case R.id.sunday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
@@ -113,8 +138,12 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
             case R.id.saturday:
                 newcal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
                 break;
+
+            default:
+                return;
         }
 
+        // go to date based on selected calendar date
         Intent goToDay = new Intent(this, DayView.class);
         goToDay.putExtra("year", newcal.get(Calendar.YEAR));
         goToDay.putExtra("month", newcal.get(Calendar.MONTH));
@@ -123,11 +152,19 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
     }
 
     /**
+     * Fill the days of the week based on date formats
      * precondition: array exists and is filled with correct values.
      * postcondition: IDs sunday-saturday in activity_week_view.xml are filled with correct dates.
      */
     public void fillWeek() {
+        // Used to display date as text
         DateFormat dateFormat = new SimpleDateFormat("EEEE, MMM. d");
+
+        // Sunday -> Monday use similar process
+        // take the current text view element,
+        // create a new calendar,
+        // set the current week day to one of Sunday -> Monday
+        // format the date and set the text of the text view to formatted date
 
         TextView sunday = (TextView) findViewById(R.id.sunday);
         Calendar sundayCal = (Calendar) cal.clone();
@@ -166,11 +203,9 @@ public class WeekView extends AppCompatActivity implements View.OnClickListener 
     }
 
     /**
+     * Used to load state from previous instance.
      * @param savedInstanceState Bundles the values of of data and array and saves them once the activity is left
      * @see   : https://developer.android.com/training/basics/activity-lifecycle/recreating.html
-     * @param : DATA (name of the array of the date we go too
-     * @param : array (holds the destination and other relevant date integers)
-     * @return none
      */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
