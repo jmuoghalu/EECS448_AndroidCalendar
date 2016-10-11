@@ -41,6 +41,8 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private CheckBox thursBox;
     private CheckBox friBox;
     private CheckBox satBox;
+    private CheckBox[] dayBoxes = new CheckBox[7];
+
 
     private CalendarEventDb database;
 
@@ -110,6 +112,15 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         thursBox = (CheckBox) findViewById(R.id.check5);
         friBox = (CheckBox) findViewById(R.id.check6);
         satBox = (CheckBox) findViewById(R.id.check7);
+
+        dayBoxes[0] = sunBox;
+        dayBoxes[1] = monBox;
+        dayBoxes[2] = tuesBox;
+        dayBoxes[3] = wedBox;
+        dayBoxes[4] = thursBox;
+        dayBoxes[5] = friBox;
+        dayBoxes[6] = satBox;
+
 
 
         Intent getToDetails = getIntent();
@@ -219,6 +230,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         event.setStartDate(startTime.getTimeInMillis());
         event.setEndDate(endTime.getTimeInMillis());
 
+
         switch (view.getId()) {
 
             case (R.id.startDateHourPlus):
@@ -266,16 +278,24 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
 
             case (R.id.none):
-                sunBox.setVisibility(view.INVISIBLE);
-                monBox.setVisibility(view.INVISIBLE);
-                tuesBox.setVisibility(view.INVISIBLE);
-                wedBox.setVisibility(view.INVISIBLE);
-                thursBox.setVisibility(view.INVISIBLE);
-                friBox.setVisibility(view.INVISIBLE);
-                satBox.setVisibility(view.INVISIBLE);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setChecked(false);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setEnabled(false);
+
+                sunBox.setVisibility(view.GONE);
+                monBox.setVisibility(view.GONE);
+                tuesBox.setVisibility(view.GONE);
+                wedBox.setVisibility(view.GONE);
+                thursBox.setVisibility(view.GONE);
+                friBox.setVisibility(view.GONE);
+                satBox.setVisibility(view.GONE);
+
+                choice = 0;
                 toRecursion = false;
                 break;
             case (R.id.weekly):
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setChecked(true);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setEnabled(false);
+
                 sunBox.setVisibility(view.VISIBLE);
                 monBox.setVisibility(view.VISIBLE);
                 tuesBox.setVisibility(view.VISIBLE);
@@ -283,10 +303,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.VISIBLE);
                 friBox.setVisibility(view.VISIBLE);
                 satBox.setVisibility(view.VISIBLE);
+
                 choice = 1;
                 toRecursion = true;
                 break;
             case (R.id.biweekly):
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setChecked(true);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setEnabled(false);
+
                 sunBox.setVisibility(view.VISIBLE);
                 monBox.setVisibility(view.VISIBLE);
                 tuesBox.setVisibility(view.VISIBLE);
@@ -294,17 +318,22 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.VISIBLE);
                 friBox.setVisibility(view.VISIBLE);
                 satBox.setVisibility(view.VISIBLE);
+
                 choice = 2;
                 toRecursion = true;
                 break;
             case (R.id.monthly):
-                sunBox.setVisibility(view.INVISIBLE);
-                monBox.setVisibility(view.INVISIBLE);
-                tuesBox.setVisibility(view.INVISIBLE);
-                wedBox.setVisibility(view.INVISIBLE);
-                thursBox.setVisibility(view.INVISIBLE);
-                friBox.setVisibility(view.INVISIBLE);
-                satBox.setVisibility(view.INVISIBLE);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setChecked(false);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setEnabled(false);
+
+                sunBox.setVisibility(view.GONE);
+                monBox.setVisibility(view.GONE);
+                tuesBox.setVisibility(view.GONE);
+                wedBox.setVisibility(view.GONE);
+                thursBox.setVisibility(view.GONE);
+                friBox.setVisibility(view.GONE);
+                satBox.setVisibility(view.GONE);
+
                 choice = 3;
                 toRecursion = true;
                 break;
@@ -370,8 +399,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             case (1):
             {
 
-                CheckBox[] dayBoxes = {sunBox, monBox, tuesBox, wedBox, thursBox, friBox, satBox};
-
                 Calendar newStartTime = (Calendar) startTime.clone();
                 Calendar newEndTime = (Calendar) endTime.clone();
                 Calendar endOfYear = new GregorianCalendar(2017, 5, 1);
@@ -388,16 +415,16 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                     curDay = newStartTime.get(Calendar.DAY_OF_WEEK); //2
 
 
-                        // handles the week of the original day
                     if(newStartTime.get(Calendar.WEEK_OF_YEAR) != beginningWeek)
                     {
 
-                        for (int A = 1; A < 7; A++) // A = 3
+                        for (int A = 1; A < 7; A++)
                         {
 
-                            //if (dayBoxes[A - 1].isChecked()) // Tuesday checked
+                            if( dayBoxes[A - 1].isChecked() )
                             {
-                                
+                                newStartTime.set(Calendar.DAY_OF_WEEK, A);
+                                newEndTime.set(Calendar.DAY_OF_WEEK, A);
 
                                 CalendarEvent newEvent = new CalendarEvent();
                                 newEvent.setDetails(details.getText().toString());
@@ -409,14 +436,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
                         }
                     }
-
+                        // handles the week of the original day
                     else
                     {
 
-                        for (int A = 1; A < 7; A++) // A = 3
+                        for (int A = curDay; A < 7; A++)
                         {
 
-                            if (dayBoxes[A - 1].isChecked()) // Tuesday checked
+                            if( dayBoxes[A - 1].isChecked() )
                             {
                                 newStartTime.set(Calendar.DAY_OF_WEEK, A);
                                 newEndTime.set(Calendar.DAY_OF_WEEK, A);
