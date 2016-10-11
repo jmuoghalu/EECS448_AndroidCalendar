@@ -4,7 +4,7 @@ package eecs448_first_team.calender_app;
  * author: Cara Fisher
  * date: 9-18-16
  * purpose: a mobile app page where details can be added to be displayed in DayView.
- *
+ * <p>
  * Many thanks to Android (https://developer.android.com/index.html) for its help
  */
 
@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class AddDetails extends AppCompatActivity implements View.OnClickListener {
+    private int choice;
     private TextView startDateHourText;
     private TextView endDateHourText;
     private TextView startDateMonthText;
@@ -33,7 +34,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private TextView startDateDayText;
     private TextView endDateDayText;
     private EditText details; //the details text to be replaced
-
+    boolean startSunday,startMonday,startTuesday,startWednesday,startThursday,startFriday,startSaturday;
     private CheckBox sunBox;
     private CheckBox monBox;
     private CheckBox tuesBox;
@@ -45,8 +46,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private CalendarEventDb database;
 
     private Calendar startTime;
-    private Calendar endTime;
+    private Calendar recurringTime;
+    private Calendar recurringTime2;
 
+    private Calendar recurringTimeTracer;
+    private Calendar recurringTimeTracer2;
+
+    private Calendar endTime;
+    private boolean toRecursion;
     private Long id = Long.valueOf(0);
     private CalendarEvent event = null;
 
@@ -85,8 +92,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.check7).setOnClickListener(this);
 
 
-
-
         details = (EditText) findViewById(R.id.edit);
 
         startDateHourText = (TextView) findViewById(R.id.startDateHourText);
@@ -115,6 +120,11 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         if (year != 0) {
             startTime = new GregorianCalendar(year, month, day);
             endTime = (Calendar) startTime.clone();
+            recurringTime = (Calendar) startTime.clone();
+            recurringTime2 = (Calendar) startTime.clone();
+            recurringTimeTracer = (Calendar) startTime.clone();
+            recurringTimeTracer2 = (Calendar) startTime.clone();
+
             endTime.add(Calendar.DAY_OF_YEAR, 1);
             endTime.add(Calendar.MINUTE, -1);
         } else {
@@ -123,10 +133,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             // zero out time for the current day
             startTime.set(Calendar.HOUR_OF_DAY, 0);
             startTime.set(Calendar.MINUTE, 0);
-            startTime.set(Calendar.MINUTE, 0);
             startTime.set(Calendar.SECOND, 0);
 
             endTime = (Calendar) startTime.clone();
+            recurringTime = (Calendar) startTime.clone();
+            recurringTime2 = (Calendar) startTime.clone();
+            recurringTimeTracer = (Calendar) startTime.clone();
+            recurringTimeTracer2 = (Calendar) startTime.clone();
+
             endTime.add(Calendar.DAY_OF_YEAR, 1);
             endTime.add(Calendar.MINUTE, -1);
         }
@@ -152,6 +166,12 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         if (event != null) {
             details.setText(event.getDetails());
             startTime.setTimeInMillis(event.getStartDate());
+            recurringTime.setTimeInMillis(event.getStartDate());
+            recurringTime2 = (Calendar) startTime.clone();
+            recurringTimeTracer.setTimeInMillis(event.getStartDate());
+            recurringTimeTracer2.setTimeInMillis(event.getStartDate());
+
+
             endTime.setTimeInMillis(event.getEndDate());
 
             deleteButton.setVisibility(View.VISIBLE);
@@ -196,8 +216,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         event.setStartDate(startTime.getTimeInMillis());
         event.setEndDate(endTime.getTimeInMillis());
 
-        switch (view.getId())
-        {
+        switch (view.getId()) {
 
             case (R.id.startDateHourPlus):
                 startTime.add(Calendar.MINUTE, 15);
@@ -230,9 +249,15 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 endTime.add(Calendar.MONTH, -1);
                 break;
             case (R.id.endDateHourPlus):
+                recurringTimeTracer.add(Calendar.MINUTE,15);
+                recurringTimeTracer2.add(Calendar.MINUTE,15);
+
                 endTime.add(Calendar.MINUTE, 15);
                 break;
             case (R.id.endDateHourMinus):
+                recurringTimeTracer.add(Calendar.MINUTE,-15);
+                recurringTimeTracer2.add(Calendar.MINUTE,-15);
+
                 endTime.add(Calendar.MINUTE, -15);
                 break;
 
@@ -245,6 +270,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.INVISIBLE);
                 friBox.setVisibility(view.INVISIBLE);
                 satBox.setVisibility(view.INVISIBLE);
+                toRecursion = false;
                 break;
             case (R.id.weekly):
                 sunBox.setVisibility(view.VISIBLE);
@@ -254,6 +280,8 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.VISIBLE);
                 friBox.setVisibility(view.VISIBLE);
                 satBox.setVisibility(view.VISIBLE);
+                choice = 1;
+                toRecursion = true;
                 break;
             case (R.id.biweekly):
                 sunBox.setVisibility(view.VISIBLE);
@@ -263,6 +291,8 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.VISIBLE);
                 friBox.setVisibility(view.VISIBLE);
                 satBox.setVisibility(view.VISIBLE);
+                toRecursion = true;
+                choice = 2;
                 break;
             case (R.id.monthly):
                 sunBox.setVisibility(view.INVISIBLE);
@@ -272,124 +302,16 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.INVISIBLE);
                 friBox.setVisibility(view.INVISIBLE);
                 satBox.setVisibility(view.INVISIBLE);
+                toRecursion = true;
+                choice = 3;
                 break;
-/* TEST CODE
-//EXPERIMENTAL CODE MTWTRF
-            case R.id.mon:
-                if (dayChecked)
-                {
-                    mondayCheck=true;
-                }
-                else
-                {
-                    mondayCheck=false;
-                }
-                break;
-            case R.id.tues:
-                if (dayChecked)
-                {
-                    tuesdayCheck=true;
-                }
-                else
-                {
-                    tuesdayCheck=false;
-                }
 
-            case R.id.wed:
-                if (dayChecked)
-                {
-                    wednesdayCheck=true;
-                }
-                else
-                {
-                    wednesdayCheck=false;
-                }
-                break;
-            case R.id.thur:
-                if (dayChecked)
-                {
-                    thursdayCheck=true;
-                }
-                else
-                {
-                    thursdayCheck=false;
-                }
-                break;
-            case R.id.fri:
-                if (dayChecked)
-                {
-                    fridayCheck=true;
-                }
-                else
-                {
-                    fridayCheck=false;
-                }
-                break;
-            case R.id.sat:
-                if (dayChecked)
-                {
-                    saturdayCheck=true;
-                }
-                else
-                {
-                    saturdayCheck=false;
-                }
-                break;
-            case R.id.sun:
-                if (dayChecked)
-                {
-                    sundayCheck=true;
-                }
-                else
-                {
-                    sundayCheck=false;
-                }
-                break;
-//EXPERIMENTAL CODE END
-//EXPERIMENTAL WEEKLY,BIWEEKLY, MONTHLY
-            case R.id.weekly:
-                if (recurringChecked)
-                {
-                    int startingDate = recurringTime.get(Calendar.DAY_OF_WEEK); //startingDate starts on a monday or tues.. or.. or sun
-                    int m,t,w,tr,f;
-                    while (recurringTime.getTime().before(endTime.getTime()))
-                    {
-                        recurringTime.add(Calendar.WEEK_OF_YEAR, 1);
 
-                        if(mondayCheck)
-                        {
-                            recurringTime.add(Calendar.DAY_OF_YEAR, (7+0)); //dayofyear%7 -> 0-6 AKA mon-sun
-                        }
-                        if(tuesdayCheck)
-                        {
-                            recurringTime.add(Calendar.DAY_OF_YEAR, (7+1)); //dayofyear%7 -> 0-6 AKA mon-sun
-                        }
-                        if(wednesdayCheck)
-                        {
-                            recurringTime.add(Calendar.DAY_OF_YEAR, (7+2)); //dayofyear%7 -> 0-6 AKA mon-sun
-                        }
-                    }
-                }
-                    break;
-            case R.id.biweekly:
-                if (recurringChecked)
-                {
-                    while (recurringTime.getTime().before(endTime.getTime())) {
-                        recurringTime.add(Calendar.DAY_OF_YEAR, 14);
-                    }
-                }
-                    break;
-            case R.id.monthly:
-                if (recurringChecked)
-                {
-                    while (recurringTime.getTime().before(endTime.getTime())) {
-                        recurringTime.add(Calendar.DAY_OF_YEAR, 31); //THIS doesnt work, changed this to MONTH_OF_YEAR?
-                    }
-                }
-                    break;
-//END WEEKLY,BIWEEKLY,MONTLY
-*/
             case (R.id.doneButton):
+                if (toRecursion) {
+                    setRecurringDates(view, choice);
+                }
+
                 if (event != null && event.getID() != null) {
                     database.updateEvent(event);
                 } else {
@@ -416,6 +338,117 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         fillDate();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        database.close();
+    }
+
+    public void setRecurringDates(View view, int choice) {
+        switch (choice) {
+//EXPERIMENTAL WEEKLY,BIWEEKLY, MONTHLY
+            case (1):
+                int startingDate = 0; //startingDate starts on a monday or tues.. or.. or sun
+                if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY)
+                {
+                    startingDate=1;
+                     startMonday = true;
+                }
+                if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY)
+                {
+                    startingDate=2;
+
+                    startTuesday = true;
+                }
+                if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY)
+                {
+                    startingDate=3;
+
+                    startWednesday = true;
+                }
+                if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY)
+                {
+                    startingDate=4;
+
+                    startThursday = true;
+                }
+                if(startTime.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY)
+                {
+                    startingDate=5;
+
+                    startFriday = true;
+                }
+                if (startTime.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+                    startingDate=6;
+                    startSaturday = true;
+                }
+                if (startTime.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                    startingDate=0;
+                    startSunday = true;
+                }
+                int m, t, w, tr, f, s;
+                while (recurringTime.getTime().before(endTime.getTime())) {
+
+                    if (sunBox.isChecked()) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, (0)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (0)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        addEvent(recurringTime,recurringTimeTracer);
+
+                    }
+                    if (monBox.isChecked()) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, (1)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (1)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        addEvent(recurringTime,recurringTimeTracer);
+                    }
+                    if (tuesBox.isChecked()) {
+                        recurringTime.set(Calendar.DAY_OF_YEAR, (2)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        recurringTimeTracer.set(Calendar.DAY_OF_YEAR, (2)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        addEvent(recurringTime,recurringTimeTracer);
+                    }
+                    if (wedBox.isChecked()) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, (3)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (3)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        addEvent(recurringTime,recurringTimeTracer);
+                    }
+                    if (thursBox.isChecked()) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, (4)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (4)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        addEvent(recurringTime,recurringTimeTracer);
+
+                    }
+                    if (friBox.isChecked()) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, (5)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (5)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        addEvent(recurringTime,recurringTimeTracer);
+
+                    }
+                    if (satBox.isChecked()) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, (6)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        recurringTimeTracer.add(Calendar.DAY_OF_YEAR, (6)); //dayofyear%7 -> 0-6 AKA sun-mon
+                        addEvent(recurringTime,recurringTimeTracer);
+
+                    }
+
+                    recurringTimeTracer2.add(Calendar.DAY_OF_YEAR,(7)); //same as recurringTime2 but saves endtime
+                    recurringTime2.add(Calendar.WEEK_OF_YEAR, 1); //moves onto next week
+                    recurringTimeTracer = (Calendar) recurringTimeTracer2.clone(); //start of next week
+                    recurringTime = (Calendar) recurringTime2.clone(); //start of next week
+                }
+
+                break;
+            case (2):
+                    while (recurringTime.getTime().before(endTime.getTime())) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, 14);
+                    }
+                break;
+            case (3):
+                    while (recurringTime.getTime().before(endTime.getTime())) {
+                        recurringTime.add(Calendar.DAY_OF_YEAR, 31); //THIS doesnt work, changed this to MONTH_OF_YEAR?
+                    }
+                break;
+//END WEEKLY,BIWEEKLY,MONTLY
+        }
+    }
     public void addEvent(Calendar start, Calendar end) {
         CalendarEvent event = new CalendarEvent();
         event.setDetails(this.event.getDetails());
@@ -423,24 +456,15 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         event.setStartDate(start.getTimeInMillis());
         database.addEvent(event);
     }
-
-    @Override
-    public void onStop()
-    {
-        super.onStop();
-        database.close();
-    }
-
-
     // from DayView.java
+
     /**
      * precondition: array exists and is filled with correct values.
      * postcondition: text of ID:date in activity_day_view.xml is set to date user wanted.
      * Sets the proper text to display based on selected day.
      * array: [day,month,year,day of the first of the month,date of Sunday of the week sent to WeekView,number of days in the month,number of days in the previous month,week number]
      */
-    public void fillDate()
-    {
+    public void fillDate() {
         DateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, YYYY");
         TextView t = (TextView) findViewById(R.id.add);
         t.setText(dateFormat.format(startTime.getTime()));
