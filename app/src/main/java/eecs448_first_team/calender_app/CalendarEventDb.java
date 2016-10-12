@@ -7,6 +7,8 @@ package eecs448_first_team.calender_app;
  * to the database for reading and writing values. Primary database access methods are
  * getCalendarDetails(long) and setCalendarDetails(long,String)
  * Many thanks to Android (https://developer.android.com/index.html) for its help
+ *
+ * Updated by "Team One" for Project 2.
  */
 
 import android.content.ContentValues;

@@ -7,6 +7,8 @@ package eecs448_first_team.calender_app;
  * purpose: a mobile app page that displays the Sunday-Saturday surrounding a date
  *
  * Many thanks to Android (https://developer.android.com/index.html) for its help
+ *
+ * Updated by "Team One" for Project 2.
  */
 
 import android.support.v7.app.AppCompatActivity;

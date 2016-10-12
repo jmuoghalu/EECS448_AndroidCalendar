@@ -14,10 +14,12 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by mbauer on 10/9/16.
+ * Created by Matthew Bauer on 10/9/16.
  * based off of guide available here https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
  * EventAdapter creates a view for each calendar event that is provided.\
  * This is used by day view to display events.
+ *
+ * Updated by "Team One" for Project 2.
  */
 
 public class EventAdapter extends ArrayAdapter<CalendarEvent> {

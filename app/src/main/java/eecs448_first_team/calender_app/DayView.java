@@ -1,12 +1,14 @@
 package eecs448_first_team.calender_app;
 
 /** 
-4  * author: Cara Fisher 
-5  * date: 9-18-16 
-6  * purpose: a mobile app page which displays the focus date and any events user has added to that date
-7  *  
-8  * Many thanks to Android (https://developer.android.com/index.html) for its help 
-9  */ 
+  * author: Cara Fisher
+  * date: 9-18-16
+  * purpose: a mobile app page which displays the focus date and any events user has added to that date
+  *
+  * Many thanks to Android (https://developer.android.com/index.html) for its help
+  *
+  * Updated by "Team One" for Project 2.
+ */
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

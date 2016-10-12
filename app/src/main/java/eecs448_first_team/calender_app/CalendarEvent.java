@@ -1,9 +1,11 @@
 package eecs448_first_team.calender_app;
 
 /**
- * Created by mbauer on 10/9/16.
+ * Created by Matthew Bauer on 10/9/16.
  *
- * This holds information on an event returned from a database
+ * This holds information on an event returned from a database.
+ *
+ * Updated by "Team One" for Project 2.
  */
 
 public class CalendarEvent {

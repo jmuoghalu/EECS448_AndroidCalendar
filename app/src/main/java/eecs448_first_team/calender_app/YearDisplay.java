@@ -6,6 +6,7 @@ package eecs448_first_team.calender_app;
  * purpose: a mobile app page that displays the entire year to the user, allowing them to select
  * a month through its constituent days.
  *
+ * Updated by "Team One" for Project 2.
  */
 
 import android.content.Intent;

@@ -5,6 +5,8 @@ package eecs448_first_team.calender_app;
  * date: 9-18-16
  * purpose: a mobile app page where details can be added to be displayed in DayView.
  * Many thanks to Android (https://developer.android.com/index.html) for its help
+ *
+ * Updated by "Team One" for Project 2.
  */
 
 import android.content.Intent;
