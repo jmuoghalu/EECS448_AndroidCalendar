@@ -9,6 +9,8 @@ package eecs448_first_team.calender_app;
  * Updated by "Team One" for Project 2.
  */
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -315,6 +317,15 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 break;
 
             case (R.id.doneButton):
+
+                if (endTime.before(startTime)) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Bad times")
+                            .setMessage("This event ends before it starts.")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    return;
+                }
 
                 // will handle the rucursing aspect of the event
                 if (monthlyButton.isChecked())
