@@ -425,42 +425,224 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         database.close();
     }
 
-    public void setRecurringDates(View view, int recurringChoice)
-    {
+
+
+    /**
+    * Adds the recurring events to the appropriate dates that occur after the current day
+    * @param view The clicked view
+    * @param recurringChoice The timeframe for the recurring events (integer representing weekly, biweekly, or monthly)
+    */
+        public void setRecurringDates(View view, int recurringChoice)
+        {
 
         switch ( recurringChoice )
         {
 
-
-            case (1):
-            {
-                Calendar newStartTime = (Calendar) startTime.clone();
-                Calendar newEndTime = (Calendar) endTime.clone();
-                Calendar endOfYear = new GregorianCalendar(2017, 5, 1);
-
-
-                int beginningWeek = newStartTime.get(Calendar.WEEK_OF_YEAR);
-                int curDay = newStartTime.get(Calendar.DAY_OF_WEEK);
-
-
-                while( newStartTime.before(endOfYear) )
-                {
-
-                        // handles the week with the original year
-                    if(newStartTime.get(Calendar.WEEK_OF_YEAR) == beginningWeek)
+                        // event that recurs weekly
+                    case (1):
                     {
-                            // Calendar.DAY_OF_WEEK has Sunday at 1, versus the dayBoxes array, which has Sunday at 0
-                        for(int A = curDay ; A < 7 ; A++)
+                                // new event will be added using a copy of the original calendars
+                        Calendar newStartTime = (Calendar) startTime.clone();
+                        Calendar newEndTime = (Calendar) endTime.clone();
+                        Calendar endOfYear = new GregorianCalendar(2017, 5, 1);
+
+                                // the method will keep track of the original day and week that the user was editing
+                        int beginningWeek = newStartTime.get(Calendar.WEEK_OF_YEAR);
+                        int curDay = newStartTime.get(Calendar.DAY_OF_WEEK);
+
+
+                                // the events will be added on the appropriate dates from the start date to the end of the academic calendar
+                        while( newStartTime.before(endOfYear) )
                         {
 
-                            newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
-                            newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                                // handles the week with the original date (from the current date to the Saturday of that week)
+                            if(newStartTime.get(Calendar.WEEK_OF_YEAR) == beginningWeek)
+                            {
+                                    // Calendar.DAY_OF_WEEK has Sunday at 1, versus the dayBoxes array, which has Sunday at 0
+                                for(int A = curDay ; A < 7 ; A++)
+                                {
+                                        // increments the day that the loop is currently looking at
+                                    newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                                    newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
 
-                            if(dayBoxes[A].isChecked())
+                                        // adds the event to the new day if the day is one that the recurring event is to fall on
+                                    if(dayBoxes[A].isChecked())
+                                    {
+                                            // creates a new event and adds it to the database
+                                        CalendarEvent newEvent = new CalendarEvent();
+
+                                        newEvent.setDetails(details.getText().toString());
+                                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                                        database.addEvent(newEvent);
+
+                                    }
+
+                                }
+
+                            }
+
+                                // handles Sunday to Saturday for the subsequent weeks
+                            else
                             {
 
-                                CalendarEvent newEvent = new CalendarEvent();
+                                for(int A = 0 ; A < 7 ; A++)
+                                {
 
+                                    newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                                    newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+
+                                    if(dayBoxes[A].isChecked())
+                                    {
+                                            // creates a new event and adds it to the database
+                                        CalendarEvent newEvent = new CalendarEvent();
+
+                                        newEvent.setDetails(details.getText().toString());
+                                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                                        database.addEvent(newEvent);
+
+                                    }
+
+                                }
+
+                            }
+
+                            newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                            newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
+
+                        }
+
+
+                        break;
+                    }
+
+
+
+
+                        // same code as the weekly case, except the weeks are incremented by 2
+                    case (2):
+                    {
+                        Calendar newStartTime = (Calendar) startTime.clone();
+                        Calendar newEndTime = (Calendar) endTime.clone();
+                        Calendar endOfYear = new GregorianCalendar(2017, 5, 1);
+
+
+                        int beginningWeek = newStartTime.get(Calendar.WEEK_OF_YEAR);
+                        int curDay = newStartTime.get(Calendar.DAY_OF_WEEK);
+
+
+                        while( newStartTime.before(endOfYear) )
+                        {
+
+                            // handles the week with the original year
+                            if(newStartTime.get(Calendar.WEEK_OF_YEAR) == beginningWeek)
+                            {
+                                // Calendar.DAY_OF_WEEK has Sunday at 1, versus the dayBoxes array, which has Sunday at 0
+                                for(int A = curDay ; A < 7 ; A++)
+                                {
+
+                                    newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                                    newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+
+                                    if(dayBoxes[A].isChecked())
+                                    {
+                                            // creates a new event and adds it to the database
+                                        CalendarEvent newEvent = new CalendarEvent();
+
+                                        newEvent.setDetails(details.getText().toString());
+                                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                                        database.addEvent(newEvent);
+
+                                    }
+
+                                }
+
+                            }
+
+
+                            else
+                            {
+
+                                for(int A = 0 ; A < 7 ; A++)
+                                {
+
+                                    newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                                    newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+
+                                    if(dayBoxes[A].isChecked())
+                                    {
+
+                                            // creates a new event and adds it to the database
+                                        CalendarEvent newEvent = new CalendarEvent();
+
+                                        newEvent.setDetails(details.getText().toString());
+                                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                                        database.addEvent(newEvent);
+
+                                    }
+
+                                }
+
+                            }
+
+                            newStartTime.add(Calendar.WEEK_OF_YEAR, 2);
+                            newEndTime.add(Calendar.WEEK_OF_YEAR, 2);
+
+                        }
+
+
+                        break;
+                    }
+
+
+
+
+
+
+                            // events that recur monthly
+                    case (3):
+                    {
+                            // keeps track of the current date (the date that the user was originally editing)
+                        int beginningDate = startTime.get(Calendar.DAY_OF_MONTH);
+
+                                // Java Calendar library indexes the months of the year starting with January at 0
+                        int[] months = {7, 8, 9, 10, 11, 0, 1, 2, 3, 4}; // August to May
+                        int curMonth = startTime.get(Calendar.MONTH);
+
+
+                        boolean keepSkipping = true;
+
+
+                        Calendar newStartTime = (Calendar) startTime.clone();
+                        Calendar newEndTime = (Calendar) endTime.clone();
+
+
+                        for (int A = 0; A < months.length; A++)
+                        {
+
+                            if(months[A] == curMonth)   // events will not be added to months that have already passed
+                            {
+                                keepSkipping = false;
+                            }
+
+
+                                // starts with the month immediately following the current date
+                            if(!keepSkipping && months[A] != curMonth)
+                            {
+
+                                    // creates a new event and adds it to the database
+                                newStartTime.add(Calendar.MONTH, 1);
+                                newEndTime.add(Calendar.MONTH, 1);
+
+
+                                CalendarEvent newEvent = new CalendarEvent();
                                 newEvent.setDetails(details.getText().toString());
                                 newEvent.setStartDate(newStartTime.getTimeInMillis());
                                 newEvent.setEndDate(newEndTime.getTimeInMillis());
@@ -471,195 +653,33 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
                         }
 
+                        break;
                     }
 
 
-                    else
-                    {
 
-                        for(int A = 0 ; A < 7 ; A++)
-                        {
-
-                            newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
-                            newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
-
-                            if(dayBoxes[A].isChecked())
-                            {
-
-                                CalendarEvent newEvent = new CalendarEvent();
-
-                                newEvent.setDetails(details.getText().toString());
-                                newEvent.setStartDate(newStartTime.getTimeInMillis());
-                                newEvent.setEndDate(newEndTime.getTimeInMillis());
-
-                                database.addEvent(newEvent);
-
-                            }
-
-                        }
-
-                    }
-
-                    newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
-                    newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
 
                 }
-
-
-                break;
-            }
-
-
-
-
-                // same code as the weekly case, except the weeks are incremented by 2
-            case (2):
-            {
-                Calendar newStartTime = (Calendar) startTime.clone();
-                Calendar newEndTime = (Calendar) endTime.clone();
-                Calendar endOfYear = new GregorianCalendar(2017, 5, 1);
-
-
-                int beginningWeek = newStartTime.get(Calendar.WEEK_OF_YEAR);
-                int curDay = newStartTime.get(Calendar.DAY_OF_WEEK);
-
-
-                while( newStartTime.before(endOfYear) )
-                {
-
-                    // handles the week with the original year
-                    if(newStartTime.get(Calendar.WEEK_OF_YEAR) == beginningWeek)
-                    {
-                        // Calendar.DAY_OF_WEEK has Sunday at 1, versus the dayBoxes array, which has Sunday at 0
-                        for(int A = curDay ; A < 7 ; A++)
-                        {
-
-                            newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
-                            newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
-
-                            if(dayBoxes[A].isChecked())
-                            {
-
-                                CalendarEvent newEvent = new CalendarEvent();
-
-                                newEvent.setDetails(details.getText().toString());
-                                newEvent.setStartDate(newStartTime.getTimeInMillis());
-                                newEvent.setEndDate(newEndTime.getTimeInMillis());
-
-                                database.addEvent(newEvent);
-
-                            }
-
-                        }
-
-                    }
-
-
-                    else
-                    {
-
-                        for(int A = 0 ; A < 7 ; A++)
-                        {
-
-                            newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
-                            newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
-
-                            if(dayBoxes[A].isChecked())
-                            {
-
-                                CalendarEvent newEvent = new CalendarEvent();
-
-                                newEvent.setDetails(details.getText().toString());
-                                newEvent.setStartDate(newStartTime.getTimeInMillis());
-                                newEvent.setEndDate(newEndTime.getTimeInMillis());
-
-                                database.addEvent(newEvent);
-
-                            }
-
-                        }
-
-                    }
-
-                    newStartTime.add(Calendar.WEEK_OF_YEAR, 2);
-                    newEndTime.add(Calendar.WEEK_OF_YEAR, 2);
-
-                }
-
-
-                break;
-            }
-
-
-
-
-
-
-
-            case (3):
-            {
-
-                int beginningDate = startTime.get(Calendar.DAY_OF_MONTH);
-
-                int[] months = {7, 8, 9, 10, 11, 0, 1, 2, 3, 4}; // August to May
-                int curMonth = startTime.get(Calendar.MONTH);
-
-
-                boolean keepSkipping = true;
-
-
-                Calendar newStartTime = (Calendar) startTime.clone();
-                Calendar newEndTime = (Calendar) endTime.clone();
-
-
-                for (int A = 0; A < months.length; A++)
-                {
-
-                    if(months[A] == curMonth)   // events will not be added to months that have already passed
-                    {
-                        keepSkipping = false;
-                    }
-
-
-                        // alteration of the code in onCreate()
-                    if(!keepSkipping && months[A] != curMonth)
-                    {
-                        // check the if(year==0) statement
-
-                        newStartTime.add(Calendar.MONTH, 1);
-                        newEndTime.add(Calendar.MONTH, 1);
-
-
-                        CalendarEvent newEvent = new CalendarEvent();
-                        newEvent.setDetails(details.getText().toString());
-                        newEvent.setStartDate(newStartTime.getTimeInMillis());
-                        newEvent.setEndDate(newEndTime.getTimeInMillis());
-
-                        database.addEvent(newEvent);
-
-                    }
-
-                }
-
-                break;
-            }
-
-
-
-
-
-
-//END WEEKLY,BIWEEKLY,MONTLY
         }
-    }
 
-    public void addEvent(Calendar start, Calendar end) {
+
+
+
+
+
+    public void addEvent(Calendar start, Calendar end)
+    {
         CalendarEvent event = new CalendarEvent();
         event.setDetails(this.event.getDetails());
         event.setEndDate(end.getTimeInMillis());
         event.setStartDate(start.getTimeInMillis());
         database.addEvent(event);
     }
+
+
+
+
+
     // from DayView.java
 
     /**
