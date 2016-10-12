@@ -30,6 +30,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class AddDetails extends AppCompatActivity implements View.OnClickListener {
+
+    /*Added by Team One*/
     private TextView startDateHourText;
     private TextView endDateHourText;
     private TextView startDateMonthText;
@@ -46,6 +48,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private CheckBox friBox;
     private CheckBox satBox;
     private CheckBox[] dayBoxes = new CheckBox[7];
+    /*End of new code*/
 
 
     private CalendarEventDb database;
@@ -74,6 +77,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_add_details);
 
         // listen for buttons
+        // added by Team One
         findViewById(R.id.doneButton).setOnClickListener(this);
         findViewById(R.id.cancelButton).setOnClickListener(this);
         findViewById(R.id.deleteButton).setOnClickListener(this);
@@ -263,6 +267,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         event.setStartDate(startTime.getTimeInMillis());
         event.setEndDate(endTime.getTimeInMillis());
 
+            /*Added by Team One*/
         switch (view.getId()) {
 
             case (R.id.startDateHourPlus):
@@ -414,6 +419,9 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
 
         updateTime();
         fillDate();
+
+        /*End of code section*/
+
     }
 
     @Override
@@ -426,7 +434,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     }
 
 
-
+    // The following methods were added by Team One
     /**
     * Adds the recurring events to the appropriate dates that occur after the current day
     * @param view The clicked view
@@ -676,7 +684,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         database.addEvent(event);
     }
 
-
+    /*End of code section*/
 
 
 
