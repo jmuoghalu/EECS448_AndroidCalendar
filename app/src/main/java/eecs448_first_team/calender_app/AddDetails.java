@@ -4,6 +4,7 @@ package eecs448_first_team.calender_app;
  * author: Cara Fisher
  * date: 9-18-16
  * purpose: a mobile app page where details can be added to be displayed in DayView.
+ * <p>
  * Many thanks to Android (https://developer.android.com/index.html) for its help
  *
  * Updated by "Team One" for Project 2.
@@ -18,7 +19,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -37,6 +37,7 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private TextView startDateDayText;
     private TextView endDateDayText;
     private EditText details; //the details text to be replaced
+    boolean startSunday,startMonday,startTuesday,startWednesday,startThursday,startFriday,startSaturday;
     private CheckBox sunBox;
     private CheckBox monBox;
     private CheckBox tuesBox;
@@ -44,20 +45,25 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     private CheckBox thursBox;
     private CheckBox friBox;
     private CheckBox satBox;
+    private CheckBox[] dayBoxes = new CheckBox[7];
 
-    private RadioButton weeklyButton;
-    private RadioButton monthlyButton;
-    private RadioButton biweeklyButton;
 
     private CalendarEventDb database;
 
     private Calendar startTime;
+    private Calendar recurringTime;
+    private Calendar recurringTime2;
+
+    private Calendar recurringTimeTracer;
+    private Calendar recurringTimeTracer2;
+
     private Calendar endTime;
+    private boolean toRecursion;
+    private int choice;
+
 
     private Long id = Long.valueOf(0);
     private CalendarEvent event = null;
-
-    private Calendar lastCalendarDay;
 
     @Override
     /**
@@ -66,10 +72,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_details);
-
-        // the last day in this calendar
-        // used by recurring events
-        lastCalendarDay = new GregorianCalendar(2017, Calendar.MAY, 31);
 
         // listen for buttons
         findViewById(R.id.doneButton).setOnClickListener(this);
@@ -112,10 +114,6 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         startDateDayText = (TextView) findViewById(R.id.startDateDayText);
         endDateDayText = (TextView) findViewById(R.id.endDateDayText);
 
-        monthlyButton = (RadioButton) findViewById(R.id.monthly);
-        biweeklyButton = (RadioButton) findViewById(R.id.biweekly);
-        weeklyButton = (RadioButton) findViewById(R.id.weekly);
-
         sunBox = (CheckBox) findViewById(R.id.check1);
         monBox = (CheckBox) findViewById(R.id.check2);
         tuesBox = (CheckBox) findViewById(R.id.check3);
@@ -123,6 +121,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         thursBox = (CheckBox) findViewById(R.id.check5);
         friBox = (CheckBox) findViewById(R.id.check6);
         satBox = (CheckBox) findViewById(R.id.check7);
+
+        dayBoxes[0] = sunBox;
+        dayBoxes[1] = monBox;
+        dayBoxes[2] = tuesBox;
+        dayBoxes[3] = wedBox;
+        dayBoxes[4] = thursBox;
+        dayBoxes[5] = friBox;
+        dayBoxes[6] = satBox;
 
         // load details passed to the view
 
@@ -141,6 +147,12 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             endTime = (Calendar) startTime.clone();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
             endTime.add(Calendar.MINUTE, -1);
+
+            // init recurringTime
+            recurringTime = (Calendar) startTime.clone();
+            recurringTime2 = (Calendar) startTime.clone();
+            recurringTimeTracer = (Calendar) startTime.clone();
+            recurringTimeTracer2 = (Calendar) startTime.clone();
         } else {
             // init time based on current time
             startTime = GregorianCalendar.getInstance();
@@ -154,6 +166,12 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             endTime = (Calendar) startTime.clone();
             endTime.add(Calendar.DAY_OF_YEAR, 1);
             endTime.add(Calendar.MINUTE, -1);
+
+            // init recurringTime
+            recurringTime = (Calendar) startTime.clone();
+            recurringTime2 = (Calendar) startTime.clone();
+            recurringTimeTracer = (Calendar) startTime.clone();
+            recurringTimeTracer2 = (Calendar) startTime.clone();
         }
 
         fillDate();
@@ -183,6 +201,11 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
             details.setText(event.getDetails());
             startTime.setTimeInMillis(event.getStartDate());
             endTime.setTimeInMillis(event.getEndDate());
+
+            recurringTime.setTimeInMillis(event.getStartDate());
+            recurringTime2 = (Calendar) startTime.clone();
+            recurringTimeTracer.setTimeInMillis(event.getStartDate());
+            recurringTimeTracer2.setTimeInMillis(event.getStartDate());
 
             // show delete button when event has already been created
             deleteButton.setVisibility(View.VISIBLE);
@@ -273,13 +296,23 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 endTime.add(Calendar.MONTH, -1);
                 break;
             case (R.id.endDateHourPlus):
+                recurringTimeTracer.add(Calendar.MINUTE,15);
+                recurringTimeTracer2.add(Calendar.MINUTE,15);
+
                 endTime.add(Calendar.MINUTE, 15);
                 break;
             case (R.id.endDateHourMinus):
+                recurringTimeTracer.add(Calendar.MINUTE,-15);
+                recurringTimeTracer2.add(Calendar.MINUTE,-15);
+
                 endTime.add(Calendar.MINUTE, -15);
                 break;
 
+
             case (R.id.none):
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setChecked(false);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setEnabled(false);
+
                 sunBox.setVisibility(view.GONE);
                 monBox.setVisibility(view.GONE);
                 tuesBox.setVisibility(view.GONE);
@@ -287,8 +320,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.GONE);
                 friBox.setVisibility(view.GONE);
                 satBox.setVisibility(view.GONE);
+
+                choice = 0;
+                toRecursion = false;
                 break;
             case (R.id.weekly):
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setChecked(true);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setEnabled(false);
+
                 sunBox.setVisibility(view.VISIBLE);
                 monBox.setVisibility(view.VISIBLE);
                 tuesBox.setVisibility(view.VISIBLE);
@@ -296,8 +335,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.VISIBLE);
                 friBox.setVisibility(view.VISIBLE);
                 satBox.setVisibility(view.VISIBLE);
+
+                choice = 1;
+                toRecursion = true;
                 break;
             case (R.id.biweekly):
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setChecked(true);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setEnabled(false);
+
                 sunBox.setVisibility(view.VISIBLE);
                 monBox.setVisibility(view.VISIBLE);
                 tuesBox.setVisibility(view.VISIBLE);
@@ -305,8 +350,14 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.VISIBLE);
                 friBox.setVisibility(view.VISIBLE);
                 satBox.setVisibility(view.VISIBLE);
+
+                choice = 2;
+                toRecursion = true;
                 break;
             case (R.id.monthly):
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setChecked(false);
+                dayBoxes[startTime.get(Calendar.DAY_OF_WEEK) - 1].setEnabled(false);
+
                 sunBox.setVisibility(view.GONE);
                 monBox.setVisibility(view.GONE);
                 tuesBox.setVisibility(view.GONE);
@@ -314,7 +365,11 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 thursBox.setVisibility(view.GONE);
                 friBox.setVisibility(view.GONE);
                 satBox.setVisibility(view.GONE);
+
+                choice = 3;
+                toRecursion = true;
                 break;
+
 
             case (R.id.doneButton):
 
@@ -328,17 +383,13 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
                 }
 
                 // will handle the rucursing aspect of the event
-                if (monthlyButton.isChecked())
+                if (toRecursion)
                 {
-                    addMonthlyEvent();
-                } else if (weeklyButton.isChecked())
-                {
-                    addWeeklyEvent();
-                } else if (biweeklyButton.isChecked())
-                {
-                    addBiweeklyEvent();
+                    setRecurringDates(view, choice);
                 }
-                else if (event != null && event.getID() != null) // will handle the event for the current day
+
+                    // will handle the event for the current day
+                if (event != null && event.getID() != null)
                 {
                     database.updateEvent(event);
                 } else {
@@ -374,116 +425,231 @@ public class AddDetails extends AppCompatActivity implements View.OnClickListene
         database.close();
     }
 
-    /**
-     * Add recurring weekly event until the last day in the calendar.
-     */
-    public void addWeeklyEvent() {
-        Calendar recurringTimeStart = (Calendar) startTime.clone();
-        Calendar recurringTimeEnd = (Calendar) endTime.clone();
+    public void setRecurringDates(View view, int recurringChoice)
+    {
 
-        while (recurringTimeEnd.before(lastCalendarDay)) {
-            if (sunBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (monBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (tuesBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (wedBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (thursBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (friBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (satBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
+        switch ( recurringChoice )
+        {
 
-            recurringTimeStart.add(Calendar.WEEK_OF_YEAR, 1);
-            recurringTimeEnd.add(Calendar.WEEK_OF_YEAR, 1);
-        }
-    }
 
-    /**
-     * Add recurring biweekly event until the last day in the calendar.
-     */
-    public void addBiweeklyEvent() {
-        Calendar recurringTimeStart = (Calendar) startTime.clone();
-        Calendar recurringTimeEnd = (Calendar) endTime.clone();
+            case (1):
+            {
+                Calendar newStartTime = (Calendar) startTime.clone();
+                Calendar newEndTime = (Calendar) endTime.clone();
+                Calendar endOfYear = new GregorianCalendar(2017, 5, 1);
 
-        while (recurringTimeEnd.before(lastCalendarDay)) {
-            if (sunBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (monBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (tuesBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (wedBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (thursBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (friBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
-            }
-            if (satBox.isChecked()) {
-                recurringTimeStart.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                recurringTimeEnd.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                addEvent(recurringTimeStart, recurringTimeEnd);
+
+                int beginningWeek = newStartTime.get(Calendar.WEEK_OF_YEAR);
+                int curDay = newStartTime.get(Calendar.DAY_OF_WEEK);
+
+
+                while( newStartTime.before(endOfYear) )
+                {
+
+                        // handles the week with the original year
+                    if(newStartTime.get(Calendar.WEEK_OF_YEAR) == beginningWeek)
+                    {
+                            // Calendar.DAY_OF_WEEK has Sunday at 1, versus the dayBoxes array, which has Sunday at 0
+                        for(int A = curDay ; A < 7 ; A++)
+                        {
+
+                            newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                            newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+
+                            if(dayBoxes[A].isChecked())
+                            {
+
+                                CalendarEvent newEvent = new CalendarEvent();
+
+                                newEvent.setDetails(details.getText().toString());
+                                newEvent.setStartDate(newStartTime.getTimeInMillis());
+                                newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                                database.addEvent(newEvent);
+
+                            }
+
+                        }
+
+                    }
+
+
+                    else
+                    {
+
+                        for(int A = 0 ; A < 7 ; A++)
+                        {
+
+                            newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                            newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+
+                            if(dayBoxes[A].isChecked())
+                            {
+
+                                CalendarEvent newEvent = new CalendarEvent();
+
+                                newEvent.setDetails(details.getText().toString());
+                                newEvent.setStartDate(newStartTime.getTimeInMillis());
+                                newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                                database.addEvent(newEvent);
+
+                            }
+
+                        }
+
+                    }
+
+                    newStartTime.add(Calendar.WEEK_OF_YEAR, 1);
+                    newEndTime.add(Calendar.WEEK_OF_YEAR, 1);
+
+                }
+
+
+                break;
             }
 
-            recurringTimeStart.add(Calendar.WEEK_OF_YEAR, 2);
-            recurringTimeEnd.add(Calendar.WEEK_OF_YEAR, 2);
-        }
-    }
 
-    /**
-     * Add recurring monthly event until the last day in the calendar.
-     */
-    public void addMonthlyEvent() {
-        Calendar recurringTimeStart = (Calendar) startTime.clone();
-        Calendar recurringTimeEnd = (Calendar) endTime.clone();
 
-        while (recurringTimeEnd.before(lastCalendarDay)) {
-            addEvent(recurringTimeStart, recurringTimeEnd);
 
-            recurringTimeStart.add(Calendar.MONTH, 1);
-            recurringTimeEnd.add(Calendar.MONTH, 1);
+                // same code as the weekly case, except the weeks are incremented by 2
+            case (2):
+            {
+                Calendar newStartTime = (Calendar) startTime.clone();
+                Calendar newEndTime = (Calendar) endTime.clone();
+                Calendar endOfYear = new GregorianCalendar(2017, 5, 1);
+
+
+                int beginningWeek = newStartTime.get(Calendar.WEEK_OF_YEAR);
+                int curDay = newStartTime.get(Calendar.DAY_OF_WEEK);
+
+
+                while( newStartTime.before(endOfYear) )
+                {
+
+                    // handles the week with the original year
+                    if(newStartTime.get(Calendar.WEEK_OF_YEAR) == beginningWeek)
+                    {
+                        // Calendar.DAY_OF_WEEK has Sunday at 1, versus the dayBoxes array, which has Sunday at 0
+                        for(int A = curDay ; A < 7 ; A++)
+                        {
+
+                            newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                            newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+
+                            if(dayBoxes[A].isChecked())
+                            {
+
+                                CalendarEvent newEvent = new CalendarEvent();
+
+                                newEvent.setDetails(details.getText().toString());
+                                newEvent.setStartDate(newStartTime.getTimeInMillis());
+                                newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                                database.addEvent(newEvent);
+
+                            }
+
+                        }
+
+                    }
+
+
+                    else
+                    {
+
+                        for(int A = 0 ; A < 7 ; A++)
+                        {
+
+                            newStartTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+                            newEndTime.set( Calendar.DAY_OF_WEEK, (A+1) );
+
+                            if(dayBoxes[A].isChecked())
+                            {
+
+                                CalendarEvent newEvent = new CalendarEvent();
+
+                                newEvent.setDetails(details.getText().toString());
+                                newEvent.setStartDate(newStartTime.getTimeInMillis());
+                                newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                                database.addEvent(newEvent);
+
+                            }
+
+                        }
+
+                    }
+
+                    newStartTime.add(Calendar.WEEK_OF_YEAR, 2);
+                    newEndTime.add(Calendar.WEEK_OF_YEAR, 2);
+
+                }
+
+
+                break;
+            }
+
+
+
+
+
+
+
+            case (3):
+            {
+
+                int beginningDate = startTime.get(Calendar.DAY_OF_MONTH);
+
+                int[] months = {7, 8, 9, 10, 11, 0, 1, 2, 3, 4}; // August to May
+                int curMonth = startTime.get(Calendar.MONTH);
+
+
+                boolean keepSkipping = true;
+
+
+                Calendar newStartTime = (Calendar) startTime.clone();
+                Calendar newEndTime = (Calendar) endTime.clone();
+
+
+                for (int A = 0; A < months.length; A++)
+                {
+
+                    if(months[A] == curMonth)   // events will not be added to months that have already passed
+                    {
+                        keepSkipping = false;
+                    }
+
+
+                        // alteration of the code in onCreate()
+                    if(!keepSkipping && months[A] != curMonth)
+                    {
+                        // check the if(year==0) statement
+
+                        newStartTime.add(Calendar.MONTH, 1);
+                        newEndTime.add(Calendar.MONTH, 1);
+
+
+                        CalendarEvent newEvent = new CalendarEvent();
+                        newEvent.setDetails(details.getText().toString());
+                        newEvent.setStartDate(newStartTime.getTimeInMillis());
+                        newEvent.setEndDate(newEndTime.getTimeInMillis());
+
+                        database.addEvent(newEvent);
+
+                    }
+
+                }
+
+                break;
+            }
+
+
+
+
+
+
+//END WEEKLY,BIWEEKLY,MONTLY
         }
     }
 
